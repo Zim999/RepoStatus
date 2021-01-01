@@ -10,8 +10,6 @@ import ArgumentParser
 
 let VersionNumberString = "0.0.1"
 
-RepoStatusCommand.setup()
-//let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 RepoStatusCommand.main()
 
 struct RepoStatusCommand: ParsableCommand {
@@ -25,38 +23,14 @@ struct RepoStatusCommand: ParsableCommand {
                       Version.self],
         defaultSubcommand: Query.self)
     
-    public static func setup(){
-        if !createConfigStorageFolder() {
-            print("Cannot create configuration storage")
-            Darwin.exit(1)
-        }
-    }
-    
     static var configStoreFileURL: URL {
         return configStoreFolderURL.appendingPathComponent("gitstatus.json")
     }
 
     // MARK: - Private
     
-    private static var homeFolderURL: URL {
-        return FileManager.default.homeDirectoryForCurrentUser
-    }
-
     private static var configStoreFolderURL: URL {
-        return homeFolderURL.appendingPathComponent(".config/GitStatus")
+        return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".config/GitStatus")
     }
-
-    private static func createConfigStorageFolder() -> Bool {
-        do {
-            try FileManager.default.createDirectory(at: configStoreFolderURL,
-                                                    withIntermediateDirectories: true,
-                                                    attributes: nil)
-            return true
-        }
-        catch {
-            return false
-        }
-    }
-
 }
 

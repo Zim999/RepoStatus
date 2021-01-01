@@ -36,6 +36,8 @@ class RepoCollection {
 
     init(from url: URL) {
         storageFileURL = url
+        createConfigStorageFolder()
+        
         if load() && groups.count == 0 {
             addDefaultGroup()
         }
@@ -178,6 +180,19 @@ class RepoCollection {
         
         return false
     }
+    
+    private func createConfigStorageFolder() {
+        do {
+            let url = storageFileURL.deletingLastPathComponent()
+            try FileManager.default.createDirectory(at: url,
+                                                    withIntermediateDirectories: true,
+                                                    attributes: nil)
+        }
+        catch {
+            print("Cannot create storage")
+        }
+    }
+
     
     // MARK: - Private
 

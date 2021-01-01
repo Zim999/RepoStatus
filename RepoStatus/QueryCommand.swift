@@ -58,7 +58,7 @@ extension RepoStatusCommand {
                     text = text.background(.red3).colour(.white)
                 }
                 else if repo.status.contains(.addedFiles) {
-                    text = text.background(.orange)
+                    text = text.background(.orange1)
                 }
                 else if repo.status.contains(.newUntrackedFiles) {
                     text = text.background(.yellow)
