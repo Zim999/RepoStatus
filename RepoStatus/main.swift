@@ -8,17 +8,21 @@
 import Foundation
 import ArgumentParser
 
+let VersionNumberString = "0.0.1"
+
 RepoStatusCommand.setup()
-let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+//let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 RepoStatusCommand.main()
 
 struct RepoStatusCommand: ParsableCommand {
+
     static let configuration = CommandConfiguration(
         commandName: "RepoStatus",
         abstract: "Display status of Git Repositories",
         subcommands: [Query.self, Config.self, Key.self,
                       AddGroup.self, AddRepo.self,
-                      RemoveGroup.self, RemoveRepo.self],
+                      RemoveGroup.self, RemoveRepo.self,
+                      Version.self],
         defaultSubcommand: Query.self)
     
     public static func setup(){

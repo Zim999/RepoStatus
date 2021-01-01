@@ -14,6 +14,7 @@
 		37032A5C253E733800FA6F18 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 37032A5B253E733800FA6F18 /* ArgumentParser */; };
 		37032A5F253E889300FA6F18 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A5E253E889300FA6F18 /* Shell.swift */; };
 		3704FF58252BFB9D00E4A513 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704FF57252BFB9D00E4A513 /* main.swift */; };
+		37787BB8259EABA300C79308 /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BB7259EABA300C79308 /* VersionCommand.swift */; };
 		37B09A8E259D3F520012A2C8 /* QueryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A8D259D3F520012A2C8 /* QueryCommand.swift */; };
 		37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */; };
 		37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */; };
@@ -49,6 +50,8 @@
 		3704FF54252BFB9D00E4A513 /* RepoStatus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RepoStatus; sourceTree = BUILT_PRODUCTS_DIR; };
 		3704FF57252BFB9D00E4A513 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		370E84FF254DF51F007E4A98 /* RepoStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatus.entitlements; sourceTree = "<group>"; };
+		37787BB2259E9C0500C79308 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		37787BB7259EABA300C79308 /* VersionCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
 		37B09A8D259D3F520012A2C8 /* QueryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryCommand.swift; sourceTree = "<group>"; };
 		37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCommand.swift; sourceTree = "<group>"; };
 		37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCommand.swift; sourceTree = "<group>"; };
@@ -109,9 +112,11 @@
 		3704FF56252BFB9D00E4A513 /* RepoStatus */ = {
 			isa = PBXGroup;
 			children = (
+				37787BB2259E9C0500C79308 /* README.md */,
 				3704FF57252BFB9D00E4A513 /* main.swift */,
 				37B09A9C259D40190012A2C8 /* AddGroupCommand.swift */,
 				37B09AA1259D40300012A2C8 /* AddRepoCommand.swift */,
+				37787BB7259EABA300C79308 /* VersionCommand.swift */,
 				37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */,
 				37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */,
 				37B09A8D259D3F520012A2C8 /* QueryCommand.swift */,
@@ -204,6 +209,7 @@
 				37B09AAC259D40600012A2C8 /* RemoveRepoCommand.swift in Sources */,
 				37B09A8E259D3F520012A2C8 /* QueryCommand.swift in Sources */,
 				37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */,
+				37787BB8259EABA300C79308 /* VersionCommand.swift in Sources */,
 				37B09AE0259E94EA0012A2C8 /* String+ANSI.swift in Sources */,
 				37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */,
 				37B09ADC259E94CF0012A2C8 /* String+Extension.swift in Sources */,
@@ -345,12 +351,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6874B44Y69;
 				ENABLE_HARDENED_RUNTIME = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/RepoMon/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RepoStatus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.repostatus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -367,12 +374,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6874B44Y69;
 				ENABLE_HARDENED_RUNTIME = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/RepoMon/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RepoStatus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.repostatus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

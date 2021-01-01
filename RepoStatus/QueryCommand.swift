@@ -11,12 +11,15 @@ import ArgumentParser
 extension RepoStatusCommand {
     struct Query: ParsableCommand {
         static let configuration = CommandConfiguration(
-            abstract: "Queries status of all configured Git repos.")
-        
+            abstract: "Display status for configured Git repos")
+
+        @Argument(help: "Display status for this group only")
+        var groupName: String?
+
         @Flag(name: [.customLong("fetch"), .customShort("f")],
               help: "Fetches from remote before getting status")
         var fetch = false
-        
+
         func run() throws {
             try perform()
         }
@@ -26,16 +29,21 @@ extension RepoStatusCommand {
         }
         
         private func perform() throws {
+            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+
             if collection.isEmpty {
                 print("Empty configuration")
                 return
             }
             
             for group in collection.groups {
-                print("\(group.name)".bold() + "".normal())
                 
-                for repo in group.repos {
-                    printStatus(for: repo)
+                if groupName == nil || (groupName != nil && groupName == group.name) {
+                    print("\(group.name)".bold() + "".normal())
+                    
+                    for repo in group.repos {
+                        printStatus(for: repo)
+                    }
                 }
             }
         }

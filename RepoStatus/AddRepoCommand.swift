@@ -35,17 +35,13 @@ extension RepoStatusCommand {
             guard Repo.exists(at: repoPath) else {
                 throw ValidationError("Path is not a Git repo")
             }
-
-            guard collection.contains(groupName) else {
-                throw ValidationError("Group does not exist")
-            }
         }
         
         func run() throws {
-            guard let group = collection.group(named: groupName)
-            else {
-                // This should already have been determined in validate()
-                throw ExitCode.failure
+            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+
+            guard let group = collection.group(named: groupName) else {
+                throw ValidationError("Group does not exist")
             }
             
             let repo = Repo(url: URL(fileURLWithPath: repoPath))

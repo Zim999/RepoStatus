@@ -16,7 +16,7 @@ extension RepoStatusCommand {
             commandName: "addgroup",
             abstract: "Add a new group to the collection")
         
-        @Argument(help: "Name of the group.")
+        @Argument(help: "Name of the group")
         var groupName: String
         
         mutating func validate() throws {
@@ -25,13 +25,15 @@ extension RepoStatusCommand {
             guard !groupName.isEmpty else {
                 throw ValidationError("Group name cannot be empty")
             }
-            
-            guard !collection.contains(groupName) else {
-                throw ValidationError("Group already exists")
-            }
         }
         
         func run() throws {
+            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+
+            guard !collection.contains(groupName) else {
+                throw ValidationError("Group already exists")
+            }
+
             collection.add(RepoGroup(name: groupName))
         }
     }

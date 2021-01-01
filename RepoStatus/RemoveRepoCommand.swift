@@ -26,21 +26,19 @@ extension RepoStatusCommand {
             else {
                 throw ValidationError("Repo and group names cannot be empty")
             }
-            
-            guard let group = collection.group(named: groupName) else {
-                throw ValidationError("Group does not exist")
-            }
-            
-            guard group.repo(named: repoName) != nil else {
-                throw ValidationError("Repo not in specified group")
-            }
         }
         
         func run() throws {
+            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+
             guard let group = collection.group(named: groupName) else {
-                throw ExitCode.failure
+                throw ValidationError("Group does not exist")
             }
-            
+
+            guard group.repo(named: repoName) != nil else {
+                throw ValidationError("Repo not in specified group")
+            }
+
             if let repo = group.repo(named: repoName) {
                 group.remove(repo)
             }

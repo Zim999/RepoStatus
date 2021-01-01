@@ -22,16 +22,14 @@ extension RepoStatusCommand {
             else {
                 throw ValidationError("Repo name cannot be empty")
             }
-            
-            guard collection.contains(groupName) else {
-                throw ValidationError("Group does not exist")
-            }
         }
         
         func run() throws {
+            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+
             guard let group = collection.group(named: groupName)
             else {
-                throw ExitCode.failure
+                throw ValidationError("Group does not exist")
             }
             collection.remove(group)
         }
