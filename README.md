@@ -2,7 +2,7 @@
 
 RepoStatus is a simple command line application for macOS to show a brief status of multiple Git repositories.
 
-Repos can be collected into named groups, useful if you have projects with multiple repos.
+Repos can be collected into named groups, useful if you have projects with multiple repos. 
 
 Status shown includes:
 
@@ -14,7 +14,7 @@ Status shown includes:
 	↓ = Behind remote
 	Current branch
 
-Usage
+### Usage
 
     USAGE: RepoStatus <subcommand>
 
@@ -30,10 +30,29 @@ Usage
       removegroup             Remove group, and all contained repos
       removerepo              Remove a repo
 
+### Examples:
 
-Screen shot:
+Add groups, and repos to those groups, using the commands `addgroup` and `addrepo`
 
-![Example](./Documentation/example.png)
+    RepoStatus addgroup "Super Project"
+    
+    RepoStatus addrepo /Users/bob/Source/SuperProject "Super Project" 
+    RepoStatus addrepo /Users/bob/Source/SubProject "Super Project" 
+
+Run command without parameters to show status of all groups/repos
+
+    RepoStatus
+
+Or, specify a group name to show status of only that group and its repos
+
+    RepoStatus "Super Project"
+
+
+### Screen shot:
+
+![Example](./Documentation/example.png?raw=true)
+
+
 
 
 
