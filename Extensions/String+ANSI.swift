@@ -11,7 +11,15 @@ extension String {
     func normal() -> String {
         return "\u{001B}[0m" + self
     }
-    
+
+    func reset() -> String {
+        return self + "\u{001B}[0m"
+    }
+
+    func resetColour() -> String {
+        return self + "\u{001B}[39m\u{001B}[39m"
+    }
+
     func bold() -> String {
         return "\u{001B}[1m" + self
     }
@@ -34,5 +42,25 @@ extension String {
 
     func colours(_ foreColour: ANSIColour, _ backColour: ANSIColour) -> String {
         return "\u{001B}[38;5;\(foreColour.rawValue);48;5;\(backColour.rawValue)m" + self
+    }
+    
+    func forward(_ numChars: Int) -> String {
+        return self + "\u{001B}[\(numChars)C"
+    }
+
+    func backward(_ numChars: Int) -> String {
+        return self + "\u{001B}[\(numChars)D"
+    }
+
+    func up(_ numLines: Int) -> String {
+        return self + "\u{001B}[\(numLines)A"
+    }
+
+    func down(_ numLines: Int) -> String {
+        return self + "\u{001B}[\(numLines)B"
+    }
+
+    func clearLine() -> String {
+        return "\u{001B}[2K"
     }
 }

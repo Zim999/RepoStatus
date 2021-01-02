@@ -25,7 +25,7 @@ extension RepoStatusCommand {
         }
         
         private func append(_ string: String, if condition: Bool) -> String {
-            return condition ? string : ""
+            return condition ? string : "- ".dim().reset()
         }
         
         private func perform() throws {
@@ -36,52 +36,82 @@ extension RepoStatusCommand {
                 return
             }
             
+            let lengthOfLongest = longestRepoName(in: collection)
+
             for group in collection.groups {
-                
                 if groupName == nil || (groupName != nil && groupName == group.name) {
-                    print("\(group.name)".bold() + "".normal())
+                    print("\(group.name)".bold().reset())
                     
                     for repo in group.repos {
-                        printStatus(for: repo)
+                        printStatus(for: repo, longest: lengthOfLongest)
                     }
                 }
             }
         }
         
-        private func printStatus(for repo: Repo) {
-            repo.refresh(fetching: fetch)
+        private func status(from status: RepoStatus) -> String {
+            var statusString = ""
+            statusString += append("M ", if: status.contains(.modifiedFiles))
+            statusString += append("? ", if: status.contains(.newUntrackedFiles))
+            statusString += append("+ ", if: status.contains(.addedFiles))
+            statusString += append("S ", if: status.contains(.hasStash))
+            statusString += append("↑\(status.aheadCount)", if: status.aheadCount > 0)
+            statusString += append("↓\(status.behindCount)", if: status.behindCount > 0)
             
-            var text = " \(repo.name): "
+            if statusString.isEmpty {
+                statusString = "- "
+            }
+            return statusString
+        }
+        
+        private func statusColours(from status: RepoStatus) -> String {
+            var statusColour = ""
             
-            if repo.status.isValid {
-                if repo.status.contains(.modifiedFiles) {
-                    text = text.background(.red3).colour(.white)
-                }
-                else if repo.status.contains(.addedFiles) {
-                    text = text.background(.orange1)
-                }
-                else if repo.status.contains(.newUntrackedFiles) {
-                    text = text.background(.yellow)
-                }
-                else {
-                    text = text.background(.chartreuse2)
-                }
-                
-                print("  " + text, terminator: "")
-                
-                var statusString = ""
-                statusString += append("M ", if: repo.status.contains(.modifiedFiles))
-                statusString += append("? ", if: repo.status.contains(.newUntrackedFiles))
-                statusString += append("+ ", if: repo.status.contains(.addedFiles))
-                statusString += append("S ", if: repo.status.contains(.hasStash))
-                statusString += append("↑\(repo.status.aheadCount)", if: repo.status.aheadCount > 0)
-                statusString += append("↓\(repo.status.behindCount)", if: repo.status.behindCount > 0)
-                
-                print(" \(statusString)" + "".normal() + " \(repo.status.branch) ".background(.silver) + " ".normal())
+            if status.contains(.modifiedFiles) {
+                statusColour = statusColour.colours(.white, .red3)
+            }
+            else if status.contains(.addedFiles) {
+                statusColour = statusColour.colours(.black, .orange1)
+            }
+            else if status.contains(.newUntrackedFiles) {
+                statusColour = statusColour.colours(.black, .yellow)
             }
             else {
-                print("  \(repo.name): Invalid")
+                statusColour = statusColour.colours(.black, .chartreuse2)
             }
+            
+            return statusColour
+        }
+        
+        private func printStatus(for repo: Repo, longest: Int) {
+            repo.refresh(fetching: fetch)
+            
+            if repo.status.isValid {
+                let statusString = status(from: repo.status)
+                let statusColour = statusColours(from: repo.status)
+                
+                print("  " +
+                        "\(statusColour)" +
+                        "\(repo.name)".reset().forward(longest + 1 - repo.name.count) +
+                        
+                        " \(statusString)" +
+                        " \(repo.status.branch) ".background(.steelBlue1_2).reset())
+            }
+            else {
+                print("  " + "\(repo.name): " + "Invalid Repo".colours(.black, .orange1).reset())
+            }
+        }
+        
+        private func longestRepoName(in collection: RepoCollection) -> Int {
+            var max = 0
+            for group in collection.groups {
+                for repo in group.repos {
+                    if repo.name.count > max {
+                        max = repo.name.count
+                    }
+                }
+            }
+            return max
         }
     }
 }
