@@ -86,32 +86,34 @@ extension RepoStatusCommand {
         private func printStatus(for repo: Repo, longest: Int) {
             repo.refresh(fetching: fetch)
             
+            let indent = "  "
             if repo.status.isValid {
                 let statusString = status(from: repo.status)
                 let statusColour = statusColours(from: repo.status)
+                let align = longest + 1 - repo.name.count
                 
-                print("  " +
-                        "\(statusColour)" +
-                        "\(repo.name)".reset().forward(longest + 1 - repo.name.count) +
-                        
-                        " \(statusString)" +
-                        " \(repo.status.branch) ".background(.steelBlue1_2).reset())
+                print(indent +
+                      "\(statusColour)" +
+                      "\(repo.name)".reset().forward(align) +
+                      " \(statusString)" +
+                      " \(repo.status.branch) ".background(.steelBlue1_2).reset())
             }
             else {
-                print("  " + "\(repo.name): " + "Invalid Repo".colours(.black, .orange1).reset())
+                print(indent + "\(repo.name): " + "Invalid Repo".colours(.black, .orange1).reset())
             }
         }
         
         private func longestRepoName(in collection: RepoCollection) -> Int {
-            var max = 0
+            var longest = 0
+
             for group in collection.groups {
                 for repo in group.repos {
-                    if repo.name.count > max {
-                        max = repo.name.count
+                    if repo.name.count > longest {
+                        longest = repo.name.count
                     }
                 }
             }
-            return max
+            return longest
         }
     }
 }
