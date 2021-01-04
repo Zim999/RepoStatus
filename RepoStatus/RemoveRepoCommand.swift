@@ -40,7 +40,7 @@ extension RepoStatusCommand {
             }
 
             if let repo = group.repo(named: repoName) {
-                group.remove(repo)
+                collection.remove(repo, from: group)
             }
         }
     }
