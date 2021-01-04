@@ -151,7 +151,7 @@ extension RepoStatus {
     
     private func getAheadCount(from string: String) throws {
         // ... ##\ (.*)\\.\\.\\..+\\[ahead.+([0-9]+)\\]
-        let count = try getIntMatchValue(from: string, using: ".+\\[ahead.+([0-9]+)\\]")
+        let count = try getIntMatchValue(from: string, using: ".+\\[ahead\\s+([0-9]+)\\]")
         if count > 0 {
             aheadCount = count
             attributes.insert(.ahead)
@@ -159,7 +159,7 @@ extension RepoStatus {
     }
     
     private func getBehindCount(from string: String) throws {
-        let count = try getIntMatchValue(from: string, using: ".+\\[behind.+([0-9]+)\\]")
+        let count = try getIntMatchValue(from: string, using: ".+\\[behind\\s+([0-9]+)\\]")
         if count > 0 {
             behindCount = count
             attributes.insert(.behind)
