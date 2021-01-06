@@ -11,7 +11,23 @@ import ArgumentParser
 extension RepoStatusCommand {
     struct Query: ParsableCommand {
         static let configuration = CommandConfiguration(
-            abstract: "Display status for configured Git repos")
+            abstract:"""
+Display status for configured Git repos
+
+    Repo name coloured as follows (priority order):
+        red = Repo has modified files
+        orange = Repo has added files
+        yellow = Repo has untracked files
+        green = Repo clean, no changes
+
+    Repo status flags:
+        + = Files added
+        M = Files modified
+        ? = New untracked files
+        S = Has stashed changes
+        ↑ = Ahead of remote
+        ↓ = Behind remote
+""")
 
         @Argument(help: "Display status for this group only")
         var groupName: String?
@@ -51,12 +67,15 @@ extension RepoStatusCommand {
         
         private func status(from status: RepoStatus) -> String {
             var statusString = ""
+            let aheadCount = status.aheadCount > 9 ? "+" : String(status.aheadCount)
+            let behindCount = status.behindCount > 9 ? "+" : String(status.behindCount)
+
             statusString += append("M ", if: status.contains(.modifiedFiles))
             statusString += append("? ", if: status.contains(.newUntrackedFiles))
             statusString += append("+ ", if: status.contains(.addedFiles))
             statusString += append("S ", if: status.contains(.hasStash))
-            statusString += append("↑\(status.aheadCount)", if: status.aheadCount > 0)
-            statusString += append("↓\(status.behindCount)", if: status.behindCount > 0)
+            statusString += append("↑\(aheadCount)", if: status.aheadCount > 0)
+            statusString += append("↓\(behindCount)", if: status.behindCount > 0)
             
             if statusString.isEmpty {
                 statusString = "- "
@@ -94,8 +113,8 @@ extension RepoStatusCommand {
                 
                 print(indent +
                       "\(statusColour)" +
-                      "\(repo.name)".reset().forward(align) +
-                      " \(statusString)" +
+                      " \(repo.name) ".reset().forward(align) +
+                      " \(statusString) " +
                       " \(repo.status.branch) ".background(.steelBlue1_2).reset())
             }
             else {
