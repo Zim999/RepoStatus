@@ -18,14 +18,19 @@ class RepoStatus {
         case deletedFiles
         case renamedFiles
         case copiedFiles
-        case hasStash
-        case ahead
-        case behind
+//        case hasStash
+//        case ahead
+//        case behind
     }
     
-    /// Current attributes of the repo
-    var attributes = Set<Attribute>()
+    typealias AttributeSet = Set<Attribute>
     
+    /// Current attributes of the working copy
+    var workingCopyAttributes = AttributeSet()
+
+    /// Current attributes of the index
+    var indexAttributes = AttributeSet()
+
     /// Has valid status been retrieved about the repo
     var isValid = false
     
@@ -38,6 +43,9 @@ class RepoStatus {
     /// Current branch
     var branch = "..."
 
+    /// Working copy has stashed code
+    var hasStash = false
+    
     init() {
         isValid = false
     }
@@ -63,9 +71,7 @@ class RepoStatus {
                 try getBehindCount(from: s)
                 try extractStatus(from: s)
 
-                if (stashList?.count ?? 0) > 0 {
-                    attributes.insert(.hasStash)
-                }
+                hasStash = (stashList?.count ?? 0) > 0
                 
                 isValid = true
             }
@@ -76,7 +82,7 @@ class RepoStatus {
     }
     
     public func contains(_ attribute: Attribute) -> Bool {
-        return attributes.contains(attribute)
+        return workingCopyAttributes.contains(attribute)
     }
 }
 
@@ -112,10 +118,10 @@ extension RepoStatus {
         for match in matches {
             if match.numberOfRanges >= 3 {
                 let firstValue = string.subString(range: match.range(at: 1))
-                set(from: firstValue)
+                set(in: &indexAttributes, from: firstValue)
                 
                 let secondValue = string.subString(range: match.range(at: 2))
-                set(from: secondValue)
+                set(in: &workingCopyAttributes, from: secondValue)
             }
         }
     }
@@ -154,7 +160,7 @@ extension RepoStatus {
         let count = try getIntMatchValue(from: string, using: ".+\\[ahead\\s+([0-9]+)\\]")
         if count > 0 {
             aheadCount = count
-            attributes.insert(.ahead)
+            // workingCopyAttributes.insert(.ahead)
         }
     }
     
@@ -162,24 +168,24 @@ extension RepoStatus {
         let count = try getIntMatchValue(from: string, using: ".+\\[behind\\s+([0-9]+)\\]")
         if count > 0 {
             behindCount = count
-            attributes.insert(.behind)
+            // workingCopyAttributes.insert(.behind)
         }
     }
 
-    private func set(from string: String) {
+    private func set(in attributeSet: inout AttributeSet, from string: String) {
         switch string.uppercased() {
             case "?":
-                attributes.insert(.newUntrackedFiles)
+                attributeSet.insert(.newUntrackedFiles)
             case "M":
-                attributes.insert(.modifiedFiles)
+                attributeSet.insert(.modifiedFiles)
             case "A":
-                attributes.insert(.addedFiles)
+                attributeSet.insert(.addedFiles)
             case "R":
-                attributes.insert(.renamedFiles)
+                attributeSet.insert(.renamedFiles)
             case "C":
-                attributes.insert(.copiedFiles)
+                attributeSet.insert(.copiedFiles)
             case "D":
-                attributes.insert(.deletedFiles)
+                attributeSet.insert(.deletedFiles)
             default:
                 break
         }

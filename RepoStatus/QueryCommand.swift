@@ -73,7 +73,7 @@ Display status for configured Git repos
             statusString += append("M ", if: status.contains(.modifiedFiles))
             statusString += append("? ", if: status.contains(.newUntrackedFiles))
             statusString += append("+ ", if: status.contains(.addedFiles))
-            statusString += append("S ", if: status.contains(.hasStash))
+            statusString += append("S ", if: status.hasStash)
             statusString += append("↑\(aheadCount)", if: status.aheadCount > 0)
             statusString += append("↓\(behindCount)", if: status.behindCount > 0)
             
