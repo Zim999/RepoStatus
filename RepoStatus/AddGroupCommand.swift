@@ -9,8 +9,6 @@ import Foundation
 import ArgumentParser
 
 extension RepoStatusCommand {
-    
-
     struct AddGroup: ParsableCommand {
         static let configuration = CommandConfiguration(
             commandName: "addgroup",

@@ -104,7 +104,21 @@ class RepoCollection {
 
         return nil
     }
-    
+
+    func repos(named: String) -> [Repo]? {
+        var repos = [Repo]()
+
+        for group in groups {
+            for repo in group.repos {
+                if repo.name == named {
+                    repos.append(repo)
+                }
+            }
+        }
+
+        return repos.isEmpty ? nil : repos
+    }
+
     /// Tests whether the collection contain the specified group
     /// - Parameter group: Group to test
     /// - Returns: True if the collection contains the group, false if it does not

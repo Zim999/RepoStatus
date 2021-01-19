@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02727F25B717DA00E5F90F /* PullCommand.swift */; };
 		37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A47253D055B00FA6F18 /* RepoCollection.swift */; };
 		37032A4B253D056C00FA6F18 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4A253D056C00FA6F18 /* Repo.swift */; };
 		37032A4E253D058900FA6F18 /* RepoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4D253D058900FA6F18 /* RepoGroup.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
 		37032A47253D055B00FA6F18 /* RepoCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCollection.swift; sourceTree = "<group>"; };
 		37032A4A253D056C00FA6F18 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		37032A4D253D058900FA6F18 /* RepoGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGroup.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				37B09A8D259D3F520012A2C8 /* QueryCommand.swift */,
 				37B09AA6259D40490012A2C8 /* RemoveGroupCommand.swift */,
 				37B09AAB259D40600012A2C8 /* RemoveRepoCommand.swift */,
+				2B02727F25B717DA00E5F90F /* PullCommand.swift */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				37B09A8E259D3F520012A2C8 /* QueryCommand.swift in Sources */,
 				37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */,
 				37B09AE0259E94EA0012A2C8 /* String+ANSI.swift in Sources */,
+				2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */,
 				37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */,
 				37B09ADC259E94CF0012A2C8 /* String+Extension.swift in Sources */,
 				37B09AA2259D40300012A2C8 /* AddRepoCommand.swift in Sources */,
