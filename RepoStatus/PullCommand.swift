@@ -14,10 +14,10 @@ extension RepoStatusCommand {
 
         static let configuration = CommandConfiguration(
             commandName: "pull",
-            abstract: "Performs a Git pull on all configured repos, a specified group of repos, or a single repo")
+            abstract: "Performs a Git pull on all specified repos, a specified groups of repos")
 
         @Argument(help: "Repos, or groups if -g option is used, to pull")
-        var toPull: [String] = []
+        var reposOrGroups: [String] = []
 
         @Flag(name: [.customLong("group"), .customShort("g")],
               help: "Pull the named groups, rather than repos")
@@ -25,13 +25,13 @@ extension RepoStatusCommand {
 
 
         mutating func validate() throws {
-            guard !toPull.isEmpty else {
+            guard !reposOrGroups.isEmpty else {
                 throw ValidationError("No repos or groups defined")
             }
 
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
-            for item in toPull {
+            for item in reposOrGroups {
                 if areGroups {
                     guard collection.group(named: item) != nil else {
                         throw ValidationError("No such group \(item)")
@@ -48,7 +48,7 @@ extension RepoStatusCommand {
         func run() throws {
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
-            for item in toPull {
+            for item in reposOrGroups {
                 if areGroups,
                    let group = collection.group(named: item) {
                     try pull(group: group)
