@@ -14,7 +14,7 @@ extension RepoStatusCommand {
 
         static let configuration = CommandConfiguration(
             commandName: "pull",
-            abstract: "Performs a Git pull on all specified repos, a specified groups of repos")
+            abstract: "Performs a Git pull on all or specified repos, or all repos in specified groups")
 
         @Argument(help: "Repos, or groups if -g option is used, to pull")
         var reposOrGroups: [String] = []
@@ -25,9 +25,9 @@ extension RepoStatusCommand {
 
 
         mutating func validate() throws {
-            guard !reposOrGroups.isEmpty else {
-                throw ValidationError("No repos or groups defined")
-            }
+//            guard !reposOrGroups.isEmpty else {
+//                throw ValidationError("No groups specified")
+//            }
 
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
@@ -48,35 +48,40 @@ extension RepoStatusCommand {
         func run() throws {
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
+            if reposOrGroups.isEmpty {
+                for group in collection.groups {
+                    pull(group: group)
+                }
+            }
+            else {
+            }
+
             for item in reposOrGroups {
                 if areGroups,
                    let group = collection.group(named: item) {
-                    try pull(group: group)
+                    pull(group: group)
                 }
                 else if let repos = collection.repos(named: item) {
-                    try repos.forEach { (repo) in
-                        try pull(repo: repo)
+                    repos.forEach { (repo) in
+                        pull(repo: repo)
                     }
-                }
-                else {
-                    // ...
                 }
             }
         }
 
-        func pull(repo: Repo) throws {
+        func pull(repo: Repo) {
             print("Pulling \(repo.name) ... ", terminator: "")
             if !repo.pull() {
-                throw ValidationError("Error")
+                print("Error".colour(.red).reset())
             }
             else {
                 print("Done")
             }
         }
 
-        func pull(group: RepoGroup) throws {
+        func pull(group: RepoGroup) {
             for repo in group.repos {
-                try pull(repo: repo)
+                pull(repo: repo)
             }
         }
 
