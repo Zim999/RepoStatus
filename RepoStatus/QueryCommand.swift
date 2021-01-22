@@ -96,7 +96,7 @@ Display status for configured Git repos
                 statusColour = statusColour.colours(.black, .yellow)
             }
             else {
-                statusColour = statusColour.colours(.black, .chartreuse2)
+                statusColour = statusColour.colours(.darkGreen, .greenYellow)
             }
             
             return statusColour
@@ -115,7 +115,7 @@ Display status for configured Git repos
                       "\(statusColour)" +
                       " \(repo.name) ".reset().forward(align) +
                       " \(statusString) " +
-                      " \(repo.status.branch) ".background(.steelBlue1_2).reset())
+                      " \(repo.status.branch) ".background(.blueViolet).reset())
             }
             else {
                 print(indent + "\(repo.name): " + "Invalid Repo".colours(.black, .orange1).reset())
