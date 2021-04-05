@@ -37,9 +37,10 @@ struct Shell {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         output = String(data: data, encoding: .utf8)!
 
-        while task.isRunning {
-            Thread.sleep(forTimeInterval: 0.001)
-        }
+        task.waitUntilExit()
+//        while task.isRunning {
+//            Thread.sleep(forTimeInterval: 0.001)
+//        }
 
         let exitCode = task.terminationStatus
 
