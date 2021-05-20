@@ -70,7 +70,14 @@ extension RepoStatusCommand {
         }
 
         func pull(repo: Repo) {
-            print("Pulling \(repo.name) ... ", terminator: "")
+            print("Pulling \(repo.name) ", terminator: "")
+
+            repo.refresh()
+
+            let branch = " \(repo.status.branch) ".background(ANSIColour.blueViolet).reset()
+            print("\(branch) ", terminator: "")
+            print(": ", terminator: "")
+
             if !repo.pull() {
                 print("Error".colour(.red).reset())
             }

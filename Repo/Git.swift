@@ -15,7 +15,7 @@ struct Git {
     
     public static var fetchCommand = "git fetch"
 
-    public static var pullCommand = "git pull"
+    public static var pullCommand = "git branch & git pull -q"
 
     public static var statusCommand = "git status --porcelain=1 -b"
 
