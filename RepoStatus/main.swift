@@ -29,13 +29,13 @@ struct RepoStatusCommand: ParsableCommand {
         defaultSubcommand: Query.self)
         
     static var configStoreFileURL: URL {
-        return configStoreFolderURL.appendingPathComponent("gitstatus.json")
+        return configStoreFolderURL.appendingPathComponent("repostatus.json")
     }
 
     // MARK: - Private
     
     private static var configStoreFolderURL: URL {
-        return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".config/GitStatus")
+        return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".config/RepoStatus")
     }
 }
 

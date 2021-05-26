@@ -87,6 +87,7 @@ extension RepoStatusCommand {
         }
 
         func pull(group: RepoGroup) {
+            print ("Group: \(group.name)")
             for repo in group.repos {
                 pull(repo: repo)
             }
