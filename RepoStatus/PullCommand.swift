@@ -70,24 +70,32 @@ extension RepoStatusCommand {
         }
 
         func pull(repo: Repo) {
-            print("Pulling \(repo.name) ", terminator: "")
+            // print("Pulling \(repo.name) ", terminator: "")
 
             repo.refresh()
 
-            let branch = " \(repo.status.branch) ".background(ANSIColour.blueViolet).reset()
-            print("\(branch) ", terminator: "")
-            print(": ", terminator: "")
+            let indent = "  "
+
+            //let branch = " \(repo.status.branch) ".background(ANSIColour.blueViolet).reset()
+
+            print(indent +
+                    " \(repo.name) " +
+                    " \(repo.status.branch) ".background(.blueViolet).reset(),
+                  terminator: "")
+
+//            print(indent + "\(branch) ", terminator: "")
+//            print(": ", terminator: "")
 
             if !repo.pull() {
-                print("Error".colour(.red).reset())
+                print(" ... " + "Error".colour(.red).reset())
             }
             else {
-                print("Done")
+                print("")
             }
         }
 
         func pull(group: RepoGroup) {
-            print ("Group: \(group.name)")
+            print("\(group.name)".bold().reset())
             for repo in group.repos {
                 pull(repo: repo)
             }
@@ -96,3 +104,4 @@ extension RepoStatusCommand {
     }
     
 }
+
