@@ -32,7 +32,7 @@ struct Shell {
         task.standardError = pipe
         task.arguments = ["-c", command]
         task.launchPath = "/bin/bash"
-        task.currentDirectoryURL = url
+        task.currentDirectoryURL = url.absoluteURL
         task.launch()
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         output = String(data: data, encoding: .utf8)!

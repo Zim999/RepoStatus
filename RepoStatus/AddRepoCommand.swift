@@ -32,8 +32,12 @@ extension RepoStatusCommand {
                 throw ValidationError("Group name cannot be empty")
             }
 
-            guard Repo.exists(at: repoPath) else {
+            guard directoryExists(at: repoPath) else {
                 throw ValidationError("Path is not a Git repo")
+            }
+
+            guard Repo.exists(at: repoPath) else {
+                throw ValidationError("Path is does not exist")
             }
         }
         
@@ -46,6 +50,10 @@ extension RepoStatusCommand {
             
             let repo = Repo(url: URL(fileURLWithPath: repoPath))
             collection.add(repo, to: group)
+        }
+
+        private func directoryExists(at path: String) -> Bool {
+            return FileManager.default.directoryExists(URL(fileURLWithPath: path))
         }
     }
 }
