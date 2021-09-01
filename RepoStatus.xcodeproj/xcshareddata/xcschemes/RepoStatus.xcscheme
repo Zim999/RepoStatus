@@ -57,7 +57,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "addrepo ../Video\ Test\ Pattern Default"
+            argument = "query -f"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

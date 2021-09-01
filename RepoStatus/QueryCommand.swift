@@ -45,6 +45,8 @@ Display status for configured Git repos
         }
         
         private func perform() throws {
+            var count = 0
+
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
             if collection.isEmpty {
@@ -54,15 +56,26 @@ Display status for configured Git repos
             
             let lengthOfLongest = longestRepoName(in: collection)
 
+            count = 0
+
             for group in collection.groups {
                 if groupName == nil || (groupName != nil && groupName == group.name) {
                     print("\(group.name)".bold().reset())
-                    
+
                     for repo in group.repos {
-                        printStatus(for: repo, longest: lengthOfLongest)
+                        count += 1
+                        DispatchQueue.global(qos: .background).async {
+                            printStatus(for: repo, longest: lengthOfLongest)
+                            count -= 1
+                        }
+                    }
+
+                    while count > 0 {
+                        // print("\(count)")
                     }
                 }
             }
+
         }
         
         private func status(from status: RepoStatus) -> String {
