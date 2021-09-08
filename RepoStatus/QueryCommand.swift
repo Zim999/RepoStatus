@@ -40,99 +40,19 @@ Display status for configured Git repos
             try perform()
         }
         
-        private func append(_ string: String, if condition: Bool) -> String {
-            return condition ? string : "- ".dim().reset()
-        }
-        
         private func perform() throws {
-            var count = 0
-
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
             if collection.isEmpty {
-                print("Empty configuration")
+                print("No repos defined")
                 return
             }
-            
-            let lengthOfLongest = longestRepoName(in: collection)
 
-            count = 0
+            collection.forEachConcurrently { $0.refresh(fetching: fetch) }
 
-            for group in collection.groups {
-                if groupName == nil || (groupName != nil && groupName == group.name) {
-                    print("\(group.name)".bold().reset())
+            let alignment = longestRepoName(in: collection)
 
-                    for repo in group.repos {
-                        count += 1
-                        DispatchQueue.global(qos: .background).async {
-                            printStatus(for: repo, longest: lengthOfLongest)
-                            count -= 1
-                        }
-                    }
-
-                    while count > 0 {
-                        // print("\(count)")
-                    }
-                }
-            }
-
-        }
-        
-        private func status(from status: RepoStatus) -> String {
-            var statusString = ""
-            let aheadCount = status.aheadCount > 9 ? "+" : String(status.aheadCount)
-            let behindCount = status.behindCount > 9 ? "+" : String(status.behindCount)
-
-            statusString += append("M ", if: status.contains(.modifiedFiles))
-            statusString += append("? ", if: status.contains(.newUntrackedFiles))
-            statusString += append("+ ", if: status.contains(.addedFiles))
-            statusString += append("S ", if: status.hasStash)
-            statusString += append("↑\(aheadCount)", if: status.aheadCount > 0)
-            statusString += append("↓\(behindCount)", if: status.behindCount > 0)
-            
-            if statusString.isEmpty {
-                statusString = "- "
-            }
-            return statusString
-        }
-        
-        private func statusColours(from status: RepoStatus) -> String {
-            var statusColour = ""
-            
-            if status.contains(.modifiedFiles) {
-                statusColour = statusColour.colours(.white, .red3)
-            }
-            else if status.contains(.addedFiles) {
-                statusColour = statusColour.colours(.black, .orange1)
-            }
-            else if status.contains(.newUntrackedFiles) {
-                statusColour = statusColour.colours(.black, .yellow)
-            }
-            else {
-                statusColour = statusColour.colours(.darkGreen, .greenYellow)
-            }
-            
-            return statusColour
-        }
-        
-        private func printStatus(for repo: Repo, longest: Int) {
-            repo.refresh(fetching: fetch)
-            
-            let indent = "  "
-            if repo.status.isValid {
-                let statusString = status(from: repo.status)
-                let statusColour = statusColours(from: repo.status)
-                let align = longest + 1 - repo.name.count
-                
-                print(indent +
-                      "\(statusColour)" +
-                      " \(repo.name) ".reset().forward(align) +
-                      " \(statusString) " +
-                      " \(repo.status.branch) ".background(.blueViolet).reset())
-            }
-            else {
-                print(indent + "\(repo.name): " + "Invalid Repo".colours(.black, .orange1).reset())
-            }
+            collection.forEach { $0.printStatus(alignmentColumn: alignment) }
         }
         
         private func longestRepoName(in collection: RepoCollection) -> Int {

@@ -66,6 +66,49 @@ extension Repo {
     }
 }
 
+extension Repo {
+    public func printStatus(alignmentColumn: Int) {
+        let indent = "  "
+        if status.error {
+            print(indent + "\(name): " + "Error".colours(.black, .red).reset())
+
+        }
+        else if status.isValid {
+            let statusString = status.asString
+            let statusColour = statusColours(from: status)
+            let align = alignmentColumn + 1 - name.count
+
+            print(indent +
+                  "\(statusColour)" +
+                  " \(name) ".reset().forward(align) +
+                  " \(statusString) " +
+                  " \(status.branch) ".background(.blueViolet).reset())
+        }
+        else {
+            print(indent + "\(name): " + "Invalid Repo".colours(.black, .orange1).reset())
+        }
+    }
+
+    private func statusColours(from status: RepoStatus) -> String {
+        var statusColour = ""
+
+        if status.contains(.modifiedFiles) {
+            statusColour = statusColour.colours(.white, .red3)
+        }
+        else if status.contains(.addedFiles) {
+            statusColour = statusColour.colours(.black, .orange1)
+        }
+        else if status.contains(.newUntrackedFiles) {
+            statusColour = statusColour.colours(.black, .yellow)
+        }
+        else {
+            statusColour = statusColour.colours(.darkGreen, .greenYellow)
+        }
+
+        return statusColour
+    }
+}
+
 // MARK: - Static Functions
 
 extension Repo {

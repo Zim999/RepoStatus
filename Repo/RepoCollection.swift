@@ -158,7 +158,31 @@ class RepoCollection {
 
         return items.first
     }
-    
+
+    func forEachConcurrently(perform: @escaping (Repo) -> Void) {
+        let opQ = OperationQueue()
+        opQ.maxConcurrentOperationCount = 10
+
+        for group in groups {
+//            if groupName == nil || (groupName != nil && groupName == group.name) {
+            for repo in group.repos {
+                opQ.addOperation {
+                    perform(repo)
+                }
+            }
+        }
+        opQ.waitUntilAllOperationsAreFinished()
+    }
+
+    func forEach(perform: @escaping (Repo) -> Void) {
+        for group in groups {
+//            if groupName == nil || (groupName != nil && groupName == group.name) {
+            for repo in group.repos {
+                perform(repo)
+            }
+        }
+    }
+
     func load() -> Bool {
         guard FileManager.default.fileExists(atPath: storageFileURL.path) else {
             return true

@@ -31,6 +31,9 @@ class RepoStatus {
     /// Current attributes of the index
     var indexAttributes = AttributeSet()
 
+    /// Did last command return error
+    var error = false
+
     /// Has valid status been retrieved about the repo
     var isValid = false
     
@@ -45,7 +48,12 @@ class RepoStatus {
 
     /// Working copy has stashed code
     var hasStash = false
-    
+
+    /// Status formatted into a string
+    var asString: String {
+        return asFormattedString()
+    }
+
     init() {
         isValid = false
     }
@@ -78,9 +86,10 @@ class RepoStatus {
         }
         catch {
             print("Exception in RepoStatus init \(error)")
+            self.error = true
         }
     }
-    
+
     public func contains(_ attribute: Attribute) -> Bool {
         return workingCopyAttributes.contains(attribute)
     }
@@ -189,5 +198,29 @@ extension RepoStatus {
             default:
                 break
         }
+    }
+}
+
+extension RepoStatus {
+    private func asFormattedString() -> String {
+        var statusString = ""
+        let aheadCount = aheadCount > 9 ? "+" : String(aheadCount)
+        let behindCount = behindCount > 9 ? "+" : String(behindCount)
+
+        statusString += append("M ", if: contains(.modifiedFiles))
+        statusString += append("? ", if: contains(.newUntrackedFiles))
+        statusString += append("+ ", if: contains(.addedFiles))
+        statusString += append("S ", if: hasStash)
+        statusString += append("↑\(aheadCount)", if: self.aheadCount > 0)
+        statusString += append("↓\(behindCount)", if: self.behindCount > 0)
+
+        if statusString.isEmpty {
+            statusString = "- "
+        }
+        return statusString
+    }
+
+    private func append(_ string: String, if condition: Bool) -> String {
+        return condition ? string : "- ".dim().reset()
     }
 }
