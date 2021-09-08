@@ -16,20 +16,22 @@ extension RepoStatusCommand {
         
         @Argument(help: "Local file path of the repo")
         var repoPath: String
-        
-        @Argument(help: "Name of the group to add to")
-        var groupName: String
-        
+
+        @Option(name: [.customShort("g"), .customLong("group")],
+                help: "Name of the group to add to, otherwise Default is used")
+        var groupName: String?
+
         mutating func validate() throws {
             repoPath.trim()
-            groupName.trim()
-            
-            guard !repoPath.isEmpty else {
-                throw ValidationError("Repo name cannot be empty")
+
+            if let groupName = groupName?.trimmed() {
+                guard !groupName.isEmpty else {
+                    throw ValidationError("Group name cannot be empty")
+                }
             }
 
-            guard !groupName.isEmpty else {
-                throw ValidationError("Group name cannot be empty")
+            guard !repoPath.isEmpty else {
+                throw ValidationError("Repo name cannot be empty")
             }
 
             guard directoryExists(at: repoPath) else {
@@ -44,12 +46,20 @@ extension RepoStatusCommand {
         func run() throws {
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
-            guard let group = collection.group(named: groupName) else {
-                throw ValidationError("Group does not exist")
+            let nameOfGroupToUse = groupName ?? RepoCollection.DefaultGroupName
+            var group = collection.group(named: nameOfGroupToUse)
+
+            if group == nil {
+                group = RepoGroup(name: nameOfGroupToUse)
+                collection.add(group!)
             }
-            
+
+            guard group != nil else {
+                throw ValidationError("Could not add repo")
+            }
+
             let repo = Repo(url: URL(fileURLWithPath: repoPath))
-            collection.add(repo, to: group)
+            collection.add(repo, to: group!)
         }
 
         private func directoryExists(at path: String) -> Bool {

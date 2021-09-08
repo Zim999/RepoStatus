@@ -52,7 +52,8 @@ Display status for configured Git repos
 
             let alignment = longestRepoName(in: collection)
 
-            collection.forEach { $0.printStatus(alignmentColumn: alignment) }
+            collection.forEach(group: { print($0.name) },
+                               repo: { $0.printStatus(alignmentColumn: alignment) } )
         }
         
         private func longestRepoName(in collection: RepoCollection) -> Int {

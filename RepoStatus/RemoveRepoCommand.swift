@@ -19,7 +19,9 @@ extension RepoStatusCommand {
         
         @Argument(help: "Name of the containing group")
         var groupName: String
-        
+
+        // ... Option to remove empty group
+
         func validate() throws {
             guard !repoName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   !groupName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

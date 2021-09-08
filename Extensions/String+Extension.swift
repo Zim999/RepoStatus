@@ -23,4 +23,8 @@ extension String {
     mutating func trim() {
         self = trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    mutating func trimmed() -> String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 }

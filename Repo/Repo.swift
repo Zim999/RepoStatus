@@ -69,14 +69,18 @@ extension Repo {
 extension Repo {
     public func printStatus(alignmentColumn: Int) {
         let indent = "  "
+        let align = alignmentColumn + 1 - name.count
+        let statusColour = statusColours(from: status)
+
         if status.error {
-            print(indent + "\(name): " + "Error".colours(.black, .red).reset())
+            print(indent +
+                    "\(statusColour)" +
+                    " \(name) ".forward(align) +
+                    " Error ".colours(.black, .red).reset())
 
         }
         else if status.isValid {
             let statusString = status.asString
-            let statusColour = statusColours(from: status)
-            let align = alignmentColumn + 1 - name.count
 
             print(indent +
                   "\(statusColour)" +

@@ -23,7 +23,8 @@ class RepoCollection {
     private var storageFileURL: URL
     
     // MARK: - Properties
-    
+    static let DefaultGroupName = "Repos"
+
     /// Groups in the collection
     var groups = [RepoGroup]()
     
@@ -174,11 +175,12 @@ class RepoCollection {
         opQ.waitUntilAllOperationsAreFinished()
     }
 
-    func forEach(perform: @escaping (Repo) -> Void) {
+    func forEach(group groupFunc: ((RepoGroup) -> Void)?,
+                 repo repoFunc: @escaping (Repo) -> Void) {
         for group in groups {
-//            if groupName == nil || (groupName != nil && groupName == group.name) {
+            groupFunc?(group)
             for repo in group.repos {
-                perform(repo)
+                repoFunc(repo)
             }
         }
     }
@@ -235,6 +237,6 @@ class RepoCollection {
     // MARK: - Private
 
     private func addDefaultGroup() {
-        groups.append(RepoGroup(name: "Default"))
+        groups.append(RepoGroup(name: Self.DefaultGroupName))
     }
 }

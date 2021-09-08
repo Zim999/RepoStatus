@@ -25,10 +25,6 @@ extension RepoStatusCommand {
 
 
         mutating func validate() throws {
-//            guard !reposOrGroups.isEmpty else {
-//                throw ValidationError("No groups specified")
-//            }
-
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
             for item in reposOrGroups {
@@ -49,12 +45,23 @@ extension RepoStatusCommand {
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
 
             if reposOrGroups.isEmpty {
-                for group in collection.groups {
-                    pull(group: group)
+                collection.forEachConcurrently {
+                    $0.refresh()
+                    if $0.pull() {
+                        $0.refresh(fetching: false)
+                    }
+                    else {
+                        $0.status.error = true
+                    }
                 }
+
+                let alignment = longestRepoName(in: collection)
+
+                collection.forEach(group: { print($0.name) },
+                                   repo: { $0.printStatus(alignmentColumn: alignment) } )
             }
-            else {
-            }
+
+// ...
 
             for item in reposOrGroups {
                 if areGroups,
@@ -67,6 +74,20 @@ extension RepoStatusCommand {
                     }
                 }
             }
+        }
+
+        // ... Make common with one in QueryCommand
+        private func longestRepoName(in collection: RepoCollection) -> Int {
+            var longest = 0
+
+            for group in collection.groups {
+                for repo in group.repos {
+                    if repo.name.count > longest {
+                        longest = repo.name.count
+                    }
+                }
+            }
+            return longest
         }
 
         func pull(repo: Repo) {
