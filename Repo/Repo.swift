@@ -89,7 +89,10 @@ extension Repo {
                   " \(status.branch) ".background(.blueViolet).reset())
         }
         else {
-            print(indent + "\(name): " + "Invalid Repo".colours(.black, .orange1).reset())
+            print(indent +
+                    "\(statusColour)" +
+                    " \(name) ".reset().forward(align) +
+                    " Invalid Repo ".colours(.black, .orange1).reset())
         }
     }
 

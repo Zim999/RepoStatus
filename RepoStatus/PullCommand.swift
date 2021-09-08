@@ -43,6 +43,7 @@ extension RepoStatusCommand {
 
         func run() throws {
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+            let alignment = longestRepoName(in: collection)
 
             if reposOrGroups.isEmpty {
                 collection.forEachConcurrently {
@@ -55,12 +56,11 @@ extension RepoStatusCommand {
                     }
                 }
 
-                let alignment = longestRepoName(in: collection)
-
                 collection.forEach(group: { print($0.name) },
                                    repo: { $0.printStatus(alignmentColumn: alignment) } )
             }
 
+            
 // ...
 
             for item in reposOrGroups {
