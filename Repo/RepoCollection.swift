@@ -146,7 +146,18 @@ class RepoCollection {
         }
         return nil
     }
-    
+
+    func groups(named groupNames: [String]) -> [RepoGroup] {
+        var groups = [RepoGroup]()
+        
+        for group in groups {
+            if groupNames.contains(group.name) {
+                groups.append(group)
+            }
+        }
+        return groups
+    }
+
     /// Finds the first group that contains the specified repo
     /// - Parameter repo: Repo to find
     /// - Returns: RepoGroup that contains repo, or nil if is not found
@@ -160,7 +171,7 @@ class RepoCollection {
         return items.first
     }
 
-    func forEachConcurrently(perform: @escaping (Repo) -> Void) {
+    func concurrentlyForEach(perform: @escaping (Repo) -> Void) {
         let opQ = OperationQueue()
         opQ.maxConcurrentOperationCount = 10
 
@@ -175,6 +186,11 @@ class RepoCollection {
         opQ.waitUntilAllOperationsAreFinished()
     }
 
+    func concurrentlyForEach(in groups: [RepoGroup],
+                             perform: @escaping (Repo) -> Void) {
+        // ..
+    }
+    
     func forEach(group groupFunc: ((RepoGroup) -> Void)?,
                  repo repoFunc: @escaping (Repo) -> Void) {
         for group in groups {
@@ -185,6 +201,12 @@ class RepoCollection {
         }
     }
 
+    func forEach(in groups: [RepoGroup],
+                 group groupFunc: ((RepoGroup) -> Void)?,
+                 repo repoFunc: @escaping (Repo) -> Void) {
+        // ..
+    }
+    
     func load() -> Bool {
         guard FileManager.default.fileExists(atPath: storageFileURL.path) else {
             return true

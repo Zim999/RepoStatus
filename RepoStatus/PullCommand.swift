@@ -19,7 +19,7 @@ extension RepoStatusCommand {
         @Argument(help: "Repos, or groups if -g option is used, to pull")
         var reposOrGroups: [String] = []
 
-        @Flag(name: [.customLong("group"), .customShort("g")],
+        @Flag(name: [.customLong("groups"), .customShort("g")],
               help: "Pull the named groups, rather than repos")
         var areGroups = false
 
@@ -45,8 +45,40 @@ extension RepoStatusCommand {
             let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
             let alignment = longestRepoName(in: collection)
 
-            if reposOrGroups.isEmpty {
-                collection.forEachConcurrently {
+            var groups: [RepoGroup]
+
+            if reposOrGroups.isEmpty == false && areGroups == false {
+                // ... Named repos
+                
+                collection.concurrentlyForEach {
+                    if reposOrGroups.contains($0.name) {
+                        $0.refresh()
+                        if $0.pull() {
+                            $0.refresh(fetching: false)
+                        }
+                        else {
+                            $0.status.error = true
+                        }
+                    }
+                }
+
+                collection.forEach(group: { print($0.name) },
+                                   repo: {
+                                    if reposOrGroups.contains($0.name) {
+                                        $0.printStatus(alignmentColumn: alignment)
+                                    }
+                                   } )
+
+            }
+            else {
+                if reposOrGroups.isEmpty {
+                    groups = collection.groups
+                }
+                else {
+                    groups = collection.groups(named: reposOrGroups)
+                }
+                
+                collection.concurrentlyForEach(in: groups, perform: {
                     $0.refresh()
                     if $0.pull() {
                         $0.refresh(fetching: false)
@@ -54,25 +86,11 @@ extension RepoStatusCommand {
                     else {
                         $0.status.error = true
                     }
-                }
+                })
 
-                collection.forEach(group: { print($0.name) },
+                collection.forEach(in: groups,
+                                   group: { print($0.name) },
                                    repo: { $0.printStatus(alignmentColumn: alignment) } )
-            }
-
-            
-// ...
-
-            for item in reposOrGroups {
-                if areGroups,
-                   let group = collection.group(named: item) {
-                    pull(group: group)
-                }
-                else if let repos = collection.repos(named: item) {
-                    repos.forEach { (repo) in
-                        pull(repo: repo)
-                    }
-                }
             }
         }
 

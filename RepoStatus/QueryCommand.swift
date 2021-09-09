@@ -48,7 +48,7 @@ Display status for configured Git repos
                 return
             }
 
-            collection.forEachConcurrently { $0.refresh(fetching: fetch) }
+            collection.concurrentlyForEach { $0.refresh(fetching: fetch) }
 
             let alignment = longestRepoName(in: collection)
 
