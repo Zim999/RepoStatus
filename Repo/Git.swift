@@ -8,11 +8,6 @@
 import Foundation
 
 struct Git {
-    public static var isAvailable: Bool {
-        // ...
-        return true
-    }
-    
     public static var fetchCommand = "git fetch"
 
     public static var pullCommand = "git branch & git pull -q"

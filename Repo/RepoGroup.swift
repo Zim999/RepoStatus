@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a group of Repo's
-public class RepoGroup: Codable, RepoCollectionItem {
+class RepoGroup: Codable, RepoCollectionItem {
     /// Display name for group
     var name : String
     

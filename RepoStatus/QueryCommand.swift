@@ -48,25 +48,14 @@ Display status for configured Git repos
                 return
             }
 
-            collection.concurrentlyForEach { $0.refresh(fetching: fetch) }
+            collection.concurrentlyForEach(in: nil,
+                                           perform: { $0.refresh(fetching: fetch) })
 
-            let alignment = longestRepoName(in: collection)
+            let alignment = collection.lengthOfLongestRepoName()
 
-            collection.forEach(group: { print($0.name) },
+            collection.forEach(in: nil,
+                               group: { print($0.name) },
                                repo: { $0.printStatus(alignmentColumn: alignment) } )
-        }
-        
-        private func longestRepoName(in collection: RepoCollection) -> Int {
-            var longest = 0
-
-            for group in collection.groups {
-                for repo in group.repos {
-                    if repo.name.count > longest {
-                        longest = repo.name.count
-                    }
-                }
-            }
-            return longest
         }
     }
 }

@@ -17,13 +17,10 @@ protocol RepoCollectionItem {
 
 /// Holds a list of RepoGroups, each containing Repo objects
 class RepoCollection {
-    /// Posted when the status of any Repo has changed
-    static let repoCollectionChanged = Notification.Name("RepoCollectionChanged")
-
     private var storageFileURL: URL
-    
-    // MARK: - Properties
     static let DefaultGroupName = "Repos"
+
+    // MARK: - Properties
 
     /// Groups in the collection
     var groups = [RepoGroup]()
@@ -35,26 +32,14 @@ class RepoCollection {
 
     // MARK: - Public
 
+    /// Initialise the collection from a JSON file at the given file URL
+    /// - Parameter url: File URL to load the collecrtion configuration from
     init(from url: URL) {
         storageFileURL = url
         createConfigStorageFolder()
         
         if load() && groups.count == 0 {
             addDefaultGroup()
-        }
-    }
-    
-    /// Refresh all groups and repos in the collection. The refresh is done on a background queue.
-    /// When the refresh is complete a __repoCollectionChanged__ notification is sent to the
-    /// default notification centre
-    func refreshAsync() {
-        DispatchQueue.global(qos: .background).async {
-            self.groups.forEach { $0.refresh() }
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: RepoCollection.repoCollectionChanged,
-                                                object: self,
-                                                userInfo: nil)
-            }
         }
     }
     
@@ -67,13 +52,17 @@ class RepoCollection {
         }
         _ = save()
     }
-    
+
+    /// Add a new repo to the specified repo group
+    /// - Parameters:
+    ///   - repo: Repo to add
+    ///   - repoGroup: Group to add the repo to
     func add(_ repo: Repo, to repoGroup: RepoGroup) {
         repoGroup.add(repo)
         _ = save()
     }
     
-    /// Remove a group from the collection
+    /// Remove a group, and its contents, from the collection.
     /// - Parameter group: Group to remove
     func remove(_ group: RepoGroup) {
         if let idx = groups.firstIndex(of: group) {
@@ -81,9 +70,16 @@ class RepoCollection {
             _ = save()
         }
     }
-    
-    func remove(_ repo: Repo, from repoGroup: RepoGroup) {
-        repoGroup.remove(repo)
+
+    /// Remove the repo from the collection
+    /// - Parameters:
+    ///   - repo: Repo to remove
+    func remove(_ repo: Repo) {
+        for group in groups {
+            if group.contains(repo) {
+                group.remove(repo)
+            }
+        }
         _ = save()
     }
     
@@ -106,6 +102,9 @@ class RepoCollection {
         return nil
     }
 
+    /// Return all repos with the specified name
+    /// - Parameter named: Name of the repos to find
+    /// - Returns: Optional array of repos with matching name
     func repos(named: String) -> [Repo]? {
         var repos = [Repo]()
 
@@ -120,15 +119,6 @@ class RepoCollection {
         return repos.isEmpty ? nil : repos
     }
 
-    /// Tests whether the collection contain the specified group
-    /// - Parameter group: Group to test
-    /// - Returns: True if the collection contains the group, false if it does not
-    func contains(_ group: RepoGroup) -> Bool {
-        return groups.contains { existingGroup in
-            existingGroup.name == group.name
-        }
-    }
-    
     /// Tests whether the collection contains a group with the specified name
     /// - Parameter groupName: Group name to test
     /// - Returns: True if the collection contains a group with the name, false if it does not
@@ -137,7 +127,10 @@ class RepoCollection {
             existingGroup.name == groupName
         }
     }
-    
+
+    /// Return the group with the specified name
+    /// - Parameter groupName: Name of the group to find
+    /// - Returns: The group with the specified name, or nil if no group has that name
     func group(named groupName: String) -> RepoGroup? {
         for group in groups {
             if group.name == groupName {
@@ -147,15 +140,18 @@ class RepoCollection {
         return nil
     }
 
+    /// Return the groups that have any of the specified names
+    /// - Parameter groupNames: The group names to find
+    /// - Returns: Array of groups matching the names
     func groups(named groupNames: [String]) -> [RepoGroup] {
-        var groups = [RepoGroup]()
+        var results = [RepoGroup]()
         
         for group in groups {
             if groupNames.contains(group.name) {
-                groups.append(group)
+                results.append(group)
             }
         }
-        return groups
+        return results
     }
 
     /// Finds the first group that contains the specified repo
@@ -171,43 +167,72 @@ class RepoCollection {
         return items.first
     }
 
-    func concurrentlyForEach(perform: @escaping (Repo) -> Void) {
+    // MARK: - Acting on Contents
+
+    /// Concurrently perform action on each repo in the given groups, or on all repos if the
+    /// group set is nil
+    /// - Parameters:
+    ///   - groupSet: Groups containing the repos to act upon, or nil to act on all repos
+    ///   - perform: Closure to perform on each repo
+    ///   - repo:  Repo to act upon
+    func concurrentlyForEach(in groupSet: [RepoGroup]?,
+                             perform: @escaping (_ repo: Repo) -> Void) {
         let opQ = OperationQueue()
         opQ.maxConcurrentOperationCount = 10
 
         for group in groups {
-//            if groupName == nil || (groupName != nil && groupName == group.name) {
-            for repo in group.repos {
-                opQ.addOperation {
-                    perform(repo)
+            if groupSet == nil || (groupSet?.contains(group) ?? false) {
+                for repo in group.repos {
+                    opQ.addOperation {
+                        perform(repo)
+                    }
                 }
             }
         }
         opQ.waitUntilAllOperationsAreFinished()
     }
 
-    func concurrentlyForEach(in groups: [RepoGroup],
-                             perform: @escaping (Repo) -> Void) {
-        // ..
-    }
-    
-    func forEach(group groupFunc: ((RepoGroup) -> Void)?,
-                 repo repoFunc: @escaping (Repo) -> Void) {
+    /// Perform action on each repo in the given groups, or on all repos if the
+    /// group set is nil. The actions are not executed concurrently.
+    /// - Parameters:
+    ///   - groupSet: Groups containing the repos to act upon, or nil to act on all repos
+    ///   - groupFunc: Closure to perform for each group
+    ///   - repoGroup:  Group to act upon
+    ///   - repoFunc: Closure to perform on each repo
+    ///   - repo:  Repo to act upon
+    func forEach(in groupSet: [RepoGroup]?,
+                 group groupFunc: ((_ repoGroup: RepoGroup) -> Void)?,
+                 repo repoFunc: @escaping (_ repo: Repo) -> Void) {
         for group in groups {
-            groupFunc?(group)
-            for repo in group.repos {
-                repoFunc(repo)
+            if groupSet == nil || (groupSet?.contains(group) ?? false) {
+                groupFunc?(group)
+                for repo in group.repos {
+                    repoFunc(repo)
+                }
             }
         }
     }
 
-    func forEach(in groups: [RepoGroup],
-                 group groupFunc: ((RepoGroup) -> Void)?,
-                 repo repoFunc: @escaping (Repo) -> Void) {
-        // ..
+    // MARK: - Utility
+
+    /// Get the length of the longest repo name in the collection
+    /// - Returns: Length of longest repo name
+    func lengthOfLongestRepoName() -> Int {
+        var longest = 0
+
+        for group in groups {
+            for repo in group.repos {
+                if repo.name.count > longest {
+                    longest = repo.name.count
+                }
+            }
+        }
+        return longest
     }
-    
-    func load() -> Bool {
+
+    // MARK: - Save/Load
+
+    private func load() -> Bool {
         guard FileManager.default.fileExists(atPath: storageFileURL.path) else {
             return true
         }
@@ -228,7 +253,7 @@ class RepoCollection {
         return true
     }
     
-    func save() -> Bool {
+    private func save() -> Bool {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
         do {

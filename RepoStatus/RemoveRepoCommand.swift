@@ -37,12 +37,11 @@ extension RepoStatusCommand {
                 throw ValidationError("Group does not exist")
             }
 
-            guard group.repo(named: repoName) != nil else {
-                throw ValidationError("Repo not in specified group")
-            }
-
             if let repo = group.repo(named: repoName) {
-                collection.remove(repo, from: group)
+                collection.remove(repo)
+            }
+            else {
+                throw ValidationError("Repo not in specified group")
             }
         }
     }
