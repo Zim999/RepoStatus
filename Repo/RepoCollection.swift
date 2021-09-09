@@ -15,7 +15,7 @@ protocol RepoCollectionItem {
     func pull() -> Bool
 }
 
-/// Holds a list of RepoGroups, each containing Repo objects
+/// Holds a list of RepoGroups, each containing Repos
 class RepoCollection {
     private var storageFileURL: URL
     static let DefaultGroupName = "Repos"

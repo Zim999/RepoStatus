@@ -18,9 +18,6 @@ class RepoStatus {
         case deletedFiles
         case renamedFiles
         case copiedFiles
-//        case hasStash
-//        case ahead
-//        case behind
     }
     
     typealias AttributeSet = Set<Attribute>
