@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02727F25B717DA00E5F90F /* PullCommand.swift */; };
+		2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
 		37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A47253D055B00FA6F18 /* RepoCollection.swift */; };
 		37032A4B253D056C00FA6F18 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4A253D056C00FA6F18 /* Repo.swift */; };
 		37032A4E253D058900FA6F18 /* RepoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4D253D058900FA6F18 /* RepoGroup.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
+		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		37032A47253D055B00FA6F18 /* RepoCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCollection.swift; sourceTree = "<group>"; };
 		37032A4A253D056C00FA6F18 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		37032A4D253D058900FA6F18 /* RepoGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGroup.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				371BF3AF25A00CCC008521E9 /* Commands */,
 				37032A5E253E889300FA6F18 /* Shell.swift */,
 				3704FF57252BFB9D00E4A513 /* main.swift */,
+				2B8C3F4426EB860000BC6B30 /* AppSettings.swift */,
 				370E84FF254DF51F007E4A98 /* RepoStatus.entitlements */,
 			);
 			path = RepoStatus;
@@ -215,6 +218,7 @@
 			files = (
 				37032A4B253D056C00FA6F18 /* Repo.swift in Sources */,
 				37B09A9D259D40190012A2C8 /* AddGroupCommand.swift in Sources */,
+				2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */,
 				37032A4E253D058900FA6F18 /* RepoGroup.swift in Sources */,
 				3704FF58252BFB9D00E4A513 /* main.swift in Sources */,
 				37B09AAC259D40600012A2C8 /* RemoveRepoCommand.swift in Sources */,

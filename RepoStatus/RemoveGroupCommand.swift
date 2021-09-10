@@ -25,7 +25,7 @@ extension RepoStatusCommand {
         }
         
         func run() throws {
-            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
 
             guard let group = collection.group(named: groupName)
             else {

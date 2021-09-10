@@ -41,7 +41,7 @@ Display status for configured Git repos
         }
         
         private func perform() throws {
-            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
 
             if collection.isEmpty {
                 print("No repos defined")

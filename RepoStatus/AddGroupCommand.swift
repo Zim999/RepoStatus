@@ -26,7 +26,7 @@ extension RepoStatusCommand {
         }
         
         func run() throws {
-            let collection = RepoCollection(from: RepoStatusCommand.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
 
             guard !collection.contains(groupName) else {
                 throw ValidationError("Group already exists")

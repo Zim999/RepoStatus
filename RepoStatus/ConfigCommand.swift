@@ -15,7 +15,7 @@ extension RepoStatusCommand {
             abstract: "Print config file path")
         
         func run() throws {
-            print(configStoreFileURL.path)
+            print(AppSettings.configStoreFileURL.path)
         }
     }
 }

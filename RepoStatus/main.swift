@@ -16,7 +16,7 @@ struct RepoStatusCommand: ParsableCommand {
 
     static let configuration = CommandConfiguration(
         commandName: "RepoStatus",
-        abstract: "Display status of Git Repositories",
+        abstract: "Display status of Git repositories",
         version: VersionNumberString,
         subcommands: [Status.self,
                       Config.self,
@@ -27,15 +27,5 @@ struct RepoStatusCommand: ParsableCommand {
                       RemoveRepo.self,
                       Pull.self],
         defaultSubcommand: Status.self)
-        
-    static var configStoreFileURL: URL {
-        return configStoreFolderURL.appendingPathComponent("repostatus.json")
-    }
-
-    // MARK: - Private
-    
-    private static var configStoreFolderURL: URL {
-        return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".config/RepoStatus")
-    }
 }
 
