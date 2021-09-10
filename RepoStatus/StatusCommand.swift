@@ -12,7 +12,7 @@ extension RepoStatusCommand {
     struct Status: ParsableCommand {
         static let configuration = CommandConfiguration(
             abstract:"""
-Display status for configured Git repos
+Display status for configured Git repos. Use --fetch option to fetch from remotes first
 
     Repo name coloured as follows (priority order):
         red = Repo has modified files
