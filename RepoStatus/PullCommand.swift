@@ -48,8 +48,6 @@ extension RepoStatusCommand {
             var groups: [RepoGroup]
 
             if reposOrGroups.isEmpty == false && areGroups == false {
-                // ... Named repos
-                
                 collection.concurrentlyForEach(in: nil, perform: {
                     if reposOrGroups.contains($0.name) {
                         $0.refresh()
@@ -91,41 +89,6 @@ extension RepoStatusCommand {
                                    repo: { $0.printStatus(alignmentColumn: alignment) } )
             }
         }
-
-        // ... Make common with one in QueryCommand
-
-        func pull(repo: Repo) {
-            // print("Pulling \(repo.name) ", terminator: "")
-
-            repo.refresh()
-
-            let indent = "  "
-
-            //let branch = " \(repo.status.branch) ".background(ANSIColour.blueViolet).reset()
-
-            print(indent +
-                    " \(repo.name) " +
-                    " \(repo.status.branch) ".background(.blueViolet).reset(),
-                  terminator: "")
-
-//            print(indent + "\(branch) ", terminator: "")
-//            print(": ", terminator: "")
-
-            if !repo.pull() {
-                print(" ... " + "Error".colour(.red).reset())
-            }
-            else {
-                print("")
-            }
-        }
-
-        func pull(group: RepoGroup) {
-            print("\(group.name)".bold().reset())
-            for repo in group.repos {
-                pull(repo: repo)
-            }
-        }
-
     }
     
 }
