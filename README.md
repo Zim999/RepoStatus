@@ -2,8 +2,13 @@
 
 RepoStatus is a simple command line application for macOS to show the status of multiple local Git repositories. 
 It indicates file have been modified, added, how many commits the remote is ahead or behind a remote, etc. 
+Output is coloured for easy reading.
 
 Local repos can be added into named groups, useful if you have projects with multiple repos. 
+
+You can get status for all repos, named repos, and all repos in named groups.
+
+RepoStatus can also perform a _fetch_ (--fetch option on status command), or _pull_ against remotes.
 
 ### Usage
 
