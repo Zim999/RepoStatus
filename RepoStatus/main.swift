@@ -18,7 +18,7 @@ struct RepoStatusCommand: ParsableCommand {
         commandName: "RepoStatus",
         abstract: "Display status of Git Repositories",
         version: VersionNumberString,
-        subcommands: [Query.self,
+        subcommands: [Status.self,
                       Config.self,
                       Key.self,
                       AddGroup.self,
@@ -26,7 +26,7 @@ struct RepoStatusCommand: ParsableCommand {
                       RemoveGroup.self,
                       RemoveRepo.self,
                       Pull.self],
-        defaultSubcommand: Query.self)
+        defaultSubcommand: Status.self)
         
     static var configStoreFileURL: URL {
         return configStoreFolderURL.appendingPathComponent("repostatus.json")

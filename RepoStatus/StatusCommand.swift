@@ -1,5 +1,5 @@
 //
-//  QueryCommand.swift
+//  StatusCommand.swift
 //  RepoStatus
 //
 //  Created by Simon Beavis on 30/12/20.
@@ -9,7 +9,7 @@ import Foundation
 import ArgumentParser
 
 extension RepoStatusCommand {
-    struct Query: ParsableCommand {
+    struct Status: ParsableCommand {
         static let configuration = CommandConfiguration(
             abstract:"""
 Display status for configured Git repos

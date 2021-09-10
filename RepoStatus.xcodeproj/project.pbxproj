@@ -16,7 +16,7 @@
 		37032A5F253E889300FA6F18 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A5E253E889300FA6F18 /* Shell.swift */; };
 		3704FF58252BFB9D00E4A513 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704FF57252BFB9D00E4A513 /* main.swift */; };
 		37787BBD259EB96500C79308 /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
-		37B09A8E259D3F520012A2C8 /* QueryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A8D259D3F520012A2C8 /* QueryCommand.swift */; };
+		37B09A8E259D3F520012A2C8 /* StatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A8D259D3F520012A2C8 /* StatusCommand.swift */; };
 		37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */; };
 		37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */; };
 		37B09A9D259D40190012A2C8 /* AddGroupCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A9C259D40190012A2C8 /* AddGroupCommand.swift */; };
@@ -54,7 +54,7 @@
 		370E84FF254DF51F007E4A98 /* RepoStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatus.entitlements; sourceTree = "<group>"; };
 		37787BB2259E9C0500C79308 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		37787BBC259EB96500C79308 /* ANSIColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSIColour.swift; sourceTree = "<group>"; };
-		37B09A8D259D3F520012A2C8 /* QueryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryCommand.swift; sourceTree = "<group>"; };
+		37B09A8D259D3F520012A2C8 /* StatusCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCommand.swift; sourceTree = "<group>"; };
 		37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCommand.swift; sourceTree = "<group>"; };
 		37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCommand.swift; sourceTree = "<group>"; };
 		37B09A9C259D40190012A2C8 /* AddGroupCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupCommand.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 				37B09AA1259D40300012A2C8 /* AddRepoCommand.swift */,
 				37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */,
 				37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */,
-				37B09A8D259D3F520012A2C8 /* QueryCommand.swift */,
+				37B09A8D259D3F520012A2C8 /* StatusCommand.swift */,
 				37B09AA6259D40490012A2C8 /* RemoveGroupCommand.swift */,
 				37B09AAB259D40600012A2C8 /* RemoveRepoCommand.swift */,
 				2B02727F25B717DA00E5F90F /* PullCommand.swift */,
@@ -218,7 +218,7 @@
 				37032A4E253D058900FA6F18 /* RepoGroup.swift in Sources */,
 				3704FF58252BFB9D00E4A513 /* main.swift in Sources */,
 				37B09AAC259D40600012A2C8 /* RemoveRepoCommand.swift in Sources */,
-				37B09A8E259D3F520012A2C8 /* QueryCommand.swift in Sources */,
+				37B09A8E259D3F520012A2C8 /* StatusCommand.swift in Sources */,
 				37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */,
 				37B09AE0259E94EA0012A2C8 /* String+ANSI.swift in Sources */,
 				2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */,
