@@ -178,7 +178,7 @@ class RepoCollection {
     func concurrentlyForEach(in groupSet: [RepoGroup]?,
                              perform: @escaping (_ repo: Repo) -> Void) {
         let opQ = OperationQueue()
-        opQ.maxConcurrentOperationCount = 10
+        opQ.maxConcurrentOperationCount = AppSettings.numConcurrentJobs
 
         for group in groups {
             if groupSet == nil || (groupSet?.contains(group) ?? false) {

@@ -31,7 +31,7 @@ extension RepoStatusCommand {
         }
         
         func run() throws {
-            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
 
             guard let group = collection.group(named: groupName) else {
                 throw ValidationError("Group does not exist")

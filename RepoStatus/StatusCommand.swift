@@ -41,7 +41,7 @@ Display status for configured Git repos. Use --fetch option to fetch from remote
         }
         
         private func perform() throws {
-            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
 
             if collection.isEmpty {
                 print("No repos defined")

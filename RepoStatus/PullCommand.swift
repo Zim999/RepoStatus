@@ -25,7 +25,7 @@ extension RepoStatusCommand {
 
 
         mutating func validate() throws {
-            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
 
             for item in reposOrGroups {
                 if areGroups {
@@ -42,7 +42,7 @@ extension RepoStatusCommand {
         }
 
         func run() throws {
-            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
             let alignment = collection.lengthOfLongestRepoName()
 
             var groups: [RepoGroup]

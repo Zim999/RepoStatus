@@ -8,8 +8,17 @@
 import Foundation
 
 struct AppSettings {
-    static var configStoreFileURL: URL {
-        return configStoreFolderURL.appendingPathComponent("repostatus.json")
+    static var collectionStoreFileURL: URL {
+        return configStoreFolderURL.appendingPathComponent("collection.json")
+    }
+
+    static var configFolderURL: URL {
+        return configStoreFolderURL
+    }
+
+    static var numConcurrentJobs: Int {
+        // ... Make this a configurable option
+        return 10
     }
 
     // MARK: - Private

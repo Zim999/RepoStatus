@@ -44,7 +44,7 @@ extension RepoStatusCommand {
         }
         
         func run() throws {
-            let collection = RepoCollection(from: AppSettings.configStoreFileURL)
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
 
             let nameOfGroupToUse = groupName ?? RepoCollection.DefaultGroupName
             var group = collection.group(named: nameOfGroupToUse)
