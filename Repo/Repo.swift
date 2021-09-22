@@ -52,8 +52,11 @@ class Repo: Codable, RepoCollectionItem {
     /// Perform a git pull on the repo
     /// - Returns: Pull command exit code. 0 if command executed successfully, non-zero for errors
     func pull() -> Bool {
-        let (exitCode, _) = Shell.run(Git.pullCommand, at: url)
+        let (exitCode, output) = Shell.run(Git.pullCommand, at: url)
         // .. parse status
+
+        print("Debug: \(output ?? "None")")
+
         refresh()
         return exitCode == 0
     }
@@ -117,14 +120,17 @@ extension Repo {
     private func statusColours(from status: RepoStatus) -> String {
         var statusColour = ""
 
-        if status.contains(.modifiedFiles) {
+        if status.error {
             statusColour = statusColour.colours(.white, .red3)
         }
-        else if status.contains(.addedFiles) {
+        else if status.contains(.modifiedFiles) {
             statusColour = statusColour.colours(.black, .orange1)
         }
-        else if status.contains(.newUntrackedFiles) {
+        else if status.contains(.addedFiles) || status.indexContains(.addedFiles) {
             statusColour = statusColour.colours(.black, .yellow)
+        }
+        else if status.contains(.newUntrackedFiles) {
+            statusColour = statusColour.colours(.white, .fuchsia)
         }
         else {
             statusColour = statusColour.colours(.darkGreen, .greenYellow)

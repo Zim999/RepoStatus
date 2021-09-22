@@ -15,9 +15,10 @@ extension RepoStatusCommand {
 Display status for configured Git repos. Use --fetch option to fetch from remotes first
 
     Repo name coloured as follows (priority order):
-        red = Repo has modified files
-        orange = Repo has added files
-        yellow = Repo has untracked files
+        red = Git command failed
+        orange = Repo has modified files
+        yellow = Repo has added files
+        fuchsia = Repo has untracked files
         green = Repo clean, no changes
 
     Repo status flags:
@@ -29,12 +30,16 @@ Display status for configured Git repos. Use --fetch option to fetch from remote
         ↓ = Behind remote
 """)
 
-        @Argument(help: "Display status for this group only")
-        var groupName: String?
+        @Argument(help: "Display status for this repo only")
+        var repoName: String?
 
         @Flag(name: [.customLong("fetch"), .customShort("f")],
               help: "Fetches from remote before getting status")
         var fetch = false
+
+        @Flag(name: [.customLong("verbose"), .customShort("v")],
+              help: "Show more information about each repo")
+        var verbose = false
 
         func run() throws {
             try perform()
@@ -49,13 +54,26 @@ Display status for configured Git repos. Use --fetch option to fetch from remote
             }
 
             collection.concurrentlyForEach(in: nil,
-                                           perform: { $0.refresh(fetching: fetch) })
+                                           perform: {
+                if repoName == nil || $0.name == repoName {
+                    $0.refresh(fetching: fetch)
+                }
+            })
 
             let alignment = collection.lengthOfLongestRepoName()
 
             collection.forEach(in: nil,
-                               group: { print($0.name) },
-                               repo: { $0.printStatus(alignmentColumn: alignment) } )
+                               group: { if repoName == nil {
+                                   print($0.name)
+                               } },
+                               repo: {
+                if repoName == nil || $0.name == repoName {
+                    $0.printStatus(alignmentColumn: alignment)
+                    if verbose {
+                        print("    Path: \($0.url.path)")
+                    }
+                }
+            })
         }
     }
 }

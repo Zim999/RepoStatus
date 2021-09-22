@@ -90,6 +90,10 @@ class RepoStatus {
     public func contains(_ attribute: Attribute) -> Bool {
         return workingCopyAttributes.contains(attribute)
     }
+
+    public func indexContains(_ attribute: Attribute) -> Bool {
+        return indexAttributes.contains(attribute)
+    }
 }
 
 // MARK: - Regex methods
@@ -206,7 +210,12 @@ extension RepoStatus {
 
         statusString += append("M ", if: contains(.modifiedFiles))
         statusString += append("? ", if: contains(.newUntrackedFiles))
-        statusString += append("+ ", if: contains(.addedFiles))
+
+        if contains(.addedFiles) {
+            print("!")
+        }
+
+        statusString += append("+ ", if: contains(.addedFiles) || indexContains(.addedFiles))
         statusString += append("S ", if: hasStash)
         statusString += append("↑\(aheadCount)", if: self.aheadCount > 0)
         statusString += append("↓\(behindCount)", if: self.behindCount > 0)

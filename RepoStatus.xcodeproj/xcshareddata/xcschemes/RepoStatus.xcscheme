@@ -57,8 +57,12 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "pull -g Frameworks"
+            argument = "DeveloperPanel"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "pull -g Frameworks"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "pull enhancedsp"
