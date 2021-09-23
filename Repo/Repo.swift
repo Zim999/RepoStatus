@@ -53,11 +53,17 @@ class Repo: Codable, RepoCollectionItem {
     /// - Returns: Pull command exit code. 0 if command executed successfully, non-zero for errors
     func pull() -> Bool {
         let (exitCode, output) = Shell.run(Git.pullCommand, at: url)
-        // .. parse status
 
-        print("Debug: \(output ?? "None")")
+        status.errorMessage = ""
 
-        refresh()
+        if let out = output,
+           out.contains("error:") {
+            status.errorMessage = extractError(from: out).capitalized
+        }
+        else {
+            refresh()
+        }
+
         return exitCode == 0
     }
 
@@ -72,9 +78,8 @@ class Repo: Codable, RepoCollectionItem {
         if status.error {
             print(indent +
                     "\(statusColour)" +
-                    " \(name) ".forward(align) +
-                    " Error ".colours(.black, .red).reset())
-
+                    " \(name) ".forward(align).colours(.black, .red).reset())
+            print("  " + " Error:\(status.errorMessage) ".colours(.black, .red).reset())
         }
         else if status.isValid {
             let statusString = status.asString
@@ -137,6 +142,28 @@ extension Repo {
         }
 
         return statusColour
+    }
+
+    private func extractError(from errorString: String) -> String {
+        var output = ""
+
+        do {
+            let regex = try NSRegularExpression(pattern: "error:(.+)")
+            let matches = regex.matches(in: errorString,
+                                        options: [],
+                                        range: NSRange(location: 0, length: errorString.count))
+
+            for match in matches {
+                if match.numberOfRanges > 1 {
+                    output +=  errorString.subString(range: match.range(at: 1))
+                }
+            }
+        }
+        catch {
+            print("Exception parsing error")
+        }
+
+        return output
     }
 }
 

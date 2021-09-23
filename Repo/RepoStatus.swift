@@ -31,6 +31,9 @@ class RepoStatus {
     /// Did last command return error
     var error = false
 
+    /// Last error if command return error
+    var errorMessage = ""
+
     /// Has valid status been retrieved about the repo
     var isValid = false
     
