@@ -230,6 +230,11 @@ class RepoCollection {
         return longest
     }
 
+    func purgeEmptyGroups() {
+        groups.removeAll(where: { $0.repos.count == 0 } )
+        _ = save()
+    }
+
     // MARK: - Save/Load
 
     private func load() -> Bool {

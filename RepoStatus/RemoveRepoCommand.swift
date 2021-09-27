@@ -12,37 +12,48 @@ extension RepoStatusCommand {
     struct RemoveRepo: ParsableCommand {
         static let configuration = CommandConfiguration(
             commandName: "removerepo",
-            abstract: "Remove a repo")
+            abstract: "Remove the named repo from the list, from either a single or all groups")
         
         @Argument(help: "Name of the repo")
         var repoName: String
-        
-        @Argument(help: "Name of the containing group")
-        var groupName: String
+
+        @Option(name: [.customShort("g"), .customLong("group")],
+                help: "Name of the group to add to remove from")
+        var groupName: String?
 
         // ... Option to remove empty group
 
         func validate() throws {
-            guard !repoName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-                  !groupName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            guard !repoName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             else {
-                throw ValidationError("Repo and group names cannot be empty")
+                throw ValidationError("Repo name cannot be empty")
             }
         }
         
         func run() throws {
             let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
 
-            guard let group = collection.group(named: groupName) else {
-                throw ValidationError("Group does not exist")
-            }
+            if let groupName = groupName {
+                guard let group = collection.group(named: groupName) else {
+                    throw ValidationError("Group does not exist")
+                }
 
-            if let repo = group.repo(named: repoName) {
-                collection.remove(repo)
+                if let repo = group.repo(named: repoName) {
+                    collection.remove(repo)
+                }
+                else {
+                    throw ValidationError("Repo not in specified group")
+                }
             }
             else {
-                throw ValidationError("Repo not in specified group")
+                for group in collection.groups {
+                    if let repo = group.repo(named: repoName) {
+                        collection.remove(repo)
+                    }
+                }
             }
+
+            collection.purgeEmptyGroups()
         }
     }
 }
