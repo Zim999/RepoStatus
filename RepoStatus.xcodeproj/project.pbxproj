@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02727F25B717DA00E5F90F /* PullCommand.swift */; };
 		2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
+		2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD252272791BAA300BE9389 /* FetchCommand.swift */; };
 		37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A47253D055B00FA6F18 /* RepoCollection.swift */; };
 		37032A4B253D056C00FA6F18 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4A253D056C00FA6F18 /* Repo.swift */; };
 		37032A4E253D058900FA6F18 /* RepoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4D253D058900FA6F18 /* RepoGroup.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
 		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		2BD252272791BAA300BE9389 /* FetchCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCommand.swift; sourceTree = "<group>"; };
 		37032A47253D055B00FA6F18 /* RepoCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCollection.swift; sourceTree = "<group>"; };
 		37032A4A253D056C00FA6F18 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		37032A4D253D058900FA6F18 /* RepoGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGroup.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				37B09A9C259D40190012A2C8 /* AddGroupCommand.swift */,
 				37B09AA1259D40300012A2C8 /* AddRepoCommand.swift */,
 				37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */,
+				2BD252272791BAA300BE9389 /* FetchCommand.swift */,
 				37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */,
 				37B09A8D259D3F520012A2C8 /* StatusCommand.swift */,
 				37B09AA6259D40490012A2C8 /* RemoveGroupCommand.swift */,
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */,
 				37032A4B253D056C00FA6F18 /* Repo.swift in Sources */,
 				37B09A9D259D40190012A2C8 /* AddGroupCommand.swift in Sources */,
 				2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */,

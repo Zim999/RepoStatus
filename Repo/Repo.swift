@@ -49,6 +49,24 @@ class Repo: Codable, RepoCollectionItem {
         }
     }
 
+    /// Perform a git fetch on the repo
+    /// - Returns: Fetch command exit code. 0 if command executed successfully, non-zero for errors
+    func fetch() -> Bool {
+        let (exitCode, output) = Shell.run(Git.fetchCommand, at: url)
+
+        status.errorMessage = ""
+
+        if let out = output,
+           out.contains("error:") {
+            status.errorMessage = extractError(from: out).capitalized
+        }
+        else {
+            refresh()
+        }
+
+        return exitCode == 0
+    }
+
     /// Perform a git pull on the repo
     /// - Returns: Pull command exit code. 0 if command executed successfully, non-zero for errors
     func pull() -> Bool {
