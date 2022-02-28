@@ -298,7 +298,7 @@ extension RepoCollection {
 
     private func sort() {
         groups.sort { (lhs, rhs) -> Bool in
-            return lhs.name < rhs.name
+            lhs.name.localizedCompare(rhs.name) == .orderedAscending
         }
     }
 }

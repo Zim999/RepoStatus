@@ -77,7 +77,7 @@ class RepoGroup: Codable, RepoCollectionItem {
 extension RepoGroup {
     private func sort() {
         repos.sort { lhs, rhs in
-            lhs.name <= rhs.name
+            lhs.name.localizedCompare(rhs.name) == .orderedAscending
         }
     }
 }
