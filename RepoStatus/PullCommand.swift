@@ -51,7 +51,13 @@ extension RepoStatusCommand {
                 collection.concurrentlyForEach(in: nil, perform: {
                     if reposOrGroups.contains($0.name) {
                         $0.refresh()
-                        if $0.pull() == false {
+                        if $0.status.isValid {
+                            if $0.pull() == false {
+                                $0.status.error = true
+                            }
+                        }
+                        else {
+                            $0.status.errorMessage = " Invalid Repo"
                             $0.status.error = true
                         }
                     }
@@ -76,12 +82,19 @@ extension RepoStatusCommand {
                 
                 collection.concurrentlyForEach(in: groups, perform: {
                     $0.refresh()
-                    if $0.pull() {
-                        $0.refresh(fetching: false)
+                    if $0.status.isValid {
+                        if $0.pull() {
+                            $0.refresh(fetching: false)
+                        }
+                        else {
+                            $0.status.error = true
+                        }
                     }
                     else {
+                        $0.status.errorMessage = " Invalid Repo"
                         $0.status.error = true
                     }
+
                 })
 
                 collection.forEach(in: groups,

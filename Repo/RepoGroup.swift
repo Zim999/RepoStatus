@@ -34,6 +34,7 @@ class RepoGroup: Codable, RepoCollectionItem {
     /// - Parameter repo: Repo to add
     func add(_ repo: Repo) {
         repos.append(repo)
+        sort()
     }
     
     /// Remove a repo from the group
@@ -70,6 +71,14 @@ class RepoGroup: Codable, RepoCollectionItem {
         repos.forEach( { _ = $0.pull() })
         // ...
         return true
+    }
+}
+
+extension RepoGroup {
+    private func sort() {
+        repos.sort { lhs, rhs in
+            lhs.name <= rhs.name
+        }
     }
 }
 

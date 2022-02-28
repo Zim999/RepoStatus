@@ -95,8 +95,11 @@ class Repo: Codable, RepoCollectionItem {
 
         if status.error {
             print(indent +
+                  "\(statusColour)" +
+                  " \(name) ".reset())
+            print(indent +
                     "\(statusColour)" +
-                    " \(name) " + "\(status.errorMessage) ".colours(.yellow, .red).reset())
+                    "\(status.errorMessage) ".colours(.yellow, .red).reset())
         }
         else if status.isValid {
             let statusString = status.asString

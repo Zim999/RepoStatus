@@ -47,9 +47,8 @@ class RepoCollection {
     /// - Parameter group: Group to add
     func add(_ group: RepoGroup) {
         groups.append(group)
-        groups.sort { (lhs, rhs) -> Bool in
-            return lhs.name < rhs.name
-        }
+        sort()
+
         _ = save()
     }
 
@@ -235,29 +234,37 @@ class RepoCollection {
         _ = save()
     }
 
+
+
+}
+
+// MARK: - Private
+
+extension RepoCollection {
+
     // MARK: - Save/Load
 
     private func load() -> Bool {
         guard FileManager.default.fileExists(atPath: storageFileURL.path) else {
             return true
         }
-        
+
         let decoder = JSONDecoder()
         do {
             let data = try Data(contentsOf: storageFileURL)
             let result = try decoder.decode([RepoGroup].self, from: data)
             groups.removeAll()
             groups.append(contentsOf: result)
-            
+
             return true
         }
         catch {
             print("Cannot decode: \(error)")
         }
-        
+
         return true
     }
-    
+
     private func save() -> Bool {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
@@ -269,10 +276,10 @@ class RepoCollection {
         catch {
             print("Cannot encode: \(error)")
         }
-        
+
         return false
     }
-    
+
     private func createConfigStorageFolder() {
         do {
             let url = storageFileURL.deletingLastPathComponent()
@@ -285,10 +292,13 @@ class RepoCollection {
         }
     }
 
-    
-    // MARK: - Private
-
     private func addDefaultGroup() {
         groups.append(RepoGroup(name: Self.DefaultGroupName))
+    }
+
+    private func sort() {
+        groups.sort { (lhs, rhs) -> Bool in
+            return lhs.name < rhs.name
+        }
     }
 }
