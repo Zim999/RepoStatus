@@ -17,18 +17,18 @@ extension RepoStatusCommand {
             abstract: "Performs a Git fetch on all or specified repos, or all repos in specified groups")
 
         @Argument(help: "Repos, or groups if -g option is used, to fetch")
-        var reposOrGroups: [String] = []
+        var toFetch: [String] = []
 
         @Flag(name: [.customLong("groups"), .customShort("g")],
               help: "Fetch the named groups, rather than repos")
-        var areGroups = false
+        var fetchingGroups = false
 
 
         mutating func validate() throws {
             let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
 
-            for item in reposOrGroups {
-                if areGroups {
+            for item in toFetch {
+                if fetchingGroups {
                     guard collection.group(named: item) != nil else {
                         throw ValidationError("No such group \(item)")
                     }
@@ -42,67 +42,61 @@ extension RepoStatusCommand {
         }
 
         func run() throws {
+            let fetchingRepos = toFetch.isEmpty == false && fetchingGroups == false
+
+            fetchingRepos ? run(onRepos: toFetch) : run(onGroups: toFetch)
+        }
+
+        private func run(onRepos: [String]) {
             let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
             let alignment = collection.lengthOfLongestRepoName()
 
-            var groups: [RepoGroup]
+            collection.concurrentlyForEach(in: nil, perform: {
+                if toFetch.contains($0.name) {
+                    run(onRepo: $0)
+                }
+            })
 
-            if reposOrGroups.isEmpty == false && areGroups == false {
-                collection.concurrentlyForEach(in: nil, perform: {
-                    if reposOrGroups.contains($0.name) {
-                        $0.refresh()
-                        if $0.status.isValid {
-                            if $0.fetch() == false {
-                                $0.status.error = true
-                            }
-                        }
-                        else {
-                            $0.status.errorMessage = " Invalid Repo"
-                            $0.status.error = true
-                        }
-                    }
-                })
+            collection.forEach(in: nil,
+                               group: { print($0.name) },
+                               repo: {
+                if toFetch.contains($0.name) {
+                    $0.printStatus(alignmentColumn: alignment)
+                }
+            } )
+        }
 
-                collection.forEach(in: nil,
-                                   group: { print($0.name) },
-                                   repo: {
-                                    if reposOrGroups.contains($0.name) {
-                                        $0.printStatus(alignmentColumn: alignment)
-                                    }
-                                   } )
+        private func run(onGroups: [String]) {
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
+            let alignment = collection.lengthOfLongestRepoName()
 
-            }
-            else {
-                if reposOrGroups.isEmpty {
-                    groups = collection.groups
+            let groups = toFetch.isEmpty ? collection.groups : collection.groups(named: toFetch)
+
+            collection.concurrentlyForEach(in: groups, perform: {
+                run(onRepo: $0)
+            })
+
+            collection.forEach(in: groups,
+                               group: { print($0.name) },
+                               repo: { $0.printStatus(alignmentColumn: alignment) } )
+        }
+
+        private func run(onRepo repo: Repo) {
+            repo.refresh()
+            if repo.status.isValid {
+                if repo.fetch() {
+                    repo.refresh(fetching: false)
                 }
                 else {
-                    groups = collection.groups(named: reposOrGroups)
+                    repo.status.error = true
                 }
-                
-                collection.concurrentlyForEach(in: groups, perform: {
-                    $0.refresh()
-                    if $0.status.isValid {
-                        if $0.fetch() {
-                            $0.refresh(fetching: false)
-                        }
-                        else {
-                            $0.status.error = true
-                        }
-                    }
-                    else {
-                        $0.status.errorMessage = " Invalid Repo"
-                        $0.status.error = true
-                    }
-
-                })
-
-                collection.forEach(in: groups,
-                                   group: { print($0.name) },
-                                   repo: { $0.printStatus(alignmentColumn: alignment) } )
             }
+            else {
+                repo.status.errorMessage = " Invalid Repo"
+                repo.status.error = true
+            }
+
         }
     }
-    
 }
 
