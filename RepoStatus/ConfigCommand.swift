@@ -12,10 +12,15 @@ extension RepoStatusCommand {
     struct Config: ParsableCommand {
         static let configuration = CommandConfiguration(
             commandName: "config",
-            abstract: "Print config storage path")
-        
+            abstract: "Print config file storage path")
+
+        @Flag(name: [.customLong("path"), .customShort("p")],
+              help: "Print directory path only")
+        var directoryOnly = false
+
         func run() throws {
-            print(AppSettings.configFolderURL.path)
+            print(directoryOnly ? AppSettings.configFolderURL.path :
+                                  AppSettings.collectionStoreFileURL.path)
         }
     }
 }
