@@ -19,19 +19,17 @@ extension RepoStatusCommand {
         
         mutating func validate() throws {
             groupName.trim()
-            
-            guard !groupName.isEmpty else {
-                throw ValidationError("Group name cannot be empty")
-            }
+            guard !groupName.isEmpty
+            else { throw ValidationError("Group name cannot be empty") }
+
+            let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
+
+            guard !collection.contains(groupName)
+            else { throw ValidationError("Group already exists") }
         }
         
         func run() throws {
             let collection = RepoCollection(from: AppSettings.collectionStoreFileURL)
-
-            guard !collection.contains(groupName) else {
-                throw ValidationError("Group already exists")
-            }
-
             collection.add(RepoGroup(name: groupName))
         }
     }

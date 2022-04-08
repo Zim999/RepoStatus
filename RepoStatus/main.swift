@@ -26,7 +26,8 @@ struct RepoStatusCommand: ParsableCommand {
                       RemoveGroup.self,
                       RemoveRepo.self,
                       Pull.self,
-                      Fetch.self],
+                      Fetch.self,
+                      Path.self],
         defaultSubcommand: Status.self)
 }
 

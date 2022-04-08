@@ -18,16 +18,12 @@ extension RepoStatusCommand {
         var repoName: String
 
         @Option(name: [.customShort("g"), .customLong("group")],
-                help: "Name of the group to add to remove from")
+                help: "Name of the group to remove the repo from")
         var groupName: String?
-
-        // ... Option to remove empty group
 
         func validate() throws {
             guard !repoName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            else {
-                throw ValidationError("Repo name cannot be empty")
-            }
+            else { throw ValidationError("Repo name cannot be empty") }
         }
         
         func run() throws {
