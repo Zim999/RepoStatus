@@ -11,7 +11,7 @@ import ArgumentParser
 extension RepoStatusCommand {
     struct Status: ParsableCommand {
         static let configuration = CommandConfiguration(
-            abstract: "Display status for configured Git repos. Use --fetch option to fetch from remotes first",
+            abstract: "Display status of repos. Use --fetch option to fetch from remotes first",
             discussion: """
                 Display status for configured Git repos. Use --fetch option to fetch from remotes first
 

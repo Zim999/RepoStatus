@@ -16,7 +16,7 @@ struct RepoStatusCommand: ParsableCommand {
 
     static let configuration = CommandConfiguration(
         commandName: "RepoStatus",
-        abstract: "Display status of Git repositories",
+        abstract: "Display status of, and fetch or pull, multiple Git repositories at once",
         version: VersionNumberString,
         subcommands: [Status.self,
                       Config.self,
