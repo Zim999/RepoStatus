@@ -58,6 +58,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "pull"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "addrepo /Users/beaviss/Source/SwiftPackages -g Packages"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

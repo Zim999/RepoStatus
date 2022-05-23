@@ -128,10 +128,27 @@ extension Repo: Equatable {
 // MARK: - Static Functions
 
 extension Repo {
-    public static func exists(at path: String) -> Bool {
-        let (exitCode, _) = Shell.run(Git.statusCommand, at: URL(fileURLWithPath: path))
+
+    public static func exists(at url: URL) -> Bool {
+        let (exitCode, _) = Shell.run(Git.statusCommand, at: url)
         return exitCode == 0
     }
+
+    public static func repos(at url: URL) throws -> [URL]? {
+        var results = [URL]()
+
+        let urls = try FileManager.default.contentsOfDirectory(at: url,
+                                                               includingPropertiesForKeys: nil)
+
+        for u in urls {
+            if Repo.exists(at: u) {
+                results.append(u)
+            }
+        }
+
+        return results.count > 0 ? results : nil
+    }
+    
 }
 
 // MARK: - Private Functions

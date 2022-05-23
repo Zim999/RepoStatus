@@ -11,24 +11,25 @@ import ArgumentParser
 extension RepoStatusCommand {
     struct Status: ParsableCommand {
         static let configuration = CommandConfiguration(
-            abstract:"""
-Display status for configured Git repos. Use --fetch option to fetch from remotes first
+            abstract: "Display status for configured Git repos. Use --fetch option to fetch from remotes first",
+            discussion: """
+                Display status for configured Git repos. Use --fetch option to fetch from remotes first
 
-    Repo name coloured as follows (priority order):
-        red = Git command failed
-        orange = Repo has modified files
-        yellow = Repo has added files
-        fuchsia = Repo has untracked files
-        green = Repo clean, no changes
+                Repo name coloured as follows (priority order):
+                    red = Git command failed
+                    orange = Repo has modified files
+                    yellow = Repo has added files
+                    fuchsia = Repo has untracked files
+                    green = Repo clean, no changes
 
-    Repo status flags:
-        + = Files added
-        M = Files modified
-        ? = New untracked files
-        S = Has stashed changes
-        ↑ = Ahead of remote
-        ↓ = Behind remote
-""")
+                Repo status flags:
+                    + = Files added
+                    M = Files modified
+                    ? = New untracked files
+                    S = Has stashed changes
+                    ↑ = Ahead of remote
+                    ↓ = Behind remote
+            """)
 
         @Argument(help: "Display status for this repo only")
         var repoName: String?

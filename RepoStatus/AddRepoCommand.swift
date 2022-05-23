@@ -12,9 +12,14 @@ extension RepoStatusCommand {
     struct AddRepo: ParsableCommand {
         static let configuration = CommandConfiguration(
             commandName: "addrepo",
-            abstract: "Add a repo to a group within the collection")
+            abstract: "Add a repo, or all repos in a directory",
+            discussion:
+                """
+                If the specified path is a repo, that repo is added.
+                If the specified path is a directory, all repos found at the path (top-level only) will be added.
+                """)
         
-        @Argument(help: "Local file path of the repo")
+        @Argument(help: "Local file path of the repo, or a directory containing repos")
         var repoPath: String
 
         @Option(name: [.customShort("g"), .customLong("group")],
@@ -35,12 +40,12 @@ extension RepoStatusCommand {
             }
 
             guard directoryExists(at: repoPath) else {
-                throw ValidationError("Path is not a Git repo")
+                throw ValidationError("Path is not a directory")
             }
 
-            guard Repo.exists(at: repoPath) else {
-                throw ValidationError("Path is does not exist")
-            }
+//            guard Repo.exists(at: repoPath) else {
+//                throw ValidationError("Path is not a Git repo")
+//            }
         }
         
         func run() throws {
@@ -58,8 +63,24 @@ extension RepoStatusCommand {
                 throw ValidationError("Could not add repo")
             }
 
-            let repo = Repo(url: URL(fileURLWithPath: repoPath))
-            collection.add(repo, to: group!)
+            let url = URL(fileURLWithPath: repoPath)
+
+            if Repo.exists(at: url) {
+                let repo = Repo(url: url)
+                collection.add(repo, to: group!)
+            }
+            else {
+                // Add all repos within the passed in directory
+
+                guard let urls = try Repo.repos(at: url) else {
+                    throw ValidationError("No repos found at path")
+                }
+
+                for url in urls {
+                    let repo = Repo(url: url)
+                    collection.add(repo, to: group!)
+                }
+            }
         }
 
         private func directoryExists(at path: String) -> Bool {
