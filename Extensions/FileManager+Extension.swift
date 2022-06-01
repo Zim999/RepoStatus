@@ -1,6 +1,6 @@
 //
 //  FileManager+Extension.swift
-//  GitMonitor
+//  RepoStatus
 //
 //  Created by Simon Beavis on 10/18/20.
 //

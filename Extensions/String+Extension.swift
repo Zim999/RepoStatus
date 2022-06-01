@@ -1,6 +1,6 @@
 //
 //  String+Extension.swift
-//  GitMonitor
+//  RepoStatus
 //
 //  Created by Simon Beavis on 10/18/20.
 //
@@ -24,6 +24,7 @@ extension String {
         self = trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    /// Returns a new string with trimmed leading and trailing whitespace and newlines
     mutating func trimmed() -> String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
