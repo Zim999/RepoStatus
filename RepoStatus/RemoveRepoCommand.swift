@@ -35,7 +35,7 @@ extension RepoStatusCommand {
                 }
 
                 if let repo = group.repo(named: repoName) {
-                    collection.remove(repo)
+                    group.remove(repo)
                 }
                 else {
                     throw ValidationError("Repo not in specified group")

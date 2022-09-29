@@ -57,12 +57,16 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "removerepo Midway -g Midway"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "pull"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "addrepo /Users/beaviss/Source/SwiftPackages -g Packages"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "DeveloperPanel"
