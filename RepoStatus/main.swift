@@ -8,7 +8,7 @@
 import Foundation
 import ArgumentParser
 
-let VersionNumberString = "0.1.0"
+let VersionNumberString = "0.2.0"
 
 RepoStatusCommand.main()
 

@@ -89,17 +89,22 @@ class Repo: Codable, RepoCollectionItem {
     /// then alignment column is used to indent the status information.
     /// - Parameter alignmentColumn: Screen column where the status is output.
     func printStatus(alignmentColumn: Int) {
+        let MaxErrorLength = 50
         let indent = "  "
         let align = alignmentColumn + 1 - name.count
         let statusColour = statusColours(from: status)
 
         if status.error {
+            var errorMessage = status.errorMessage
+            if errorMessage.count > MaxErrorLength {
+                errorMessage = errorMessage.prefix(MaxErrorLength) + "..."
+            }
+
             print(indent +
                   "\(statusColour)" +
-                  " \(name) ".reset())
-            print(indent +
-                    "\(statusColour)" +
-                  "\(status.errorMessage.prefix(60)) ".colours(.yellow, .red).reset())
+                  " \(name) " +
+                  "\(statusColour)" +
+                  "\(errorMessage) ".colours(.yellow, .red).reset())
         }
         else if status.isValid {
             let statusString = status.asString
