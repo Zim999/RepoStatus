@@ -99,7 +99,7 @@ class Repo: Codable, RepoCollectionItem {
                   " \(name) ".reset())
             print(indent +
                     "\(statusColour)" +
-                    "\(status.errorMessage) ".colours(.yellow, .red).reset())
+                  "\(status.errorMessage.prefix(60)) ".colours(.yellow, .red).reset())
         }
         else if status.isValid {
             let statusString = status.asString
@@ -174,9 +174,9 @@ extension Repo {
         else if status.contains(.newUntrackedFiles) {
             statusColour = statusColour.colours(.white, .fuchsia)
         }
-        else {
-            statusColour = statusColour.colours(.darkGreen, .greenYellow)
-        }
+//        else {
+//            statusColour = statusColour.colours(.darkGreen, .greenYellow)
+//        }
 
         return statusColour
     }

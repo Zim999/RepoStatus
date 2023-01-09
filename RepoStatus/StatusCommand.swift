@@ -64,9 +64,10 @@ extension RepoStatusCommand {
             let alignment = collection.lengthOfLongestRepoName()
 
             collection.forEach(in: nil,
-                               group: { if repoName == nil {
-                                   print($0.name)
-                               } },
+                               group: {
+                if repoName == nil {
+                    print($0.name.bold().reset())                    
+                } },
                                repo: {
                 if repoName == nil || $0.name == repoName {
                     $0.printStatus(alignmentColumn: alignment)
