@@ -26,6 +26,7 @@
 		2B2EE929297994460015CF5A /* RepoCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */; };
 		2B2EE92A297994460015CF5A /* RepoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A50253D05AA00FA6F18 /* RepoStatus.swift */; };
 		2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
+		2B9C012D2979D35300E6B77A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C012C2979D35300E6B77A /* Color+Extension.swift */; };
 		2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD252272791BAA300BE9389 /* FetchCommand.swift */; };
 		2BE1322828006488008F03F3 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1322728006488008F03F3 /* PathCommand.swift */; };
 		37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A47253D055B00FA6F18 /* RepoCollection.swift */; };
@@ -71,6 +72,7 @@
 		2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatusUI.entitlements; sourceTree = "<group>"; };
 		2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		2B9C012C2979D35300E6B77A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		2BD252272791BAA300BE9389 /* FetchCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCommand.swift; sourceTree = "<group>"; };
 		2BE1322728006488008F03F3 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
 		37032A47253D055B00FA6F18 /* RepoCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCollection.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */,
 				2B2EE914297992E80015CF5A /* ContentView.swift */,
+				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
 				2B2EE916297992EA0015CF5A /* Assets.xcassets */,
 				2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */,
 				2B2EE919297992EA0015CF5A /* Preview Content */,
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B2EE925297994460015CF5A /* RepoCollection.swift in Sources */,
+				2B9C012D2979D35300E6B77A /* Color+Extension.swift in Sources */,
 				2B2EE915297992E80015CF5A /* ContentView.swift in Sources */,
 				2B2EE9232979943E0015CF5A /* Shell.swift in Sources */,
 				2B2EE927297994460015CF5A /* RepoGroup.swift in Sources */,

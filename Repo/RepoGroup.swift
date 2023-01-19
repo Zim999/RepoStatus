@@ -6,12 +6,21 @@
 //
 
 import Foundation
+import Combine
 
 /// A named collection of Repo's
-class RepoGroup: Codable, RepoCollectionItem {
-    /// Display name for group
+class RepoGroup: Codable, RepoCollectionItem, ObservableObject {
+
+    /// Name for group
     var name : String
-    
+    {
+        didSet {
+            displayName = name
+        }
+    }
+
+    @Published var displayName: String
+
     /// Unique identifier for group. Preserved between execution of app
     var id: UUID
     
@@ -21,10 +30,25 @@ class RepoGroup: Codable, RepoCollectionItem {
     /// Initialise a RepoGroup with the specified name
     /// - Parameter name: The group name
     init(name: String) {
-        self.name = name
         self.id = UUID()
+        self.name = name
+        self.displayName = name
     }
-    
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case repos
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.displayName = name
+        self.repos = try container.decode([Repo].self, forKey: .repos)
+    }
+
     /// Refresh the status of all repos in the group
     func refresh() {
         repos.forEach( { $0.refresh() })
@@ -87,3 +111,4 @@ extension RepoGroup: Equatable {
         return lhs.name == rhs.name
     }
 }
+

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a Git Repo
-class Repo: Codable, RepoCollectionItem {
+class Repo: Codable, RepoCollectionItem, ObservableObject {
     /// File URL for the repo directory
     let url : URL
     
@@ -16,7 +16,7 @@ class Repo: Codable, RepoCollectionItem {
     var id: UUID
     
     /// Status of the repo
-    var status = RepoStatus()
+    @Published var status = RepoStatus()
     
     /// Display name for the repo
     var name: String {
