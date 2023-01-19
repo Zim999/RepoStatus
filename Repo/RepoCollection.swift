@@ -7,14 +7,6 @@
 
 import Foundation
 
-/// To be implemented by all items in a RepoCollection (individual Repo and RepoGroup objects)
-protocol RepoCollectionItem {
-    var uuid: UUID { get }
-    var name: String { get }
-
-    func pull() -> Bool
-}
-
 /// Holds a list of RepoGroups, each containing Repos
 class RepoCollection {
     private var storageFileURL: URL
@@ -86,13 +78,13 @@ class RepoCollection {
     /// specifid UUID.
     /// - Parameter uuid: Identifier of the item to find
     /// - Returns: The item, or nil if no item with the UUID is in the collection
-    func item(with uuid: UUID) -> RepoCollectionItem? {
+    func item(with uuid: UUID) -> (any RepoCollectionItem)? {
         for group in groups {
-            if group.uuid == uuid {
+            if group.id == uuid {
                 return group
             }
             for repo in group.repos {
-                if repo.uuid == uuid {
+                if repo.id == uuid {
                     return repo
                 }
             }

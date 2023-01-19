@@ -13,7 +13,7 @@ class Repo: Codable, RepoCollectionItem {
     let url : URL
     
     /// Unique identifier for this repo, preserved across app executions
-    var uuid: UUID
+    var id: UUID
     
     /// Status of the repo
     var status = RepoStatus()
@@ -27,7 +27,7 @@ class Repo: Codable, RepoCollectionItem {
     /// - Parameter url: File URL of the local repo
     init(url: URL) {
         self.url = url
-        self.uuid = UUID()
+        self.id = UUID()
     }
 
     /// Refresh the status of the repo by executing the  git status command. Can also optionally
@@ -161,7 +161,7 @@ extension Repo {
 extension Repo {
     private enum CodingKeys: String, CodingKey {
         case url
-        case uuid
+        case id
     }
 
     private func statusColours(from status: RepoStatus) -> String {

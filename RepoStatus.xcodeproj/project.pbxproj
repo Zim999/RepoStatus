@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02727F25B717DA00E5F90F /* PullCommand.swift */; };
+		2B2EE90A297990D60015CF5A /* RepoCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */; };
 		2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
 		2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD252272791BAA300BE9389 /* FetchCommand.swift */; };
 		2BE1322828006488008F03F3 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1322728006488008F03F3 /* PathCommand.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
+		2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionItem.swift; sourceTree = "<group>"; };
 		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		2BD252272791BAA300BE9389 /* FetchCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCommand.swift; sourceTree = "<group>"; };
 		2BE1322728006488008F03F3 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
@@ -84,12 +86,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B2EE90B2979926E0015CF5A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2B8C3F4426EB860000BC6B30 /* AppSettings.swift */,
+				37032A5E253E889300FA6F18 /* Shell.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		37032A82253FC2C500FA6F18 /* Repo */ = {
 			isa = PBXGroup;
 			children = (
-				37032A4A253D056C00FA6F18 /* Repo.swift */,
 				37B09AC4259E927E0012A2C8 /* Git.swift */,
+				37032A4A253D056C00FA6F18 /* Repo.swift */,
 				37032A47253D055B00FA6F18 /* RepoCollection.swift */,
+				2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */,
 				37032A4D253D058900FA6F18 /* RepoGroup.swift */,
 				37032A50253D05AA00FA6F18 /* RepoStatus.swift */,
 			);
@@ -103,6 +115,7 @@
 				37B09AD8259E94CF0012A2C8 /* Extensions */,
 				37032A82253FC2C500FA6F18 /* Repo */,
 				3704FF56252BFB9D00E4A513 /* RepoStatus */,
+				2B2EE90B2979926E0015CF5A /* Shared */,
 				3704FF55252BFB9D00E4A513 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,9 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				371BF3AF25A00CCC008521E9 /* Commands */,
-				37032A5E253E889300FA6F18 /* Shell.swift */,
 				3704FF57252BFB9D00E4A513 /* main.swift */,
-				2B8C3F4426EB860000BC6B30 /* AppSettings.swift */,
 				370E84FF254DF51F007E4A98 /* RepoStatus.entitlements */,
 			);
 			path = RepoStatus;
@@ -135,11 +146,11 @@
 				37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */,
 				2BD252272791BAA300BE9389 /* FetchCommand.swift */,
 				37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */,
-				37B09A8D259D3F520012A2C8 /* StatusCommand.swift */,
 				2BE1322728006488008F03F3 /* PathCommand.swift */,
+				2B02727F25B717DA00E5F90F /* PullCommand.swift */,
 				37B09AA6259D40490012A2C8 /* RemoveGroupCommand.swift */,
 				37B09AAB259D40600012A2C8 /* RemoveRepoCommand.swift */,
-				2B02727F25B717DA00E5F90F /* PullCommand.swift */,
+				37B09A8D259D3F520012A2C8 /* StatusCommand.swift */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -147,10 +158,10 @@
 		37B09AD8259E94CF0012A2C8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */,
-				37B09ADA259E94CF0012A2C8 /* String+Extension.swift */,
-				37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */,
 				37787BBC259EB96500C79308 /* ANSIColour.swift */,
+				37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */,
+				37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */,
+				37B09ADA259E94CF0012A2C8 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -185,7 +196,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					3704FF53252BFB9D00E4A513 = {
 						CreatedOnToolsVersion = 12.0.1;
@@ -219,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B2EE90A297990D60015CF5A /* RepoCollectionItem.swift in Sources */,
 				2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */,
 				37032A4B253D056C00FA6F18 /* Repo.swift in Sources */,
 				37B09A9D259D40190012A2C8 /* AddGroupCommand.swift in Sources */,
@@ -281,6 +293,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -342,6 +355,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -369,6 +383,7 @@
 				CODE_SIGN_ENTITLEMENTS = RepoStatus/RepoStatus.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6874B44Y69;
 				ENABLE_HARDENED_RUNTIME = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/RepoStatus/Info.plist";
@@ -392,6 +407,7 @@
 				CODE_SIGN_ENTITLEMENTS = RepoStatus/RepoStatus.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6874B44Y69;
 				ENABLE_HARDENED_RUNTIME = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/RepoStatus/Info.plist";

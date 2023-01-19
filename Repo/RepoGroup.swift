@@ -13,7 +13,7 @@ class RepoGroup: Codable, RepoCollectionItem {
     var name : String
     
     /// Unique identifier for group. Preserved between execution of app
-    var uuid: UUID
+    var id: UUID
     
     /// Repos contained in this group
     var repos = [Repo]()
@@ -22,7 +22,7 @@ class RepoGroup: Codable, RepoCollectionItem {
     /// - Parameter name: The group name
     init(name: String) {
         self.name = name
-        self.uuid = UUID()
+        self.id = UUID()
     }
     
     /// Refresh the status of all repos in the group
