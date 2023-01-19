@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import Combine
 
 /// Holds a list of RepoGroups, each containing Repos
-class RepoCollection {
+class RepoCollection: ObservableObject {
     private var storageFileURL: URL
     static let DefaultGroupName = "Repos"
 
     // MARK: - Properties
 
     /// Groups in the collection
-    var groups = [RepoGroup]()
+    @Published var groups = [RepoGroup]()
     
     /// Is the collection empty
     var isEmpty: Bool {

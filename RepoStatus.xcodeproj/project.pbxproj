@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02727F25B717DA00E5F90F /* PullCommand.swift */; };
 		2B2EE90A297990D60015CF5A /* RepoCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */; };
+		2B2EE913297992E80015CF5A /* RepoStatusUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */; };
+		2B2EE915297992E80015CF5A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE914297992E80015CF5A /* ContentView.swift */; };
+		2B2EE917297992EA0015CF5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EE916297992EA0015CF5A /* Assets.xcassets */; };
+		2B2EE91B297992EA0015CF5A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */; };
+		2B2EE91F297994370015CF5A /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
+		2B2EE920297994370015CF5A /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */; };
+		2B2EE921297994370015CF5A /* String+ANSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */; };
+		2B2EE922297994370015CF5A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADA259E94CF0012A2C8 /* String+Extension.swift */; };
+		2B2EE9232979943E0015CF5A /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A5E253E889300FA6F18 /* Shell.swift */; };
+		2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
+		2B2EE925297994460015CF5A /* RepoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A47253D055B00FA6F18 /* RepoCollection.swift */; };
+		2B2EE926297994460015CF5A /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4A253D056C00FA6F18 /* Repo.swift */; };
+		2B2EE927297994460015CF5A /* RepoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4D253D058900FA6F18 /* RepoGroup.swift */; };
+		2B2EE928297994460015CF5A /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AC4259E927E0012A2C8 /* Git.swift */; };
+		2B2EE929297994460015CF5A /* RepoCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */; };
+		2B2EE92A297994460015CF5A /* RepoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A50253D05AA00FA6F18 /* RepoStatus.swift */; };
 		2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
 		2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD252272791BAA300BE9389 /* FetchCommand.swift */; };
 		2BE1322828006488008F03F3 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1322728006488008F03F3 /* PathCommand.swift */; };
@@ -48,6 +64,12 @@
 /* Begin PBXFileReference section */
 		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
 		2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionItem.swift; sourceTree = "<group>"; };
+		2B2EE910297992E80015CF5A /* RepoStatusUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepoStatusUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStatusUIApp.swift; sourceTree = "<group>"; };
+		2B2EE914297992E80015CF5A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2B2EE916297992EA0015CF5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatusUI.entitlements; sourceTree = "<group>"; };
+		2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		2BD252272791BAA300BE9389 /* FetchCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCommand.swift; sourceTree = "<group>"; };
 		2BE1322728006488008F03F3 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
@@ -75,6 +97,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2B2EE90D297992E80015CF5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3704FF51252BFB9D00E4A513 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +122,26 @@
 				37032A5E253E889300FA6F18 /* Shell.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		2B2EE911297992E80015CF5A /* RepoStatusUI */ = {
+			isa = PBXGroup;
+			children = (
+				2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */,
+				2B2EE914297992E80015CF5A /* ContentView.swift */,
+				2B2EE916297992EA0015CF5A /* Assets.xcassets */,
+				2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */,
+				2B2EE919297992EA0015CF5A /* Preview Content */,
+			);
+			path = RepoStatusUI;
+			sourceTree = "<group>";
+		};
+		2B2EE919297992EA0015CF5A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		37032A82253FC2C500FA6F18 /* Repo */ = {
@@ -116,6 +165,7 @@
 				37032A82253FC2C500FA6F18 /* Repo */,
 				3704FF56252BFB9D00E4A513 /* RepoStatus */,
 				2B2EE90B2979926E0015CF5A /* Shared */,
+				2B2EE911297992E80015CF5A /* RepoStatusUI */,
 				3704FF55252BFB9D00E4A513 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -124,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				3704FF54252BFB9D00E4A513 /* RepoStatus */,
+				2B2EE910297992E80015CF5A /* RepoStatusUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +220,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2B2EE90F297992E80015CF5A /* RepoStatusUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B2EE91C297992EA0015CF5A /* Build configuration list for PBXNativeTarget "RepoStatusUI" */;
+			buildPhases = (
+				2B2EE90C297992E80015CF5A /* Sources */,
+				2B2EE90D297992E80015CF5A /* Frameworks */,
+				2B2EE90E297992E80015CF5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RepoStatusUI;
+			productName = RepoStatusUI;
+			productReference = 2B2EE910297992E80015CF5A /* RepoStatusUI.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3704FF53252BFB9D00E4A513 /* RepoStatus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3704FF5B252BFB9D00E4A513 /* Build configuration list for PBXNativeTarget "RepoStatus" */;
@@ -195,9 +263,12 @@
 		3704FF4C252BFB9D00E4A513 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					2B2EE90F297992E80015CF5A = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					3704FF53252BFB9D00E4A513 = {
 						CreatedOnToolsVersion = 12.0.1;
 						LastSwiftMigration = 1220;
@@ -221,11 +292,45 @@
 			projectRoot = "";
 			targets = (
 				3704FF53252BFB9D00E4A513 /* RepoStatus */,
+				2B2EE90F297992E80015CF5A /* RepoStatusUI */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		2B2EE90E297992E80015CF5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B2EE91B297992EA0015CF5A /* Preview Assets.xcassets in Resources */,
+				2B2EE917297992EA0015CF5A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		2B2EE90C297992E80015CF5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B2EE925297994460015CF5A /* RepoCollection.swift in Sources */,
+				2B2EE915297992E80015CF5A /* ContentView.swift in Sources */,
+				2B2EE9232979943E0015CF5A /* Shell.swift in Sources */,
+				2B2EE927297994460015CF5A /* RepoGroup.swift in Sources */,
+				2B2EE920297994370015CF5A /* FileManager+Extension.swift in Sources */,
+				2B2EE91F297994370015CF5A /* ANSIColour.swift in Sources */,
+				2B2EE929297994460015CF5A /* RepoCollectionItem.swift in Sources */,
+				2B2EE913297992E80015CF5A /* RepoStatusUIApp.swift in Sources */,
+				2B2EE922297994370015CF5A /* String+Extension.swift in Sources */,
+				2B2EE92A297994460015CF5A /* RepoStatus.swift in Sources */,
+				2B2EE928297994460015CF5A /* Git.swift in Sources */,
+				2B2EE926297994460015CF5A /* Repo.swift in Sources */,
+				2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */,
+				2B2EE921297994370015CF5A /* String+ANSI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3704FF50252BFB9D00E4A513 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -259,6 +364,80 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		2B2EE91D297992EA0015CF5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = RepoStatusUI/RepoStatusUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RepoStatusUI/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.RepoStatusUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B2EE91E297992EA0015CF5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = RepoStatusUI/RepoStatusUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RepoStatusUI/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.RepoStatusUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3704FF59252BFB9D00E4A513 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -426,6 +605,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2B2EE91C297992EA0015CF5A /* Build configuration list for PBXNativeTarget "RepoStatusUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B2EE91D297992EA0015CF5A /* Debug */,
+				2B2EE91E297992EA0015CF5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3704FF4F252BFB9D00E4A513 /* Build configuration list for PBXProject "RepoStatus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

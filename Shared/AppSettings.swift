@@ -24,6 +24,8 @@ struct AppSettings {
     // MARK: - Private
 
     private static var configStoreFolderURL: URL {
-        return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".config/RepoStatus")
+        let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".config/RepoStatus")
+        print(url)
+        return url
     }    
 }
