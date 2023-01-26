@@ -13,21 +13,6 @@ struct ContentView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("RepoStatus")
-                Group {
-                    Spacer()
-                    Button(action: {} , label: { Text("Fetch") })
-                    Button(action: {} , label: { Text("Pull") })
-                    Spacer()
-                    Button(action: {
-                        Task {
-                            repoCollection.forEach(in: nil, group: nil, repo: { $0.refresh(fetching: false) })
-                        }
-                    },
-                           label: { Image(systemName: "arrow.clockwise") })
-                }
-            }
 
             List {
                 ForEach(repoCollection.groups) { group in
@@ -45,8 +30,20 @@ struct ContentView: View {
         }
         .padding()
         .background(Color.appBackground)
-//        .task {
-//            repoCollection.forEach(in: nil, group: nil, repo: { $0.refresh(fetching: false) })
+        .toolbar(content: {
+            ToolbarItemGroup(placement: .automatic, content: {
+                Button(action: { }, label: { Image(systemName: "arrow.down") })
+                Button(action: { }, label: { Image(systemName: "arrow.down.to.line") })
+            })
+            ToolbarItemGroup(placement: .automatic, content: {
+                Button(action: { refresh() },
+                       label: { Image(systemName: "arrow.clockwise") })
+            })
+        })
+//        .task(priority: .background) {
+//            repoCollection.forEach(in: nil, group: nil) { repo in
+//                repo.refresh(fetching: true)
+//            }
 //        }
     }
 
@@ -55,17 +52,12 @@ struct ContentView: View {
         repoCollection.groups.forEach { count += $0.repos.count }
         return count
     }
+
+    func refresh() {
+        repoCollection.forEach(perform: { $0.refresh() })
+    }
+
 }
-
-//extension NSTableView {
-//    open override func viewDidMoveToWindow() {
-//        super.viewDidMoveToWindow()
-//
-//        backgroundColor = NSColor.clear
-//        enclosingScrollView!.drawsBackground = false
-//    }
-//}
-
 struct GroupCell: View {
 
     @ObservedObject var group: RepoGroup
@@ -92,30 +84,32 @@ struct GroupCell: View {
             .background(Color.groupBackground)
             .cornerRadius(4)
 
-            ForEach(group.repos) { repo in
-                RepoCell(repo: repo)
-            }
+            let columns = [GridItem(.flexible(minimum: 50)),
+                           GridItem(.fixed(100)),
+                           GridItem(.fixed(50)) ]
+
+            LazyVGrid(columns: columns,
+                      alignment: .trailing,
+                      spacing: 4.0,
+                      content: {
+                ForEach(group.repos) { repo in
+                    RepoCell(repo: repo)
+                }
+
+            } )
         }
     }
 }
 
 struct RepoCell: View {
-
     @ObservedObject var repo: Repo
 
     var body: some View {
-        HStack {
-            Text("\(repo.name)")
-            Spacer()
-            Text("- - - - - -")
-            Text("\(repo.status.branch)")
-        }
-        .padding(2)
-        .padding([.leading, .trailing])
+        Text("\(repo.name)")
+        Text("- - - - - -")
+        Text("\(repo.status.branch)")
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

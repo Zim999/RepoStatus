@@ -192,9 +192,9 @@ class RepoCollection: ObservableObject {
     ///   - repoGroup:  Group to act upon
     ///   - repoFunc: Closure to perform on each repo
     ///   - repo:  Repo to act upon
-    func forEach(in groupSet: [RepoGroup]?,
-                 group groupFunc: ((_ repoGroup: RepoGroup) -> Void)?,
-                 repo repoFunc: @escaping (_ repo: Repo) -> Void) {
+    func forEach(in groupSet: [RepoGroup]? = nil,
+                 group groupFunc: ((_ repoGroup: RepoGroup) -> Void)? = nil,
+                 perform repoFunc: @escaping (_ repo: Repo) -> Void) {
         for group in groups {
             if groupSet == nil || (groupSet?.contains(group) ?? false) {
                 groupFunc?(group)
@@ -216,6 +216,21 @@ class RepoCollection: ObservableObject {
             for repo in group.repos {
                 if repo.name.count > longest {
                     longest = repo.name.count
+                }
+            }
+        }
+        return longest
+    }
+
+    /// Get the length of the longest branch name in the collection
+    /// - Returns: Length of longest repo name
+    func lengthOfLongestBranchName() -> Int {
+        var longest = 0
+
+        for group in groups {
+            for repo in group.repos {
+                if repo.status.branch.count > longest {
+                    longest = repo.status.branch.count
                 }
             }
         }

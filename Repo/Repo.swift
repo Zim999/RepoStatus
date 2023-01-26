@@ -49,6 +49,13 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
         }
     }
 
+    func refreshAsync(fetching: Bool = false) async {
+        await withCheckedContinuation({ continuation in
+            refresh(fetching: fetching)
+            continuation.resume()
+        })
+    }
+
     /// Perform a git fetch on the repo
     /// - Returns: Fetch command exit code. 0 if command executed successfully, non-zero for errors
     func fetch() -> Bool {
