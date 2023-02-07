@@ -51,7 +51,7 @@ extension RepoStatusCommand {
                                         print($0.name)
                                     }
                                },
-                               repo: {
+                               perform: {
                                     if !group {
                                         if name == nil || name == $0.name {
                                             print($0.url)

@@ -68,7 +68,7 @@ extension RepoStatusCommand {
                 if repoName == nil {
                     print($0.name.bold().reset())                    
                 } },
-                               repo: {
+                               perform: {
                 if repoName == nil || $0.name == repoName {
                     $0.printStatus(alignmentColumn: alignment)
                     if verbose {
