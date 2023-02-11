@@ -49,9 +49,14 @@ class RepoStatus {
     /// Working copy has stashed code
     var hasStash = false
 
-    /// Status formatted into a string
+    /// Status formatted into a plain string
     var asString: String {
-        return asFormattedString()
+        return plainString()
+    }
+
+    /// Status formatted into a formatted string
+    var asFormattedString: String {
+        return formattedString()
     }
 
     init() {
@@ -206,30 +211,58 @@ extension RepoStatus {
 }
 
 extension RepoStatus {
-    private func asFormattedString() -> String {
+    private func formattedString() -> String {
         var statusString = ""
         let aheadCount = aheadCount > 9 ? "+" : String(aheadCount)
         let behindCount = behindCount > 9 ? "+" : String(behindCount)
-
-        statusString += append("M ", if: contains(.modifiedFiles))
-        statusString += append("? ", if: contains(.newUntrackedFiles))
-
+        
+        statusString += appendFormatted("M ", if: contains(.modifiedFiles))
+        statusString += appendFormatted("? ", if: contains(.newUntrackedFiles))
+        
         if contains(.addedFiles) {
             print("!")
         }
-
-        statusString += append("+ ", if: contains(.addedFiles) || indexContains(.addedFiles))
-        statusString += append("S ", if: hasStash)
-        statusString += append("↑\(aheadCount)", if: self.aheadCount > 0)
-        statusString += append("↓\(behindCount)", if: self.behindCount > 0)
-
+        
+        statusString += appendFormatted("+ ", if: contains(.addedFiles) || indexContains(.addedFiles))
+        statusString += appendFormatted("S ", if: hasStash)
+        statusString += appendFormatted("↑\(aheadCount)", if: self.aheadCount > 0)
+        statusString += appendFormatted("↓\(behindCount)", if: self.behindCount > 0)
+        
         if statusString.isEmpty {
             statusString = "- "
         }
         return statusString
     }
-
-    private func append(_ string: String, if condition: Bool) -> String {
+    
+    private func plainString() -> String {
+        var statusString = ""
+        let aheadCount = aheadCount > 9 ? "+" : String(aheadCount)
+        let behindCount = behindCount > 9 ? "+" : String(behindCount)
+        
+        statusString += append("M ", if: contains(.modifiedFiles))
+        statusString += append("? ", if: contains(.newUntrackedFiles))
+        
+        if contains(.addedFiles) {
+            print("!")
+        }
+        
+        statusString += append("+ ", if: contains(.addedFiles) || indexContains(.addedFiles))
+        statusString += append("S ", if: hasStash)
+        statusString += append("↑\(aheadCount)", if: self.aheadCount > 0)
+        statusString += append("↓\(behindCount)", if: self.behindCount > 0)
+        
+        if statusString.isEmpty {
+            statusString = "- "
+        }
+        return statusString
+    }
+    
+    private func appendFormatted(_ string: String, if condition: Bool) -> String {
         return condition ? string : "- ".dim().reset()
     }
+
+    private func append(_ string: String, if condition: Bool) -> String {
+        return condition ? string : "- "
+    }
+
 }

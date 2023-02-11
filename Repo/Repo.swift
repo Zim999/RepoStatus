@@ -45,7 +45,9 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
             status = RepoStatus() // Invalid
         }
         else {
-            status = RepoStatus(from: statusOutput, stashList: stashOutput)
+            DispatchQueue.main.async {
+                self.status = RepoStatus(from: statusOutput, stashList: stashOutput)
+            }
         }
     }
 
@@ -114,7 +116,7 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
                   "\(errorMessage) ".colours(.yellow, .red).reset())
         }
         else if status.isValid {
-            let statusString = status.asString
+            let statusString = status.asFormattedString
 
             print(indent +
                   "\(statusColour)" +

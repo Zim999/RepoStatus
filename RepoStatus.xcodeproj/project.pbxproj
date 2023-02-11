@@ -36,6 +36,8 @@
 		37032A5C253E733800FA6F18 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 37032A5B253E733800FA6F18 /* ArgumentParser */; };
 		37032A5F253E889300FA6F18 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A5E253E889300FA6F18 /* Shell.swift */; };
 		3704FF58252BFB9D00E4A513 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704FF57252BFB9D00E4A513 /* main.swift */; };
+		374F38D629984770003260A2 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38D529984770003260A2 /* RepoCell.swift */; };
+		374F38D9299847A3003260A2 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38D8299847A3003260A2 /* GroupCell.swift */; };
 		37787BBD259EB96500C79308 /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
 		37B09A8E259D3F520012A2C8 /* StatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A8D259D3F520012A2C8 /* StatusCommand.swift */; };
 		37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */; };
@@ -83,6 +85,8 @@
 		3704FF54252BFB9D00E4A513 /* RepoStatus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RepoStatus; sourceTree = BUILT_PRODUCTS_DIR; };
 		3704FF57252BFB9D00E4A513 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		370E84FF254DF51F007E4A98 /* RepoStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatus.entitlements; sourceTree = "<group>"; };
+		374F38D529984770003260A2 /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
+		374F38D8299847A3003260A2 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		37787BB2259E9C0500C79308 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		37787BBC259EB96500C79308 /* ANSIColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSIColour.swift; sourceTree = "<group>"; };
 		37B09A8D259D3F520012A2C8 /* StatusCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCommand.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 		2B2EE911297992E80015CF5A /* RepoStatusUI */ = {
 			isa = PBXGroup;
 			children = (
+				374F38D729984782003260A2 /* View */,
 				2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */,
 				2B2EE914297992E80015CF5A /* ContentView.swift */,
 				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
@@ -207,6 +212,15 @@
 				37B09A8D259D3F520012A2C8 /* StatusCommand.swift */,
 			);
 			name = Commands;
+			sourceTree = "<group>";
+		};
+		374F38D729984782003260A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				374F38D529984770003260A2 /* RepoCell.swift */,
+				374F38D8299847A3003260A2 /* GroupCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		37B09AD8259E94CF0012A2C8 /* Extensions */ = {
@@ -320,6 +334,7 @@
 				2B2EE925297994460015CF5A /* RepoCollection.swift in Sources */,
 				2B9C012D2979D35300E6B77A /* Color+Extension.swift in Sources */,
 				2B2EE915297992E80015CF5A /* ContentView.swift in Sources */,
+				374F38D9299847A3003260A2 /* GroupCell.swift in Sources */,
 				2B2EE9232979943E0015CF5A /* Shell.swift in Sources */,
 				2B2EE927297994460015CF5A /* RepoGroup.swift in Sources */,
 				2B2EE920297994370015CF5A /* FileManager+Extension.swift in Sources */,
@@ -332,6 +347,7 @@
 				2B2EE926297994460015CF5A /* Repo.swift in Sources */,
 				2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */,
 				2B2EE921297994370015CF5A /* String+ANSI.swift in Sources */,
+				374F38D629984770003260A2 /* RepoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +396,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"RepoStatusUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Repo Status";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -393,7 +410,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.RepoStatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -417,6 +434,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"RepoStatusUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Repo Status";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -430,7 +448,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.RepoStatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -494,7 +512,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -550,7 +568,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

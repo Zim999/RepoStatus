@@ -36,6 +36,14 @@ class RepoCollection: ObservableObject {
         }
     }
     
+    func refreshAllAsync() {
+        Task {
+            forEach { repo in
+                repo.refresh()
+            }
+        }
+    }
+    
     /// Add a group to the collection
     /// - Parameter group: Group to add
     func add(_ group: RepoGroup) {

@@ -14,18 +14,20 @@ extension Color {
         Color("appBackground")
     }
 
-    static var listBackground: Color {
-        Color("listBackground")
-    }
-
-
-    static var groupBackground: Color {
-        Color("groupBackground")
-    }
-
     static var groupText: Color {
         Color("groupText")
     }
 
+    static var repoName: Color {
+        Color("repoName")
+    }
+
+    static var branchName: Color {
+        Color("branchName")
+    }
+
+    static var statusItems: Color {
+        Color("statusItems")
+    }
 
 }
