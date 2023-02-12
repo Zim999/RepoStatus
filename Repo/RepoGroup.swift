@@ -25,7 +25,7 @@ class RepoGroup: Codable, RepoCollectionItem, ObservableObject {
     var id: UUID
     
     /// Repos contained in this group
-    var repos = [Repo]()
+    @Published var repos = [Repo]()
 
     /// Initialise a RepoGroup with the specified name
     /// - Parameter name: The group name
@@ -93,7 +93,6 @@ class RepoGroup: Codable, RepoCollectionItem, ObservableObject {
     /// - Returns: true
     func pull() -> Bool {
         repos.forEach( { _ = $0.pull() })
-        // ...
         return true
     }
 }
@@ -111,4 +110,14 @@ extension RepoGroup: Equatable {
         return lhs.name == rhs.name
     }
 }
+
+extension RepoGroup {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(repos, forKey: .repos)
+    }
+}
+
 

@@ -12,20 +12,14 @@ struct ContentView: View {
     @EnvironmentObject var repoCollection: RepoCollection
     
     var body: some View {
-        ZStack {
-            windowBackground()
-            
-            VStack(alignment: .leading) {
-                repoList()
-                    .padding(.bottom, -8)
-                statusBar()
-            }
-            .toolbar(content: {
-                toolbarButtons()
-            })
-            .task(priority: .background) {
-                refresh()
-            }
+        VStack(alignment: .leading) {
+            repoList()
+        }
+        .toolbar(content: {
+            toolbarButtons()
+        })
+        .task(priority: .background) {
+            refresh()
         }
     }
 }
@@ -33,12 +27,6 @@ struct ContentView: View {
 // MARK: - Private
 
 extension ContentView {
-    private func repoCount() -> Int {
-        var count = 0
-        repoCollection.groups.forEach { count += $0.repos.count }
-        return count
-    }
-
     private func refresh() {
         repoCollection.refreshAllAsync()
     }
@@ -56,24 +44,12 @@ extension ContentView {
 
 extension ContentView {
     @ViewBuilder
-    private func windowBackground() -> some View {
-        Rectangle()
-            .foregroundColor(.appBackground)
-    }
-    
-    @ViewBuilder
     private func repoList() -> some View {
         List {
             ForEach(repoCollection.groups) { group in
                 GroupCell(group: group)
             }
         }
-    }
-    
-    @ViewBuilder
-    private func statusBar() -> some View {
-        Text("\(repoCollection.groups.count) Groups, \(repoCount()) Repos")
-            .padding(8)
     }
     
     private func toolbarButtons() -> some ToolbarContent {

@@ -16,6 +16,13 @@ struct RepoStatusUIApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(repoCollection)
+                .frame(minWidth: 250, minHeight: 250)
+        }
+        .commands {
+            CommandMenu("Repos") {
+                Button("Fetch", action: { })
+                Button("Pull", action: { })
+            }
         }
     }
 }

@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 struct RepoCell: View {
+    @EnvironmentObject var repoCollection: RepoCollection
     @ObservedObject var repo: Repo
+    @State var infoPopoverShown = false
     
     var body: some View {
         HStack {
@@ -21,6 +23,27 @@ struct RepoCell: View {
             status()
             infoButton()
         }
+        .contextMenu {
+            Button("Fetch", action: { fetch() })
+            Button("Pull", action: { pull() })
+            Section {
+                Button("Remove \(repo.name)", action: { remove() })
+            }
+        }
+    }
+}
+
+extension RepoCell {
+    private func fetch() {
+        _ = repo.fetch()
+    }
+    
+    private func pull() {
+        _ = repo.pull()
+    }
+    
+    private func remove() {
+        repoCollection.remove(repo)
     }
 }
 
@@ -28,14 +51,14 @@ struct RepoCell: View {
 
 extension RepoCell {
     @ViewBuilder
-    func repoName() -> some View {
+    private func repoName() -> some View {
         Text("\(repo.name)")
             .font(.body)
             .foregroundColor(.repoName)
     }
     
     @ViewBuilder
-    func branchName() -> some View {
+    private func branchName() -> some View {
         HStack {
             Image(systemName: "arrow.triangle.branch")
             Text("\(repo.status.branch)")
@@ -45,18 +68,43 @@ extension RepoCell {
     }
     
     @ViewBuilder
-    func status() -> some View {
+    private func status() -> some View {
         Text("\(repo.status.asString)")
             .font(Font.system(.body).monospaced())
             .foregroundColor(.statusItems)
     }
     
     @ViewBuilder
-    func infoButton() -> some View {
-        Button(action: { },
-               label: { Image(systemName: "info.circle") })
+    private func infoButton() -> some View {
+        Button(action: { infoPopoverShown = true },
+               label: { infoIcon() })
         .buttonStyle(.borderless)
         .tint(.accentColor)
+        .popover(isPresented: $infoPopoverShown,
+                 arrowEdge: .trailing,
+                 content: { infoPopover() })
+    }
+
+    @ViewBuilder
+    private func infoIcon() -> some View {
+        Image(systemName: "info.circle")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 18)
+    }
+    
+    @ViewBuilder
+    private func infoPopover() -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Path:")
+                Text("\(repo.url.path())")
+                    .textSelection(.enabled)
+            }
+            Button("Show in Finder", action: {} )
+        }
+        .padding()
+        .buttonStyle(.borderedProminent)
     }
 }
 

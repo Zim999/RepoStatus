@@ -41,22 +41,33 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
         let (exitCode, statusOutput) = Shell.run(Git.statusCommand, at: url)
         let (_, stashOutput) = Shell.run(Git.stashListCommand, at: url)
 
+        // ... Needs to be sorted out
+        #if COMMANDLINE
         if exitCode != 0 {
             status = RepoStatus() // Invalid
         }
         else {
-            DispatchQueue.main.async {
+            status = RepoStatus(from: statusOutput, stashList: stashOutput)
+        }
+        #else
+
+        DispatchQueue.main.async {
+            if exitCode != 0 {
+                self.status = RepoStatus() // Invalid
+            }
+            else {
                 self.status = RepoStatus(from: statusOutput, stashList: stashOutput)
             }
         }
+        #endif
     }
 
-    func refreshAsync(fetching: Bool = false) async {
-        await withCheckedContinuation({ continuation in
-            refresh(fetching: fetching)
-            continuation.resume()
-        })
-    }
+//    func refreshAsync(fetching: Bool = false) async {
+//        await withCheckedContinuation({ continuation in
+//            refresh(fetching: fetching)
+//            continuation.resume()
+//        })
+//    }
 
     /// Perform a git fetch on the repo
     /// - Returns: Fetch command exit code. 0 if command executed successfully, non-zero for errors

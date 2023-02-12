@@ -11,46 +11,50 @@ import UniformTypeIdentifiers
 
 struct GroupCell: View {
     let ImportedFileTypes = [UTType.folder, UTType.directory]
-    
-    @ObservedObject var group: RepoGroup
-    @State var requestNewRepo = false
+    @SceneStorage("expansionState") var expansionState = ExpansionState()
 
+    @EnvironmentObject var repoCollection: RepoCollection
+    @ObservedObject var group: RepoGroup
+    @State var showOpenSheet = false
+    
     var body: some View {
-        VStack {
-            HStack {
-                groupTitle()
-                Spacer()
-                addButton()
-            }
-            .padding([.leading, .top, .bottom], 4)
-            .cornerRadius(4)
-            .fileImporter(isPresented: $requestNewRepo,
-                          allowedContentTypes: ImportedFileTypes,
-                          allowsMultipleSelection: false,
-                          onCompletion: { result in
-                importFile(from: result)
-            })
-            repoList()
-        }
+        DisclosureGroup(isExpanded: $expansionState[group.id],
+                        content: { repoList() },
+                        label: { groupTitle() }
+        )
+        .fileImporter(isPresented: $showOpenSheet,
+                      allowedContentTypes: ImportedFileTypes,
+                      allowsMultipleSelection: false,
+                      onCompletion: { result in
+            importRepos(from: try? result.get())
+        })
     }
     
     func addRepos(in urls: [URL]) {
         for u in urls {
             let r = Repo(url: u)
-            group.add(r)
+            repoCollection.add(r, to: group)
         }
     }
 }
 
 // MARK: - Private
 extension GroupCell {
-    func importFile(from result: Result<[URL], Error>) {
-        switch result {
-            case .success(let urls):
-                addRepos(in: urls)
-            case .failure(let error):
-                print(error.localizedDescription)
-        }
+    private func importRepos(from urls: [URL]?) {
+        guard let urls else { return }
+        addRepos(in: urls)
+    }
+    
+    private func requestRepoPath() {
+        showOpenSheet = true
+    }
+    
+    private func rename() {
+        // ...
+    }
+
+    private func remove() {
+        repoCollection.remove(group)
     }
 }
 
@@ -58,7 +62,7 @@ extension GroupCell {
 extension GroupCell {
     
     @ViewBuilder
-    func repoList() -> some View {
+    private func repoList() -> some View {
         ForEach(group.repos) { repo in
             VStack {
                 RepoCell(repo: repo)
@@ -69,32 +73,25 @@ extension GroupCell {
     }
 
     @ViewBuilder
-    func separator() -> some View {
+    private func groupTitle() -> some View {
+        HStack {
+            Text("\(group.name)")
+                .contextMenu {
+                    Button("Add Repo...", action: { requestRepoPath() })
+                    Button("Rename Group...", action: { rename() })
+                    Section {
+                        Button("Remove Group", action: { remove() })
+                    }
+                }
+        }
+        .badge(group.repos.count)
+    }
+    
+    @ViewBuilder
+    private func separator() -> some View {
         Rectangle()
             .frame(height: 1)
             .opacity(0.1)
-    }
-    
-    @ViewBuilder
-    func groupTitle() -> some View {
-        Text("\(group.displayName)")
-            .font(.title3)
-            .foregroundColor(.groupText)
-    }
-    
-    @ViewBuilder
-    func addButton() -> some View {
-        Button(action: { requestNewRepo = true },
-               label: { bigAddImage() })
-        .buttonStyle(BorderlessButtonStyle())
-        .tint(.accentColor)
-    }
-    
-    @ViewBuilder
-    func bigAddImage() -> some View {
-        Image(systemName: "plus")
-            .resizable()
-            .frame(width: 14, height: 14)
     }
 }
 
