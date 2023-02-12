@@ -60,7 +60,7 @@ class RepoStatus {
     }
 
     init() {
-        isValid = false
+        // isValid = false
     }
     
     /// Create an instance of RepoStatus, from the output of the git status command

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  BaseWindowView.swift
 //  RepoStatusUI
 //
 //  Created by Beavis, Simon on 19/01/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct BaseWindowView: View {
     
     @EnvironmentObject var repoCollection: RepoCollection
     
@@ -26,7 +26,7 @@ struct ContentView: View {
 
 // MARK: - Private
 
-extension ContentView {
+extension BaseWindowView {
     private func refresh() {
         repoCollection.refreshAllAsync()
     }
@@ -42,7 +42,7 @@ extension ContentView {
 
 // MARK: - View Builders
 
-extension ContentView {
+extension BaseWindowView {
     @ViewBuilder
     private func repoList() -> some View {
         List {
@@ -85,7 +85,7 @@ extension ContentView {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        BaseWindowView()
             .environmentObject(RepoCollection(from: AppSettings.collectionStoreFileURL))
             .frame(width: 400)
     }

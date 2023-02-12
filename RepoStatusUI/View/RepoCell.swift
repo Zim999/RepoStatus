@@ -20,7 +20,17 @@ struct RepoCell: View {
                 branchName()
             }
             Spacer()
-            status()
+
+            if repo.status.error {
+                ErrorMessageView(message: repo.status.errorMessage)
+            }
+            else if repo.status.isValid {
+                status()
+            }
+            else {
+                ErrorMessageView(message: "Invalid Repo", kind: .warning)
+            }
+            
             infoButton()
         }
         .contextMenu {
@@ -101,10 +111,14 @@ extension RepoCell {
                 Text("\(repo.url.path())")
                     .textSelection(.enabled)
             }
-            Button("Show in Finder", action: {} )
+            Button("Show in Finder", action: { showInFinder() } )
         }
         .padding()
         .buttonStyle(.borderedProminent)
+    }
+    
+    private func showInFinder() {
+        NSWorkspace.shared.activateFileViewerSelecting([repo.url])
     }
 }
 

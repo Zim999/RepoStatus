@@ -14,7 +14,7 @@ struct RepoStatusUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BaseWindowView()
                 .environmentObject(repoCollection)
                 .frame(minWidth: 250, minHeight: 250)
         }

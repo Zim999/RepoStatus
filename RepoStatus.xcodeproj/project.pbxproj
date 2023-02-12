@@ -10,7 +10,7 @@
 		2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02727F25B717DA00E5F90F /* PullCommand.swift */; };
 		2B2EE90A297990D60015CF5A /* RepoCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */; };
 		2B2EE913297992E80015CF5A /* RepoStatusUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */; };
-		2B2EE915297992E80015CF5A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE914297992E80015CF5A /* ContentView.swift */; };
+		2B2EE915297992E80015CF5A /* BaseWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE914297992E80015CF5A /* BaseWindowView.swift */; };
 		2B2EE917297992EA0015CF5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EE916297992EA0015CF5A /* Assets.xcassets */; };
 		2B2EE91B297992EA0015CF5A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */; };
 		2B2EE91F297994370015CF5A /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
@@ -39,6 +39,7 @@
 		374F38D629984770003260A2 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38D529984770003260A2 /* RepoCell.swift */; };
 		374F38D9299847A3003260A2 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38D8299847A3003260A2 /* GroupCell.swift */; };
 		374F38DB29989E3B003260A2 /* ExpansionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38DA29989E3B003260A2 /* ExpansionState.swift */; };
+		374F38DE29999F51003260A2 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38DD29999F51003260A2 /* ErrorMessageView.swift */; };
 		37787BBD259EB96500C79308 /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
 		37B09A8E259D3F520012A2C8 /* StatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A8D259D3F520012A2C8 /* StatusCommand.swift */; };
 		37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */; };
@@ -70,7 +71,7 @@
 		2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionItem.swift; sourceTree = "<group>"; };
 		2B2EE910297992E80015CF5A /* RepoStatusUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepoStatusUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStatusUIApp.swift; sourceTree = "<group>"; };
-		2B2EE914297992E80015CF5A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2B2EE914297992E80015CF5A /* BaseWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWindowView.swift; sourceTree = "<group>"; };
 		2B2EE916297992EA0015CF5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatusUI.entitlements; sourceTree = "<group>"; };
 		2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		374F38D529984770003260A2 /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 		374F38D8299847A3003260A2 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		374F38DA29989E3B003260A2 /* ExpansionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionState.swift; sourceTree = "<group>"; };
+		374F38DD29999F51003260A2 /* ErrorMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		37787BB2259E9C0500C79308 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		37787BBC259EB96500C79308 /* ANSIColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSIColour.swift; sourceTree = "<group>"; };
 		37B09A8D259D3F520012A2C8 /* StatusCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCommand.swift; sourceTree = "<group>"; };
@@ -137,7 +139,6 @@
 			children = (
 				374F38D729984782003260A2 /* View */,
 				2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */,
-				2B2EE914297992E80015CF5A /* ContentView.swift */,
 				374F38DA29989E3B003260A2 /* ExpansionState.swift */,
 				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
 				2B2EE916297992EA0015CF5A /* Assets.xcassets */,
@@ -222,6 +223,8 @@
 			children = (
 				374F38D8299847A3003260A2 /* GroupCell.swift */,
 				374F38D529984770003260A2 /* RepoCell.swift */,
+				374F38DD29999F51003260A2 /* ErrorMessageView.swift */,
+				2B2EE914297992E80015CF5A /* BaseWindowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,7 +339,7 @@
 			files = (
 				2B2EE925297994460015CF5A /* RepoCollection.swift in Sources */,
 				2B9C012D2979D35300E6B77A /* Color+Extension.swift in Sources */,
-				2B2EE915297992E80015CF5A /* ContentView.swift in Sources */,
+				2B2EE915297992E80015CF5A /* BaseWindowView.swift in Sources */,
 				374F38D9299847A3003260A2 /* GroupCell.swift in Sources */,
 				2B2EE9232979943E0015CF5A /* Shell.swift in Sources */,
 				374F38DB29989E3B003260A2 /* ExpansionState.swift in Sources */,
@@ -348,6 +351,7 @@
 				2B2EE922297994370015CF5A /* String+Extension.swift in Sources */,
 				2B2EE92A297994460015CF5A /* RepoStatus.swift in Sources */,
 				2B2EE928297994460015CF5A /* Git.swift in Sources */,
+				374F38DE29999F51003260A2 /* ErrorMessageView.swift in Sources */,
 				2B2EE926297994460015CF5A /* Repo.swift in Sources */,
 				2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */,
 				2B2EE921297994370015CF5A /* String+ANSI.swift in Sources */,

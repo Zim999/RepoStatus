@@ -68,41 +68,17 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
 //            continuation.resume()
 //        })
 //    }
-
+    
     /// Perform a git fetch on the repo
     /// - Returns: Fetch command exit code. 0 if command executed successfully, non-zero for errors
     func fetch() -> Bool {
-        let (exitCode, output) = Shell.run(Git.fetchCommand, at: url)
-
-        status.errorMessage = ""
-
-        if let out = output,
-           out.contains("error:") {
-            status.errorMessage = extractError(from: out).capitalized
-        }
-        else {
-            refresh()
-        }
-
-        return exitCode == 0
+        return perform(command: Git.fetchCommand)
     }
 
     /// Perform a git pull on the repo
     /// - Returns: Pull command exit code. 0 if command executed successfully, non-zero for errors
     func pull() -> Bool {
-        let (exitCode, output) = Shell.run(Git.pullCommand, at: url)
-
-        status.errorMessage = ""
-
-        if let out = output,
-           out.contains("error:") {
-            status.errorMessage = extractError(from: out).capitalized
-        }
-        else {
-            refresh()
-        }
-
-        return exitCode == 0
+        return perform(command: Git.pullCommand)
     }
 
     /// Output the status of the repo to stdout. The beginning of the line has the repo name,
@@ -184,6 +160,34 @@ extension Repo {
         case id
     }
 
+    /// Perform a git command on the repo
+    /// - Returns: Command exit code. 0 if command executed successfully, non-zero for errors
+    private func perform(command: String) -> Bool {
+        let (exitCode, output) = Shell.run(command, at: url)
+
+        let newStatus = status
+        newStatus.errorMessage = ""
+
+        if let out = output,
+           out.contains("error:") {
+            newStatus.errorMessage = extractError(from: out).capitalized
+        }
+        else if exitCode > 0 {
+            newStatus.errorMessage = "Error Executing Command"
+        }
+        else {
+            refresh()
+        }
+
+        newStatus.error = exitCode != 0
+        
+        runOnMain {
+            status = newStatus
+        }
+
+        return !status.error
+    }
+    
     private func statusColours(from status: RepoStatus) -> String {
         var statusColour = ""
 
@@ -226,6 +230,17 @@ extension Repo {
         }
 
         return output
+    }
+    
+    private func runOnMain(_ f: () -> Void) {
+        if Thread.isMainThread {
+            f()
+        }
+        else {
+            DispatchQueue.main.sync {
+                f()
+            }
+        }
     }
 }
 
