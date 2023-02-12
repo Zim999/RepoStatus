@@ -217,8 +217,8 @@
 		374F38D729984782003260A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				374F38D529984770003260A2 /* RepoCell.swift */,
 				374F38D8299847A3003260A2 /* GroupCell.swift */,
+				374F38D529984770003260A2 /* RepoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

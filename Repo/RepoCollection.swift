@@ -37,13 +37,35 @@ class RepoCollection: ObservableObject {
     }
     
     func refreshAllAsync() {
+        // TODO: Should refresh more than one at a time...
+        // ...
         Task {
             forEach { repo in
                 repo.refresh()
             }
         }
     }
-    
+
+    func fetchAllAsync() {
+        // TODO: Should refresh more than one at a time...
+        // ...
+        Task {
+            forEach { repo in
+                _ = repo.fetch()
+            }
+        }
+    }
+
+    func pullAllAsync() {
+        // TODO: Should refresh more than one at a time...
+        // ...
+        Task {
+            forEach { repo in
+                _ = repo.pull()
+            }
+        }
+    }
+
     /// Add a group to the collection
     /// - Parameter group: Group to add
     func add(_ group: RepoGroup) {

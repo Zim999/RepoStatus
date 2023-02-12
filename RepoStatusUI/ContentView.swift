@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    
     @EnvironmentObject var repoCollection: RepoCollection
     
     var body: some View {
@@ -28,15 +28,41 @@ struct ContentView: View {
             }
         }
     }
+}
 
+// MARK: - Private
+
+extension ContentView {
+    private func repoCount() -> Int {
+        var count = 0
+        repoCollection.groups.forEach { count += $0.repos.count }
+        return count
+    }
+
+    private func refresh() {
+        repoCollection.refreshAllAsync()
+    }
+    
+    private func fetch() {
+        repoCollection.fetchAllAsync()
+    }
+    
+    private func pull() {
+        repoCollection.pullAllAsync()
+    }
+}
+
+// MARK: - View Builders
+
+extension ContentView {
     @ViewBuilder
-    func windowBackground() -> some View {
+    private func windowBackground() -> some View {
         Rectangle()
             .foregroundColor(.appBackground)
     }
     
     @ViewBuilder
-    func repoList() -> some View {
+    private func repoList() -> some View {
         List {
             ForEach(repoCollection.groups) { group in
                 GroupCell(group: group)
@@ -45,32 +71,39 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    func statusBar() -> some View {
+    private func statusBar() -> some View {
         Text("\(repoCollection.groups.count) Groups, \(repoCount()) Repos")
             .padding(8)
     }
-
-    func toolbarButtons() -> some ToolbarContent {
+    
+    private func toolbarButtons() -> some ToolbarContent {
         Group {
             ToolbarItemGroup(placement: .automatic, content: {
-                Button(action: { /* fetch */ }, label: { Image(systemName: "arrow.down") })
-                Button(action: { /* Pull */ }, label: { Image(systemName: "arrow.down.to.line") })
+                fetchButton()
+                pullButton()
             })
             ToolbarItemGroup(placement: .automatic, content: {
-                Button(action: { refresh() },
-                       label: { Image(systemName: "arrow.clockwise") })
+                refreshButton()
             })
         }
     }
 
-    func repoCount() -> Int {
-        var count = 0
-        repoCollection.groups.forEach { count += $0.repos.count }
-        return count
+    @ViewBuilder
+    private func fetchButton() -> some View {
+        Button(action: { fetch() },
+               label: { Image(systemName: "arrow.down") })
     }
 
-    func refresh() {
-        repoCollection.refreshAllAsync()
+    @ViewBuilder
+    private func pullButton() -> some View {
+        Button(action: { pull() },
+               label: { Image(systemName: "arrow.down.to.line") })
+    }
+
+    @ViewBuilder
+    private func refreshButton() -> some View {
+        Button(action: { refresh() },
+               label: { Image(systemName: "arrow.clockwise") })
     }
 }
 
