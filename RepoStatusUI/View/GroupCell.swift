@@ -11,7 +11,8 @@ import UniformTypeIdentifiers
 
 struct GroupCell: View {
     let ImportedFileTypes = [UTType.folder, UTType.directory]
-    @SceneStorage("expansionState") var expansionState = ExpansionState()
+
+    @AppStorage("expansionState") var expansionState = ExpansionState()
 
     @EnvironmentObject var repoCollection: RepoCollection
     @ObservedObject var group: RepoGroup

@@ -1,5 +1,5 @@
 //
-//  RepoStatus.swift
+//  Status.swift
 //  GitMonitor
 //
 //  Created by Simon Beavis on 10/18/20.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents status of a Git Rrepo
-class RepoStatus {
+class Status {
     
     /// Attributes of the current repo status
     enum Attribute {
@@ -63,7 +63,7 @@ class RepoStatus {
         // isValid = false
     }
     
-    /// Create an instance of RepoStatus, from the output of the git status command
+    /// Create an instance of Status, from the output of the git status command
     /// - Parameters:
     ///   - statusLines: Output from th git status command
     ///   - stashList: Output from the git stash lst command
@@ -90,7 +90,7 @@ class RepoStatus {
             }
         }
         catch {
-            print("Exception in RepoStatus init \(error)")
+            print("Exception in Status init \(error)")
             self.error = true
         }
     }
@@ -106,7 +106,7 @@ class RepoStatus {
 
 // MARK: - Regex methods
 
-extension RepoStatus {
+extension Status {
     
     /*
      o   ' ' = unmodified
@@ -210,7 +210,7 @@ extension RepoStatus {
     }
 }
 
-extension RepoStatus {
+extension Status {
     private func formattedString() -> String {
         var statusString = ""
         let aheadCount = aheadCount > 9 ? "+" : String(aheadCount)

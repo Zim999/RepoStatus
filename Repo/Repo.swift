@@ -16,7 +16,7 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
     var id: UUID
     
     /// Status of the repo
-    @Published var status = RepoStatus()
+    @Published var status = Status()
     
     /// Display name for the repo
     var name: String {
@@ -44,19 +44,19 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
         // ... Needs to be sorted out
         #if COMMANDLINE
         if exitCode != 0 {
-            status = RepoStatus() // Invalid
+            status = Status() // Invalid
         }
         else {
-            status = RepoStatus(from: statusOutput, stashList: stashOutput)
+            status = Status(from: statusOutput, stashList: stashOutput)
         }
         #else
 
         DispatchQueue.main.async {
             if exitCode != 0 {
-                self.status = RepoStatus() // Invalid
+                self.status = Status() // Invalid
             }
             else {
-                self.status = RepoStatus(from: statusOutput, stashList: stashOutput)
+                self.status = Status(from: statusOutput, stashList: stashOutput)
             }
         }
         #endif
@@ -188,7 +188,7 @@ extension Repo {
         return !status.error
     }
     
-    private func statusColours(from status: RepoStatus) -> String {
+    private func statusColours(from status: Status) -> String {
         var statusColour = ""
 
         if status.error {

@@ -11,18 +11,35 @@ import SwiftUI
 struct RepoStatusUIApp: App {
 
     var repoCollection = RepoCollection(from: AppSettings.collectionStoreFileURL)
+    @AppStorage("compactView") var compactView = true
 
     var body: some Scene {
         WindowGroup {
             BaseWindowView()
                 .environmentObject(repoCollection)
                 .frame(minWidth: 250, minHeight: 250)
+                .onAppear {
+                    NSWindow.allowsAutomaticWindowTabbing = false
+                }
         }
         .commands {
-            CommandMenu("Repos") {
-                Button("Fetch", action: { })
-                Button("Pull", action: { })
+            CommandGroup(replacing: .newItem, addition: {})
+
+            CommandGroup(replacing: .toolbar, addition: {
+                Toggle("Compact View", isOn: $compactView)
+                Divider()
+            })
+
+
+            CommandMenu("Groups") {
+                Button("Add Group...", action: { /* ... */ })
+            }
+
+            CommandMenu("Repository") {
+                Button("Fetch", action: { repoCollection.fetchAllAsync() })
+                Button("Pull", action: { repoCollection.pullAllAsync() })
             }
         }
+        
     }
 }

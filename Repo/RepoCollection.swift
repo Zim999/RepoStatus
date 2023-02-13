@@ -52,6 +52,7 @@ class RepoCollection: ObservableObject {
         Task {
             forEach { repo in
                 _ = repo.fetch()
+                repo.refresh(fetching: false)
             }
         }
     }
@@ -62,6 +63,7 @@ class RepoCollection: ObservableObject {
         Task {
             forEach { repo in
                 _ = repo.pull()
+                repo.refresh(fetching: false)
             }
         }
     }
