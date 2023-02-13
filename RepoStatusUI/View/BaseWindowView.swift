@@ -12,14 +12,18 @@ struct BaseWindowView: View {
     @EnvironmentObject var repoCollection: RepoCollection
     
     var body: some View {
-        VStack(alignment: .leading) {
-            repoList()
-        }
-        .toolbar(content: {
-            toolbarButtons()
-        })
-        .task(priority: .background) {
-            refresh()
+        ZStack {
+            Color.appBackground
+            
+            VStack(alignment: .leading) {
+                repoList()
+            }
+            .toolbar(content: {
+                toolbarButtons()
+            })
+            .task(priority: .background) {
+                refresh()
+            }
         }
     }
 }
@@ -50,6 +54,7 @@ extension BaseWindowView {
                 GroupCell(group: group)
             }
         }
+        .scrollContentBackground(.hidden)
     }
     
     private func toolbarButtons() -> some ToolbarContent {

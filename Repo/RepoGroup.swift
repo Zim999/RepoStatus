@@ -12,14 +12,7 @@ import Combine
 class RepoGroup: Codable, RepoCollectionItem, ObservableObject {
 
     /// Name for group
-    var name : String
-    {
-        didSet {
-            displayName = name
-        }
-    }
-
-    @Published var displayName: String
+    @Published var name : String
 
     /// Unique identifier for group. Preserved between execution of app
     var id: UUID
@@ -32,7 +25,6 @@ class RepoGroup: Codable, RepoCollectionItem, ObservableObject {
     init(name: String) {
         self.id = UUID()
         self.name = name
-        self.displayName = name
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -45,7 +37,6 @@ class RepoGroup: Codable, RepoCollectionItem, ObservableObject {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
-        self.displayName = name
         self.repos = try container.decode([Repo].self, forKey: .repos)
     }
 

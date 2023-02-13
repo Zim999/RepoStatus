@@ -13,9 +13,7 @@
 		2B2EE915297992E80015CF5A /* BaseWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE914297992E80015CF5A /* BaseWindowView.swift */; };
 		2B2EE917297992EA0015CF5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EE916297992EA0015CF5A /* Assets.xcassets */; };
 		2B2EE91B297992EA0015CF5A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */; };
-		2B2EE91F297994370015CF5A /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
 		2B2EE920297994370015CF5A /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */; };
-		2B2EE921297994370015CF5A /* String+ANSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */; };
 		2B2EE922297994370015CF5A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADA259E94CF0012A2C8 /* String+Extension.swift */; };
 		2B2EE9232979943E0015CF5A /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A5E253E889300FA6F18 /* Shell.swift */; };
 		2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
@@ -41,6 +39,9 @@
 		374F38DB29989E3B003260A2 /* ExpansionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38DA29989E3B003260A2 /* ExpansionState.swift */; };
 		374F38DE29999F51003260A2 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38DD29999F51003260A2 /* ErrorMessageView.swift */; };
 		37787BBD259EB96500C79308 /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
+		37A97B4F2999AF1D0063B52F /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */; };
+		37A97B502999AF380063B52F /* String+ANSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */; };
+		37A97B512999AF3F0063B52F /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
 		37B09A8E259D3F520012A2C8 /* StatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A8D259D3F520012A2C8 /* StatusCommand.swift */; };
 		37B09A93259D3FBD0012A2C8 /* KeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A92259D3FBD0012A2C8 /* KeyCommand.swift */; };
 		37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09A97259D3FE70012A2C8 /* ConfigCommand.swift */; };
@@ -49,7 +50,6 @@
 		37B09AA7259D40490012A2C8 /* RemoveGroupCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AA6259D40490012A2C8 /* RemoveGroupCommand.swift */; };
 		37B09AAC259D40600012A2C8 /* RemoveRepoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AAB259D40600012A2C8 /* RemoveRepoCommand.swift */; };
 		37B09AC5259E927E0012A2C8 /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AC4259E927E0012A2C8 /* Git.swift */; };
-		37B09ADB259E94CF0012A2C8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */; };
 		37B09ADC259E94CF0012A2C8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADA259E94CF0012A2C8 /* String+Extension.swift */; };
 		37B09AE0259E94EA0012A2C8 /* String+ANSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */; };
 /* End PBXBuildFile section */
@@ -140,7 +140,6 @@
 				374F38D729984782003260A2 /* View */,
 				2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */,
 				374F38DA29989E3B003260A2 /* ExpansionState.swift */,
-				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
 				2B2EE916297992EA0015CF5A /* Assets.xcassets */,
 				2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */,
 				2B2EE919297992EA0015CF5A /* Preview Content */,
@@ -174,9 +173,9 @@
 			children = (
 				37787BB2259E9C0500C79308 /* README.md */,
 				37B09AD8259E94CF0012A2C8 /* Extensions */,
+				2B2EE90B2979926E0015CF5A /* Shared */,
 				37032A82253FC2C500FA6F18 /* Repo */,
 				3704FF56252BFB9D00E4A513 /* RepoStatus */,
-				2B2EE90B2979926E0015CF5A /* Shared */,
 				2B2EE911297992E80015CF5A /* RepoStatusUI */,
 				3704FF55252BFB9D00E4A513 /* Products */,
 			);
@@ -233,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				37787BBC259EB96500C79308 /* ANSIColour.swift */,
+				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
 				37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */,
 				37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */,
 				37B09ADA259E94CF0012A2C8 /* String+Extension.swift */,
@@ -344,17 +344,17 @@
 				2B2EE9232979943E0015CF5A /* Shell.swift in Sources */,
 				374F38DB29989E3B003260A2 /* ExpansionState.swift in Sources */,
 				2B2EE927297994460015CF5A /* RepoGroup.swift in Sources */,
+				37A97B502999AF380063B52F /* String+ANSI.swift in Sources */,
 				2B2EE920297994370015CF5A /* FileManager+Extension.swift in Sources */,
-				2B2EE91F297994370015CF5A /* ANSIColour.swift in Sources */,
 				2B2EE929297994460015CF5A /* RepoCollectionItem.swift in Sources */,
 				2B2EE913297992E80015CF5A /* RepoStatusUIApp.swift in Sources */,
 				2B2EE922297994370015CF5A /* String+Extension.swift in Sources */,
 				2B2EE92A297994460015CF5A /* RepoStatus.swift in Sources */,
 				2B2EE928297994460015CF5A /* Git.swift in Sources */,
+				37A97B512999AF3F0063B52F /* ANSIColour.swift in Sources */,
 				374F38DE29999F51003260A2 /* ErrorMessageView.swift in Sources */,
 				2B2EE926297994460015CF5A /* Repo.swift in Sources */,
 				2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */,
-				2B2EE921297994370015CF5A /* String+ANSI.swift in Sources */,
 				374F38D629984770003260A2 /* RepoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,8 +378,8 @@
 				37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */,
 				37B09ADC259E94CF0012A2C8 /* String+Extension.swift in Sources */,
 				37B09AA2259D40300012A2C8 /* AddRepoCommand.swift in Sources */,
-				37B09ADB259E94CF0012A2C8 /* FileManager+Extension.swift in Sources */,
 				37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */,
+				37A97B4F2999AF1D0063B52F /* FileManager+Extension.swift in Sources */,
 				2BE1322828006488008F03F3 /* PathCommand.swift in Sources */,
 				37B09AA7259D40490012A2C8 /* RemoveGroupCommand.swift in Sources */,
 				37032A51253D05AA00FA6F18 /* RepoStatus.swift in Sources */,

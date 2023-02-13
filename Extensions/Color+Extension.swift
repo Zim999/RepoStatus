@@ -14,10 +14,6 @@ extension Color {
         Color("appBackground")
     }
     
-    static var groupText: Color {
-        Color("groupText")
-    }
-    
     static var repoName: Color {
         Color("repoName")
     }
