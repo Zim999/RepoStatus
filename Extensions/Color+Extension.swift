@@ -22,10 +22,18 @@ extension Color {
         Color("branchName")
     }
     
+    static var branchNameBackground: Color {
+        Color("branchNameBackground")
+    }
+
     static var statusItems: Color {
         Color("statusItems")
     }
     
+    static var statusItemsBackground: Color {
+        Color("statusItemsBackground")
+    }
+
     static var errorText: Color {
         Color("errorText")
     }

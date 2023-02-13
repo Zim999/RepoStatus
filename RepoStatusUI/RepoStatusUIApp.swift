@@ -11,7 +11,7 @@ import SwiftUI
 struct RepoStatusUIApp: App {
 
     var repoCollection = RepoCollection(from: AppSettings.collectionStoreFileURL)
-    @AppStorage("compactView") var compactView = true
+    @AppStorage("compactView") var compactView = false
 
     var body: some Scene {
         WindowGroup {

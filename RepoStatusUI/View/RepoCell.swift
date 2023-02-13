@@ -20,8 +20,10 @@ struct RepoCell: View {
             if compactView {
                 repoName()
                 Spacer()
-                branchName()
-                    .padding(.trailing, 8)
+                if repo.status.isValid {
+                    branchName()
+                        .padding(.trailing, 8)
+                }
             }
             else {
                 VStack(alignment: .leading) {
@@ -83,15 +85,27 @@ extension RepoCell {
             Image(systemName: "arrow.triangle.branch")
             Text("\(repo.status.branch)")
                 .font(.body)
+                .foregroundColor(.branchName)
         }
+        .padding(4)
+        .padding([.leading, .trailing], 8)
         .foregroundColor(.branchName)
+        .background(Color.branchNameBackground)
+        .cornerRadius(8)
+        .truncationMode(.tail)
+        .lineLimit(1)
     }
     
     @ViewBuilder
     private func status() -> some View {
         Text("\(repo.status.asString)")
             .font(Font.system(.body).monospaced())
+            .padding(4)
+            .padding([.leading, .trailing], 8)
             .foregroundColor(.statusItems)
+            .background(Color.statusItemsBackground)
+            .cornerRadius(8)
+
     }
     
     @ViewBuilder
