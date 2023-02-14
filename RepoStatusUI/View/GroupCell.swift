@@ -65,7 +65,7 @@ extension GroupCell {
     @ViewBuilder
     private func repoList() -> some View {
         ForEach(group.repos) { repo in
-            VStack {
+            VStack(alignment: .leading) {
                 RepoCell(repo: repo)
                 separator()
             }
@@ -77,6 +77,7 @@ extension GroupCell {
     private func groupTitle() -> some View {
         HStack {
             Text("\(group.name)")
+                .badge(group.repos.count)
                 .contextMenu {
                     Button("Add Repo...", action: { requestRepoPath() })
                     Button("Rename Group...", action: { rename() })
@@ -85,7 +86,6 @@ extension GroupCell {
                     }
                 }
         }
-        .badge(group.repos.count)
     }
     
     @ViewBuilder

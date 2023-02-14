@@ -77,6 +77,10 @@ extension RepoCell {
         Text("\(repo.name)")
             .font(.body)
             .foregroundColor(.repoName)
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .help(repo.name)
+            .layoutPriority(0.1)
     }
     
     @ViewBuilder
@@ -94,6 +98,7 @@ extension RepoCell {
         .cornerRadius(8)
         .truncationMode(.tail)
         .lineLimit(1)
+        .help(repo.status.branch)
     }
     
     @ViewBuilder
@@ -105,7 +110,8 @@ extension RepoCell {
             .foregroundColor(.statusItems)
             .background(Color.statusItemsBackground)
             .cornerRadius(8)
-
+            .lineLimit(1)
+            .layoutPriority(1)
     }
     
     @ViewBuilder
@@ -124,25 +130,60 @@ extension RepoCell {
         Image(systemName: "info.circle")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 18)
+            .frame(width: 16, height: 16)
     }
     
     @ViewBuilder
     private func infoPopover() -> some View {
         VStack(alignment: .leading) {
+            if repo.status.isValid {
+                if repo.status.error {
+                    Text("Error: \(repo.status.errorMessage)")
+                }
+                else {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Modified:")
+                            Text("Added:")
+                            Text("Untracked:")
+                            Text("Stashed:")
+                            Text("Ahead:")
+                            Text("Behind:")
+                        }
+                        VStack(alignment: .leading) {
+                            Text(repo.status.contains(.modifiedFiles).string)
+                            Text(repo.status.contains(.addedFiles).string)
+                            Text(repo.status.contains(.newUntrackedFiles).string)
+                            Text(repo.status.hasStash.string)
+                            Text("\(repo.status.aheadCount)")
+                            Text("\(repo.status.behindCount)")
+                        }
+
+                    }
+                }
+            }
+            Divider()
             HStack {
                 Text("Path:")
                 Text("\(repo.url.path())")
                     .textSelection(.enabled)
+                    .frame(maxWidth: 500)
             }
             Button("Show in Finder", action: { showInFinder() } )
+
         }
         .padding()
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(.bordered)
     }
     
     private func showInFinder() {
         NSWorkspace.shared.activateFileViewerSelecting([repo.url])
+    }
+}
+
+extension Bool {
+    var string: String {
+        self ? "Yes" : "No"
     }
 }
 
