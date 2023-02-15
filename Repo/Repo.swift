@@ -180,10 +180,14 @@ extension Repo {
         }
 
         newStatus.error = exitCode != 0
-        
-        runOnMain {
-            status = newStatus
+
+#if COMMANDLINE
+        status = newStatus
+#else
+        DispatchQueue.main.async {
+            self.status = newStatus
         }
+#endif
 
         return !status.error
     }
@@ -230,17 +234,6 @@ extension Repo {
         }
 
         return output
-    }
-    
-    private func runOnMain(_ f: () -> Void) {
-        if Thread.isMainThread {
-            f()
-        }
-        else {
-            DispatchQueue.main.sync {
-                f()
-            }
-        }
     }
 }
 

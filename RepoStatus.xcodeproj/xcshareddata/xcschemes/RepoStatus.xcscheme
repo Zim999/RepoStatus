@@ -58,6 +58,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "removerepo Midway -g Midway"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "fetch"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
