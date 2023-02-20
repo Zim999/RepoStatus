@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,7 +24,6 @@
 		2B2EE929297994460015CF5A /* RepoCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */; };
 		2B2EE92A297994460015CF5A /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A50253D05AA00FA6F18 /* Status.swift */; };
 		2B8C3F4526EB860000BC6B30 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C3F4426EB860000BC6B30 /* AppSettings.swift */; };
-		2B8FD06D299D1C3A007B3623 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FD06C299D1C3A007B3623 /* AppCoordinator.swift */; };
 		2B9C012D2979D35300E6B77A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C012C2979D35300E6B77A /* Color+Extension.swift */; };
 		2BD252282791BAA300BE9389 /* FetchCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD252272791BAA300BE9389 /* FetchCommand.swift */; };
 		2BE1322828006488008F03F3 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1322728006488008F03F3 /* PathCommand.swift */; };
@@ -39,6 +38,8 @@
 		374F38D9299847A3003260A2 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38D8299847A3003260A2 /* GroupCell.swift */; };
 		374F38DB29989E3B003260A2 /* ExpansionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38DA29989E3B003260A2 /* ExpansionState.swift */; };
 		374F38DE29999F51003260A2 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F38DD29999F51003260A2 /* ErrorMessageView.swift */; };
+		3773312D29A176E9001914C4 /* UUID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773312C29A176E9001914C4 /* UUID+Extension.swift */; };
+		3773312E29A176E9001914C4 /* UUID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773312C29A176E9001914C4 /* UUID+Extension.swift */; };
 		37787BBD259EB96500C79308 /* ANSIColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37787BBC259EB96500C79308 /* ANSIColour.swift */; };
 		37A97B4F2999AF1D0063B52F /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */; };
 		37A97B502999AF380063B52F /* String+ANSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */; };
@@ -77,7 +78,6 @@
 		2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoStatusUI.entitlements; sourceTree = "<group>"; };
 		2B2EE91A297992EA0015CF5A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		2B8FD06C299D1C3A007B3623 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		2B9C012C2979D35300E6B77A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		2BD252272791BAA300BE9389 /* FetchCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCommand.swift; sourceTree = "<group>"; };
 		2BE1322728006488008F03F3 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
@@ -93,6 +93,7 @@
 		374F38D8299847A3003260A2 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		374F38DA29989E3B003260A2 /* ExpansionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionState.swift; sourceTree = "<group>"; };
 		374F38DD29999F51003260A2 /* ErrorMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
+		3773312C29A176E9001914C4 /* UUID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UUID+Extension.swift"; sourceTree = "<group>"; };
 		37787BB2259E9C0500C79308 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		37787BBC259EB96500C79308 /* ANSIColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSIColour.swift; sourceTree = "<group>"; };
 		37B09A8D259D3F520012A2C8 /* StatusCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCommand.swift; sourceTree = "<group>"; };
@@ -142,7 +143,6 @@
 				374F38D729984782003260A2 /* View */,
 				2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */,
 				374F38DA29989E3B003260A2 /* ExpansionState.swift */,
-				2B8FD06C299D1C3A007B3623 /* AppCoordinator.swift */,
 				2B2EE916297992EA0015CF5A /* Assets.xcassets */,
 				2B2EE918297992EA0015CF5A /* RepoStatusUI.entitlements */,
 				2B2EE919297992EA0015CF5A /* Preview Content */,
@@ -235,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				37787BBC259EB96500C79308 /* ANSIColour.swift */,
+				3773312C29A176E9001914C4 /* UUID+Extension.swift */,
 				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
 				37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */,
 				37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */,
@@ -289,8 +290,9 @@
 		3704FF4C252BFB9D00E4A513 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					2B2EE90F297992E80015CF5A = {
 						CreatedOnToolsVersion = 14.2;
@@ -352,13 +354,13 @@
 				2B2EE929297994460015CF5A /* RepoCollectionItem.swift in Sources */,
 				2B2EE913297992E80015CF5A /* RepoStatusUIApp.swift in Sources */,
 				2B2EE922297994370015CF5A /* String+Extension.swift in Sources */,
-				2B8FD06D299D1C3A007B3623 /* AppCoordinator.swift in Sources */,
 				2B2EE92A297994460015CF5A /* Status.swift in Sources */,
 				2B2EE928297994460015CF5A /* Git.swift in Sources */,
 				37A97B512999AF3F0063B52F /* ANSIColour.swift in Sources */,
 				374F38DE29999F51003260A2 /* ErrorMessageView.swift in Sources */,
 				2B2EE926297994460015CF5A /* Repo.swift in Sources */,
 				2B2EE9242979943E0015CF5A /* AppSettings.swift in Sources */,
+				3773312E29A176E9001914C4 /* UUID+Extension.swift in Sources */,
 				374F38D629984770003260A2 /* RepoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +383,7 @@
 				2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */,
 				37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */,
 				37B09ADC259E94CF0012A2C8 /* String+Extension.swift in Sources */,
+				3773312D29A176E9001914C4 /* UUID+Extension.swift in Sources */,
 				37B09AA2259D40300012A2C8 /* AddRepoCommand.swift in Sources */,
 				37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */,
 				37A97B4F2999AF1D0063B52F /* FileManager+Extension.swift in Sources */,

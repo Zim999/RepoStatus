@@ -30,22 +30,19 @@ struct GroupCell: View {
             importRepos(from: try? result.get())
         })
     }
-    
-    func addRepos(in urls: [URL]) {
-        for u in urls {
-            let r = Repo(url: u)
-            repoCollection.add(r, to: group)
-        }
-    }
 }
 
 // MARK: - Private
 extension GroupCell {
     private func importRepos(from urls: [URL]?) {
         guard let urls else { return }
-        addRepos(in: urls)
+
+        for u in urls {
+            let r = Repo(url: u)
+            repoCollection.add(r, to: group)
+        }
     }
-    
+
     private func requestRepoPath() {
         showOpenSheet = true
     }
@@ -67,7 +64,7 @@ extension GroupCell {
         ForEach(group.repos) { repo in
             VStack(alignment: .leading) {
                 RepoCell(repo: repo)
-                separator()
+                // separator()
             }
             .padding(.leading, 16)
         }

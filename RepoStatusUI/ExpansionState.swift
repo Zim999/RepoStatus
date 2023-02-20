@@ -13,7 +13,7 @@ struct ExpansionState: RawRepresentable {
     let current = 2021
 
     init?(rawValue: String) {
-        ids = Set(rawValue.components(separatedBy: ",").compactMap(UUID.init))
+        ids = Set(rawValue.components(separatedBy: ",").compactMap({ UUID(uuidString: $0) }))
     }
 
     init() {

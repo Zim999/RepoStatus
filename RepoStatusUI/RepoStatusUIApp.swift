@@ -12,10 +12,15 @@ struct RepoStatusUIApp: App {
 
     var repoCollection = RepoCollection(from: AppSettings.collectionStoreFileURL)
     @AppStorage("compactView") var compactView = false
+    @AppStorage("listSelection") var selection: UUID? {
+        didSet {
+            
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
-            BaseWindowView()
+            BaseWindowView(selection: $selection)
                 .environmentObject(repoCollection)
                 .frame(minWidth: 250, minHeight: 250)
                 .onAppear {

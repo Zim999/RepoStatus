@@ -11,6 +11,8 @@ struct BaseWindowView: View {
     
     @EnvironmentObject var repoCollection: RepoCollection
     
+    @Binding var selection: UUID?
+    
     var body: some View {
         ZStack {
             Color.appBackground
@@ -49,7 +51,7 @@ extension BaseWindowView {
 extension BaseWindowView {
     @ViewBuilder
     private func repoList() -> some View {
-        List {
+        List(selection: $selection) {
             ForEach(repoCollection.groups) { group in
                 GroupCell(group: group)
             }
@@ -89,8 +91,10 @@ extension BaseWindowView {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    @State static var selection: UUID?
+    
     static var previews: some View {
-        BaseWindowView()
+        BaseWindowView(selection: $selection)
             .environmentObject(RepoCollection(from: AppSettings.collectionStoreFileURL))
             .frame(width: 400)
     }

@@ -76,7 +76,6 @@ extension RepoCell {
     private func repoName() -> some View {
         Text("\(repo.name)")
             .font(.body)
-            .foregroundColor(.repoName)
             .lineLimit(1)
             .truncationMode(.tail)
             .help(repo.name)
