@@ -9,42 +9,75 @@ import SwiftUI
 
 @main
 struct RepoStatusUIApp: App {
-
+    
     var repoCollection = RepoCollection(from: AppSettings.collectionStoreFileURL)
-    @AppStorage("compactView") var compactView = false
-    @AppStorage("listSelection") var selection: UUID? {
-        didSet {
-            
-        }
-    }
-
+    @AppStorage("selection") var selection: UUID?
+    
     var body: some Scene {
         WindowGroup {
-            BaseWindowView(selection: $selection)
-                .environmentObject(repoCollection)
-                .frame(minWidth: 250, minHeight: 250)
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
+            Group {
+                BaseWindowView(selection: $selection)
+                    .environmentObject(repoCollection)
+                    .frame(minWidth: 250, minHeight: 250)
+                    .onAppear {
+                        NSWindow.allowsAutomaticWindowTabbing = false
+                    }
+            }
+            .environmentObject(repoCollection)
         }
         .commands {
-            CommandGroup(replacing: .newItem, addition: {})
+            self.menuCommands
+        }
+    }
+    
+    @CommandsBuilder
+    var menuCommands: some Commands {
+        CommandGroup(replacing: .newItem, addition: {})
 
-            CommandGroup(replacing: .toolbar, addition: {
-                Toggle("Compact View", isOn: $compactView)
+        CommandMenu("Group") {
+            Button("New Group...", action: { addGroup() })
+                .keyboardShortcut(KeyEquivalent("g"), modifiers: .command )
+            Divider()
+            Group {
+                Button("Fetch", action: {  })
+                    .keyboardShortcut(KeyEquivalent("f"), modifiers: .command )
+                Button("Pull", action: {  })
+                    .keyboardShortcut(KeyEquivalent("p"), modifiers: .command )
                 Divider()
-            })
-
-
-            CommandMenu("Groups") {
-                Button("Add Group...", action: { /* ... */ })
+                Button("Add Repo to Group...", action: {  })
+                Button("Rename...", action: {  })
+                Divider()
+                Button("Remove...", action: {  })
+                    .keyboardShortcut(KeyEquivalent.delete, modifiers: .command )
             }
-
-            CommandMenu("Repository") {
-                Button("Fetch", action: { repoCollection.fetchAllAsync() })
-                Button("Pull", action: { repoCollection.pullAllAsync() })
-            }
+            .disabled(!aGroupIsSelected)
         }
         
+        CommandMenu("Repo") {
+            Group {
+                Button("Fetch", action: { repoCollection.fetchAllAsync() })
+                    .keyboardShortcut(KeyEquivalent("f"), modifiers: .command )
+                Button("Pull", action: { repoCollection.pullAllAsync() })
+                    .keyboardShortcut(KeyEquivalent("p"), modifiers: .command )
+                Divider()
+                Button("Remove...", action: {  })
+                    .keyboardShortcut(KeyEquivalent.delete, modifiers: .command )
+            }
+            .disabled(!aRepoIsSelected)
+        }
+    }
+    
+    private func addGroup() {
+        // ...
+    }
+    
+    private var aGroupIsSelected: Bool {
+        guard let selection else { return false }
+        return repoCollection.group(with: selection) != nil
+    }
+    
+    private var aRepoIsSelected: Bool {
+        guard let selection else { return false }
+        return repoCollection.repo(with: selection) != nil
     }
 }

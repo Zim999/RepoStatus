@@ -17,6 +17,9 @@ struct GroupCell: View {
     @EnvironmentObject var repoCollection: RepoCollection
     @ObservedObject var group: RepoGroup
     @State var showOpenSheet = false
+    @State var popoverShown = false
+    
+    var isSelected: Bool
     
     var body: some View {
         DisclosureGroup(isExpanded: $expansionState[group.id],
@@ -51,6 +54,18 @@ extension GroupCell {
         // ...
     }
 
+    private func fetch() {
+        // ...
+    }
+
+    private func pull() {
+        // ...
+    }
+
+    private func refresh() {
+        // ...
+    }
+
     private func remove() {
         repoCollection.remove(group)
     }
@@ -64,7 +79,6 @@ extension GroupCell {
         ForEach(group.repos) { repo in
             VStack(alignment: .leading) {
                 RepoCell(repo: repo)
-                // separator()
             }
             .padding(.leading, 16)
         }
@@ -73,15 +87,24 @@ extension GroupCell {
     @ViewBuilder
     private func groupTitle() -> some View {
         HStack {
-            Text("\(group.name)")
-                .badge(group.repos.count)
+            Label(group.name, systemImage: "folder")
                 .contextMenu {
-                    Button("Add Repo...", action: { requestRepoPath() })
-                    Button("Rename Group...", action: { rename() })
+                    Section {
+                        Button("Fetch", action: { fetch() })
+                        Button("Pull", action: { pull() })
+                    }
+                    Section {
+                        Button("Refresh", action: { refresh() })
+                    }
+                    Section {
+                        Button("Add Repo...", action: { requestRepoPath() })
+                        Button("Rename Group...", action: { rename() })
+                    }
                     Section {
                         Button("Remove Group", action: { remove() })
                     }
                 }
+            badge()
         }
     }
     
@@ -91,13 +114,25 @@ extension GroupCell {
             .frame(height: 1)
             .opacity(0.1)
     }
+    
+    @ViewBuilder
+    private func badge() -> some View {
+        ZStack {
+            Circle()
+                .opacity(0.05)
+            Text("\(group.repos.count)")
+                .font(.system(size: 11))
+                .opacity(0.7)
+        }
+        .frame(width: 18, height: 18)
+    }
 }
 
 struct GrooupCell_Previews: PreviewProvider {
     static let group = RepoGroup(name: "Test Group")
     
     static var previews: some View {
-        GroupCell(group: group)
+        GroupCell(group: group, isSelected: true)
             .environmentObject(RepoCollection(from: AppSettings.collectionStoreFileURL))
             .frame(width: 400)
     }

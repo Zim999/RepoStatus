@@ -143,6 +143,21 @@ class RepoCollection: ObservableObject {
         return repos.isEmpty ? nil : repos
     }
 
+    /// Return repo with the specified id
+    /// - Parameter id: Id of the repo to find
+    /// - Returns: Repo or nil if not found
+    func repo(with id: UUID) -> Repo? {
+        for group in groups {
+            for repo in group.repos {
+                if repo.id == id {
+                    return repo
+                }
+            }
+        }
+
+        return nil
+    }
+
     /// Tests whether the collection contains a group with the specified name
     /// - Parameter groupName: Group name to test
     /// - Returns: True if the collection contains a group with the name, false if it does not
@@ -162,6 +177,13 @@ class RepoCollection: ObservableObject {
             }
         }
         return nil
+    }
+
+    /// Return the group with the specified id
+    /// - Parameter id: Group id to find
+    /// - Returns: The group with the specified id, or nil if no group has that id
+    func group(with id: UUID) -> RepoGroup? {
+        return groups.filter { $0.id == id }.first
     }
 
     /// Return the groups that have any of the specified names

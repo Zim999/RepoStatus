@@ -162,7 +162,7 @@ extension Repo {
 
     /// Perform a git command on the repo
     /// - Returns: Command exit code. 0 if command executed successfully, non-zero for errors
-    private func perform(command: String) -> Bool {
+    private     func perform(command: String) -> Bool {
         let (exitCode, output) = Shell.run(command, at: url)
 
         let newStatus = status

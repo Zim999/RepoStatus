@@ -10,7 +10,6 @@ import SwiftUI
 struct BaseWindowView: View {
     
     @EnvironmentObject var repoCollection: RepoCollection
-    
     @Binding var selection: UUID?
     
     var body: some View {
@@ -53,7 +52,7 @@ extension BaseWindowView {
     private func repoList() -> some View {
         List(selection: $selection) {
             ForEach(repoCollection.groups) { group in
-                GroupCell(group: group)
+                GroupCell(group: group, isSelected: group.id == selection)
             }
         }
         .scrollContentBackground(.hidden)
@@ -75,18 +74,21 @@ extension BaseWindowView {
     private func fetchButton() -> some View {
         Button(action: { fetch() },
                label: { Image(systemName: "arrow.down") })
+        .help("Fetch All")
     }
 
     @ViewBuilder
     private func pullButton() -> some View {
         Button(action: { pull() },
                label: { Image(systemName: "arrow.down.to.line") })
+        .help("Pull All")
     }
 
     @ViewBuilder
     private func refreshButton() -> some View {
         Button(action: { refresh() },
                label: { Image(systemName: "arrow.clockwise") })
+        .help("Refresh All")
     }
 }
 

@@ -10,27 +10,17 @@ import SwiftUI
 
 struct RepoCell: View {
     @EnvironmentObject var repoCollection: RepoCollection
-    @AppStorage("compactView") var compactView = false
 
     @ObservedObject var repo: Repo
     @State var infoPopoverShown = false
     
     var body: some View {
         HStack {
-            if compactView {
-                repoName()
-                Spacer()
-                if repo.status.isValid {
-                    branchName()
-                        .padding(.trailing, 8)
-                }
-            }
-            else {
-                VStack(alignment: .leading) {
-                    repoName()
-                    branchName()
-                }
-                Spacer()
+            repoName()
+            Spacer()
+            if repo.status.isValid {
+                branchName()
+                    .padding(.trailing, 8)
             }
 
             if repo.status.error {
