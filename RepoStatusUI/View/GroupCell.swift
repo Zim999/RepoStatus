@@ -18,6 +18,7 @@ struct GroupCell: View {
     @ObservedObject var group: RepoGroup
     @State var showOpenSheet = false
     @State var popoverShown = false
+    var filterText = ""
     
     var isSelected: Bool
     
@@ -76,14 +77,33 @@ extension GroupCell {
     
     @ViewBuilder
     private func repoList() -> some View {
-        ForEach(group.repos) { repo in
-            VStack(alignment: .leading) {
-                RepoCell(repo: repo)
+        let repos = r()
+        
+        if repos.isEmpty {
+            Text("No matching repos")
+                .padding(.leading, 16)
+        }
+        else {
+            ForEach(repos) { repo in
+                VStack(alignment: .leading) {
+                    RepoCell(repo: repo)
+                }
+                .padding(.leading, 16)
             }
-            .padding(.leading, 16)
         }
     }
-
+    
+    func r() -> [Repo] {
+        if filterText.isEmpty {
+            return group.repos
+        }
+        else {
+            return group.repos.filter {
+                $0.name.localizedStandardContains(filterText)
+            }
+        }
+    }
+ 
     @ViewBuilder
     private func groupTitle() -> some View {
         HStack {

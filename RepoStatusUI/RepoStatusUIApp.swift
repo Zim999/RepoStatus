@@ -28,6 +28,11 @@ struct RepoStatusUIApp: App {
         .commands {
             self.menuCommands
         }
+        
+        Settings {
+            Text("None! :)")
+                .frame(width: 450, height: 250)
+        }
     }
     
     @CommandsBuilder

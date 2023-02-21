@@ -71,7 +71,7 @@
 /* Begin PBXFileReference section */
 		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
 		2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionItem.swift; sourceTree = "<group>"; };
-		2B2EE910297992E80015CF5A /* RepoStatusUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepoStatusUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B2EE910297992E80015CF5A /* Repo Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Repo Status.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2EE912297992E80015CF5A /* RepoStatusUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStatusUIApp.swift; sourceTree = "<group>"; };
 		2B2EE914297992E80015CF5A /* BaseWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWindowView.swift; sourceTree = "<group>"; };
 		2B2EE916297992EA0015CF5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				3704FF54252BFB9D00E4A513 /* RepoStatus */,
-				2B2EE910297992E80015CF5A /* RepoStatusUI.app */,
+				2B2EE910297992E80015CF5A /* Repo Status.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,9 +247,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2B2EE90F297992E80015CF5A /* RepoStatusUI */ = {
+		2B2EE90F297992E80015CF5A /* Repo Status UI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2B2EE91C297992EA0015CF5A /* Build configuration list for PBXNativeTarget "RepoStatusUI" */;
+			buildConfigurationList = 2B2EE91C297992EA0015CF5A /* Build configuration list for PBXNativeTarget "Repo Status UI" */;
 			buildPhases = (
 				2B2EE90C297992E80015CF5A /* Sources */,
 				2B2EE90D297992E80015CF5A /* Frameworks */,
@@ -259,9 +259,9 @@
 			);
 			dependencies = (
 			);
-			name = RepoStatusUI;
+			name = "Repo Status UI";
 			productName = RepoStatusUI;
-			productReference = 2B2EE910297992E80015CF5A /* RepoStatusUI.app */;
+			productReference = 2B2EE910297992E80015CF5A /* Repo Status.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3704FF53252BFB9D00E4A513 /* RepoStatus */ = {
@@ -320,7 +320,7 @@
 			projectRoot = "";
 			targets = (
 				3704FF53252BFB9D00E4A513 /* RepoStatus */,
-				2B2EE90F297992E80015CF5A /* RepoStatusUI */,
+				2B2EE90F297992E80015CF5A /* Repo Status UI */,
 			);
 		};
 /* End PBXProject section */
@@ -428,12 +428,13 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.RepoStatusUI;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Repo Status";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -466,12 +467,13 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remoteoutpostdevelopment.RepoStatusUI;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Repo Status";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -643,7 +645,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2B2EE91C297992EA0015CF5A /* Build configuration list for PBXNativeTarget "RepoStatusUI" */ = {
+		2B2EE91C297992EA0015CF5A /* Build configuration list for PBXNativeTarget "Repo Status UI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2B2EE91D297992EA0015CF5A /* Debug */,

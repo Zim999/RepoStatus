@@ -11,6 +11,7 @@ struct BaseWindowView: View {
     
     @EnvironmentObject var repoCollection: RepoCollection
     @Binding var selection: UUID?
+    @State var searchText = ""
     
     var body: some View {
         ZStack {
@@ -52,10 +53,13 @@ extension BaseWindowView {
     private func repoList() -> some View {
         List(selection: $selection) {
             ForEach(repoCollection.groups) { group in
-                GroupCell(group: group, isSelected: group.id == selection)
+                GroupCell(group: group,
+                          filterText: searchText,
+                          isSelected: group.id == selection)
             }
         }
         .scrollContentBackground(.hidden)
+        .searchable(text: $searchText)
     }
     
     private func toolbarButtons() -> some ToolbarContent {

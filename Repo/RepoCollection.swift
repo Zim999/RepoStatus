@@ -213,6 +213,20 @@ class RepoCollection: ObservableObject {
         return items.first
     }
 
+    func groupsFiltered(by text: String) -> [RepoGroup] {
+        guard !text.isEmpty else { return groups }
+        
+        var results = [RepoGroup]()
+        
+        for group in groups {
+            if group.name.localizedStandardContains(text) {
+                results.append(group)
+            }
+        }
+        
+        return results
+    }
+    
     // MARK: - Acting on Contents
 
     /// Concurrently perform action on each repo in the given groups, or on all repos if the
