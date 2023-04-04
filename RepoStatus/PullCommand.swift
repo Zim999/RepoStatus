@@ -60,7 +60,7 @@ extension RepoStatusCommand {
                                group: { print($0.name) },
                                perform: {
                 if toPull.contains($0.name) {
-                    $0.printStatus(alignmentColumn: alignment)
+                    $0.printSummary(alignmentColumn: alignment)
                 }
             } )
         }
@@ -77,7 +77,7 @@ extension RepoStatusCommand {
 
             collection.forEach(in: groups,
                                group: { print($0.name) },
-                               perform: { $0.printStatus(alignmentColumn: alignment) } )
+                               perform: { $0.printSummary(alignmentColumn: alignment) } )
         }
 
         private func run(onRepo repo: Repo) {

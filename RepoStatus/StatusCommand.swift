@@ -20,7 +20,6 @@ extension RepoStatusCommand {
                     orange = Repo has modified files
                     yellow = Repo has added files
                     fuchsia = Repo has untracked files
-                    green = Repo clean, no changes
 
                 Repo status flags:
                     + = Files added
@@ -70,7 +69,7 @@ extension RepoStatusCommand {
                 } },
                                perform: {
                 if repoName == nil || $0.name == repoName {
-                    $0.printStatus(alignmentColumn: alignment)
+                    $0.printSummary(alignmentColumn: alignment)
                     if verbose {
                         print("    Path: \($0.url.path)")
                     }

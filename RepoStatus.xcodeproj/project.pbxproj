@@ -14,6 +14,7 @@
 		2BDA212429DC554D0044DF46 /* StatusParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA212329DC554D0044DF46 /* StatusParser.swift */; };
 		2BDA212629DC6A400044DF46 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA212529DC6A400044DF46 /* Attribute.swift */; };
 		2BDA212829DC94580044DF46 /* StatusFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA212729DC94580044DF46 /* StatusFormatter.swift */; };
+		2BE04AAE29DCAE7C002FFB23 /* RepoSummaryFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE04AAD29DCAE7C002FFB23 /* RepoSummaryFormatter.swift */; };
 		2BE1322828006488008F03F3 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1322728006488008F03F3 /* PathCommand.swift */; };
 		37032A48253D055B00FA6F18 /* RepoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A47253D055B00FA6F18 /* RepoCollection.swift */; };
 		37032A4B253D056C00FA6F18 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37032A4A253D056C00FA6F18 /* Repo.swift */; };
@@ -58,6 +59,7 @@
 		2BDA212329DC554D0044DF46 /* StatusParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusParser.swift; sourceTree = "<group>"; };
 		2BDA212529DC6A400044DF46 /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		2BDA212729DC94580044DF46 /* StatusFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFormatter.swift; sourceTree = "<group>"; };
+		2BE04AAD29DCAE7C002FFB23 /* RepoSummaryFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoSummaryFormatter.swift; sourceTree = "<group>"; };
 		2BE1322728006488008F03F3 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
 		37032A47253D055B00FA6F18 /* RepoCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCollection.swift; sourceTree = "<group>"; };
 		37032A4A253D056C00FA6F18 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				2BDA212529DC6A400044DF46 /* Attribute.swift */,
 				37B09AC4259E927E0012A2C8 /* Git.swift */,
 				37032A4A253D056C00FA6F18 /* Repo.swift */,
+				2BE04AAD29DCAE7C002FFB23 /* RepoSummaryFormatter.swift */,
 				37032A47253D055B00FA6F18 /* RepoCollection.swift */,
 				2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */,
 				37032A4D253D058900FA6F18 /* RepoGroup.swift */,
@@ -258,6 +261,7 @@
 				37B09AE0259E94EA0012A2C8 /* String+ANSI.swift in Sources */,
 				2B02728025B717DA00E5F90F /* PullCommand.swift in Sources */,
 				37B09A98259D3FE70012A2C8 /* ConfigCommand.swift in Sources */,
+				2BE04AAE29DCAE7C002FFB23 /* RepoSummaryFormatter.swift in Sources */,
 				2BDA212429DC554D0044DF46 /* StatusParser.swift in Sources */,
 				37B09ADC259E94CF0012A2C8 /* String+Extension.swift in Sources */,
 				3773312D29A176E9001914C4 /* UUID+Extension.swift in Sources */,

@@ -16,7 +16,7 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
     var id: UUID
     
     /// Status of the repo
-    @Published var status = Status()
+    var status = Status()
     
     /// Display name for the repo
     var name: String {
@@ -64,39 +64,9 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
     /// Output the status of the repo to stdout. The beginning of the line has the repo name,
     /// then alignment column is used to indent the status information.
     /// - Parameter alignmentColumn: Screen column where the status is output.
-    func printStatus(alignmentColumn: Int) {
-        let MaxErrorLength = 50
-        let indent = "  "
-        let align = alignmentColumn + 1 - name.count
-        let statusColour = statusColours(from: status)
-
-        if status.error {
-            var errorMessage = status.errorMessage
-            if errorMessage.count > MaxErrorLength {
-                errorMessage = errorMessage.prefix(MaxErrorLength) + "..."
-            }
-
-            print(indent +
-                  "\(statusColour)" +
-                  " \(name) " +
-                  "\(statusColour)" +
-                  "\(errorMessage) ".colours(.yellow, .red).reset())
-        }
-        else if status.details.isValid {
-            let statusString = status.asFormattedString
-
-            print(indent +
-                  "\(statusColour)" +
-                  " \(name) ".reset().forward(align) +
-                  " \(statusString) " +
-                  " \(status.details.branch) ".background(.blueViolet).reset())
-        }
-        else {
-            print(indent +
-                    "\(statusColour)" +
-                    " \(name) ".reset().forward(align) +
-                    " Invalid Repo ".colours(.black, .orange1).reset())
-        }
+    func printSummary(alignmentColumn: Int) {
+        let output = RepoSummaryFormatter(for: self, alignmentColumn: alignmentColumn)
+        print(output.ansiFormatted)
     }
 }
 
@@ -164,28 +134,6 @@ extension Repo {
         status = newStatus
 
         return !status.error
-    }
-    
-    private func statusColours(from status: Status) -> String {
-        var statusColour = ""
-
-        if status.error {
-            statusColour = statusColour.colours(.white, .red3)
-        }
-        else if status.details.contains(.modifiedFiles) {
-            statusColour = statusColour.colours(.black, .orange1)
-        }
-        else if status.details.contains(.addedFiles) || status.details.indexContains(.addedFiles) {
-            statusColour = statusColour.colours(.black, .yellow)
-        }
-        else if status.details.contains(.newUntrackedFiles) {
-            statusColour = statusColour.colours(.white, .fuchsia)
-        }
-//        else {
-//            statusColour = statusColour.colours(.darkGreen, .greenYellow)
-//        }
-
-        return statusColour
     }
 
     private func extractError(from errorString: String) -> String {
