@@ -41,25 +41,12 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
         let (exitCode, statusOutput) = Shell.run(Git.statusCommand, at: url)
         let (_, stashOutput) = Shell.run(Git.stashListCommand, at: url)
 
-        // ... Needs to be sorted out
-        #if COMMANDLINE
         if exitCode != 0 {
             status = Status() // Invalid
         }
         else {
             status = Status(from: statusOutput, stashList: stashOutput)
         }
-        #else
-
-        DispatchQueue.main.async {
-            if exitCode != 0 {
-                self.status = Status() // Invalid
-            }
-            else {
-                self.status = Status(from: statusOutput, stashList: stashOutput)
-            }
-        }
-        #endif
     }
 
     /// Perform a git fetch on the repo
@@ -174,13 +161,7 @@ extension Repo {
 
         newStatus.error = exitCode != 0
 
-#if COMMANDLINE
         status = newStatus
-#else
-        DispatchQueue.main.async {
-            self.status = newStatus
-        }
-#endif
 
         return !status.error
     }
