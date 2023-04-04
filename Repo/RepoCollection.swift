@@ -36,38 +36,6 @@ class RepoCollection: ObservableObject {
         }
     }
     
-    func refreshAllAsync() {
-        // TODO: Should refresh more than one at a time...
-        // ...
-        Task {
-            forEach { repo in
-                repo.refresh()
-            }
-        }
-    }
-
-    func fetchAllAsync() {
-        // TODO: Should refresh more than one at a time...
-        // ...
-        Task {
-            forEach { repo in
-                _ = repo.fetch()
-                repo.refresh(fetching: false)
-            }
-        }
-    }
-
-    func pullAllAsync() {
-        // TODO: Should refresh more than one at a time...
-        // ...
-        Task {
-            forEach { repo in
-                _ = repo.pull()
-                repo.refresh(fetching: false)
-            }
-        }
-    }
-
     /// Add a group to the collection
     /// - Parameter group: Group to add
     func add(_ group: RepoGroup) {
@@ -107,25 +75,6 @@ class RepoCollection: ObservableObject {
         _ = save()
     }
     
-    /// Finds the item, RepoGroup or Repo, in the collection, with the
-    /// specifid UUID.
-    /// - Parameter uuid: Identifier of the item to find
-    /// - Returns: The item, or nil if no item with the UUID is in the collection
-    func item(with uuid: UUID) -> (any RepoCollectionItem)? {
-        for group in groups {
-            if group.id == uuid {
-                return group
-            }
-            for repo in group.repos {
-                if repo.id == uuid {
-                    return repo
-                }
-            }
-        }
-
-        return nil
-    }
-
     /// Return all repos with the specified name
     /// - Parameter named: Name of the repos to find
     /// - Returns: Optional array of repos with matching name
@@ -141,21 +90,6 @@ class RepoCollection: ObservableObject {
         }
 
         return repos.isEmpty ? nil : repos
-    }
-
-    /// Return repo with the specified id
-    /// - Parameter id: Id of the repo to find
-    /// - Returns: Repo or nil if not found
-    func repo(with id: UUID) -> Repo? {
-        for group in groups {
-            for repo in group.repos {
-                if repo.id == id {
-                    return repo
-                }
-            }
-        }
-
-        return nil
     }
 
     /// Tests whether the collection contains a group with the specified name
@@ -179,13 +113,6 @@ class RepoCollection: ObservableObject {
         return nil
     }
 
-    /// Return the group with the specified id
-    /// - Parameter id: Group id to find
-    /// - Returns: The group with the specified id, or nil if no group has that id
-    func group(with id: UUID) -> RepoGroup? {
-        return groups.filter { $0.id == id }.first
-    }
-
     /// Return the groups that have any of the specified names
     /// - Parameter groupNames: The group names to find
     /// - Returns: Array of groups matching the names
@@ -197,33 +124,6 @@ class RepoCollection: ObservableObject {
                 results.append(group)
             }
         }
-        return results
-    }
-
-    /// Finds the first group that contains the specified repo
-    /// - Parameter repo: Repo to find
-    /// - Returns: RepoGroup that contains repo, or nil if is not found
-    func groupContaining(_ repo : Repo) -> RepoGroup? {
-        let items = groups.filter { (group) -> Bool in
-            group.repos.contains { (r) -> Bool in
-                r === repo
-            }
-        }
-
-        return items.first
-    }
-
-    func groupsFiltered(by text: String) -> [RepoGroup] {
-        guard !text.isEmpty else { return groups }
-        
-        var results = [RepoGroup]()
-        
-        for group in groups {
-            if group.name.localizedStandardContains(text) {
-                results.append(group)
-            }
-        }
-        
         return results
     }
     
@@ -297,8 +197,8 @@ class RepoCollection: ObservableObject {
 
         for group in groups {
             for repo in group.repos {
-                if repo.status.branch.count > longest {
-                    longest = repo.status.branch.count
+                if repo.status.details.branch.count > longest {
+                    longest = repo.status.details.branch.count
                 }
             }
         }
@@ -309,9 +209,6 @@ class RepoCollection: ObservableObject {
         groups.removeAll(where: { $0.repos.count == 0 } )
         _ = save()
     }
-
-
-
 }
 
 // MARK: - Private

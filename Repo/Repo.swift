@@ -62,13 +62,6 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
         #endif
     }
 
-//    func refreshAsync(fetching: Bool = false) async {
-//        await withCheckedContinuation({ continuation in
-//            refresh(fetching: fetching)
-//            continuation.resume()
-//        })
-//    }
-    
     /// Perform a git fetch on the repo
     /// - Returns: Fetch command exit code. 0 if command executed successfully, non-zero for errors
     func fetch() -> Bool {
@@ -102,14 +95,14 @@ class Repo: Codable, RepoCollectionItem, ObservableObject {
                   "\(statusColour)" +
                   "\(errorMessage) ".colours(.yellow, .red).reset())
         }
-        else if status.isValid {
+        else if status.details.isValid {
             let statusString = status.asFormattedString
 
             print(indent +
                   "\(statusColour)" +
                   " \(name) ".reset().forward(align) +
                   " \(statusString) " +
-                  " \(status.branch) ".background(.blueViolet).reset())
+                  " \(status.details.branch) ".background(.blueViolet).reset())
         }
         else {
             print(indent +
@@ -198,13 +191,13 @@ extension Repo {
         if status.error {
             statusColour = statusColour.colours(.white, .red3)
         }
-        else if status.contains(.modifiedFiles) {
+        else if status.details.contains(.modifiedFiles) {
             statusColour = statusColour.colours(.black, .orange1)
         }
-        else if status.contains(.addedFiles) || status.indexContains(.addedFiles) {
+        else if status.details.contains(.addedFiles) || status.details.indexContains(.addedFiles) {
             statusColour = statusColour.colours(.black, .yellow)
         }
-        else if status.contains(.newUntrackedFiles) {
+        else if status.details.contains(.newUntrackedFiles) {
             statusColour = statusColour.colours(.white, .fuchsia)
         }
 //        else {

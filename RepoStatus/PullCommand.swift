@@ -82,7 +82,7 @@ extension RepoStatusCommand {
 
         private func run(onRepo repo: Repo) {
             repo.refresh()
-            if repo.status.isValid {
+            if repo.status.details.isValid {
                 //                if repo.pull() == false {
                 //                    repo.status.error = true
                 //                }
