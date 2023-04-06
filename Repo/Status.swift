@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct StatusDetails {
     /// Current attributes of the working copy
     var workingCopyAttributes = AttributeSet()

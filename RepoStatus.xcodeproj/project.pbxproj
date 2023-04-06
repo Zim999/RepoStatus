@@ -54,7 +54,6 @@
 		2B02727F25B717DA00E5F90F /* PullCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCommand.swift; sourceTree = "<group>"; };
 		2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionItem.swift; sourceTree = "<group>"; };
 		2B8C3F4426EB860000BC6B30 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		2B9C012C2979D35300E6B77A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		2BD252272791BAA300BE9389 /* FetchCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCommand.swift; sourceTree = "<group>"; };
 		2BDA212329DC554D0044DF46 /* StatusParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusParser.swift; sourceTree = "<group>"; };
 		2BDA212529DC6A400044DF46 /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
@@ -106,18 +105,25 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		2B8969F629DD9C6700707698 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				2BE04AAD29DCAE7C002FFB23 /* RepoSummaryFormatter.swift */,
+				2BDA212729DC94580044DF46 /* StatusFormatter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		37032A82253FC2C500FA6F18 /* Repo */ = {
 			isa = PBXGroup;
 			children = (
 				2BDA212529DC6A400044DF46 /* Attribute.swift */,
 				37B09AC4259E927E0012A2C8 /* Git.swift */,
 				37032A4A253D056C00FA6F18 /* Repo.swift */,
-				2BE04AAD29DCAE7C002FFB23 /* RepoSummaryFormatter.swift */,
 				37032A47253D055B00FA6F18 /* RepoCollection.swift */,
 				2B2EE909297990D60015CF5A /* RepoCollectionItem.swift */,
 				37032A4D253D058900FA6F18 /* RepoGroup.swift */,
 				37032A50253D05AA00FA6F18 /* Status.swift */,
-				2BDA212729DC94580044DF46 /* StatusFormatter.swift */,
 				2BDA212329DC554D0044DF46 /* StatusParser.swift */,
 			);
 			path = Repo;
@@ -128,6 +134,7 @@
 			children = (
 				37787BB2259E9C0500C79308 /* README.md */,
 				37B09AD8259E94CF0012A2C8 /* Extensions */,
+				2B8969F629DD9C6700707698 /* Formatters */,
 				2B2EE90B2979926E0015CF5A /* Shared */,
 				37032A82253FC2C500FA6F18 /* Repo */,
 				3704FF56252BFB9D00E4A513 /* RepoStatus */,
@@ -175,7 +182,6 @@
 			children = (
 				37787BBC259EB96500C79308 /* ANSIColour.swift */,
 				3773312C29A176E9001914C4 /* UUID+Extension.swift */,
-				2B9C012C2979D35300E6B77A /* Color+Extension.swift */,
 				37B09AD9259E94CF0012A2C8 /* FileManager+Extension.swift */,
 				37B09ADF259E94EA0012A2C8 /* String+ANSI.swift */,
 				37B09ADA259E94CF0012A2C8 /* String+Extension.swift */,
