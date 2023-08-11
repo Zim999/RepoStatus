@@ -65,7 +65,7 @@ extension RepoStatusCommand {
             collection.forEach(in: nil,
                                group: {
                 if repoName == nil {
-                    print($0.name.bold().reset())                    
+                    print("\($0.name.bold().reset()) (\($0.repos.count))")
                 } },
                                perform: {
                 if repoName == nil || $0.name == repoName {

@@ -57,7 +57,7 @@ extension RepoStatusCommand {
             })
 
             collection.forEach(in: nil,
-                               group: { print($0.name) },
+                               group: { print("\($0.name) (\($0.repos.count))") },
                                perform: {
                 if toPull.contains($0.name) {
                     $0.printSummary(alignmentColumn: alignment)
@@ -76,7 +76,7 @@ extension RepoStatusCommand {
             })
 
             collection.forEach(in: groups,
-                               group: { print($0.name) },
+                               group: { print("\($0.name) (\($0.repos.count))") },
                                perform: { $0.printSummary(alignmentColumn: alignment) } )
         }
 
